@@ -8,110 +8,912 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
     tailwind.config = {
+      darkMode: 'class',
       theme: {
         extend: {
           colors: {
             primaryStart: '#6fb1ff',
             primaryEnd: '#1c6be1',
             muted: '#5c7394',
-            textDark: '#112a45'
+            textDark: '#112a45',
+            darkBg: '#0f172a',
+            darkText: '#f1f5f9'
           },
           fontFamily: {
             vazir: ['\'Vazirmatn\'', 'sans-serif']
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.8s ease-in-out',
+            'slide-up': 'slideUp 0.6s ease-out',
+            'typing': 'typing 3.5s steps(40, end)',
+            'bounce-slow': 'bounce 2s infinite',
+            'pulse-slow': 'pulse 3s infinite',
+            'spin-slow': 'spin 3s linear infinite'
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' }
+            },
+            slideUp: {
+              '0%': { transform: 'translateY(30px)', opacity: '0' },
+              '100%': { transform: 'translateY(0)', opacity: '1' }
+            },
+            typing: {
+              'from': { width: '0' },
+              'to': { width: '100%' }
+            }
           }
         }
       }
     }
   </script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1AqzN+M8n9+8ujXr+TN9gA7l+0s6Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    .skill-bar {
+      transition: width 1.5s ease-in-out;
+    }
+    .project-card:hover {
+      transform: translateY(-8px);
+      transition: transform 0.3s ease;
+    }
+    .section-hidden {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+    .section-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      right: 20px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, #6fb1ff, #1c6be1);
+    }
+    .dark .timeline::before {
+      background: linear-gradient(to bottom, #3b82f6, #1e40af);
+    }
+    .particle {
+      position: absolute;
+      background: rgba(111, 177, 255, 0.6);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .glass-effect {
+      backdrop-filter: blur(16px) saturate(180%);
+      background-color: rgba(255, 255, 255, 0.75);
+    }
+    .dark .glass-effect {
+      background-color: rgba(15, 23, 42, 0.75);
+    }
+  </style>
 </head>
-<body class="min-h-screen font-vazir bg-[radial-gradient(circle_at_top_left,_#f3f7ff,_#dce7ff_40%,_#e6f0ff_70%,_#f4f8ff_100%)] text-textDark flex justify-center">
-  <div class="relative w-full max-w-6xl px-6 sm:px-10 lg:px-16 py-10 lg:py-14">
+<body class="min-h-screen font-vazir bg-[radial-gradient(circle_at_top_left,_#f3f7ff,_#dce7ff_40%,_#e6f0ff_70%,_#f4f8ff_100%)] text-textDark dark:bg-darkBg dark:text-darkText transition-colors duration-300">
+  
+  <!-- Preloader -->
+  <div id="preloader" class="fixed inset-0 bg-white dark:bg-darkBg z-50 flex flex-col items-center justify-center transition-opacity duration-500">
+    <div class="animate-spin-slow rounded-full h-20 w-20 border-b-2 border-primaryEnd mb-4"></div>
+    <div class="text-lg font-semibold text-primaryEnd animate-pulse">در حال بارگذاری...</div>
+  </div>
+
+  <!-- Particle Background -->
+  <canvas id="particleCanvas" class="fixed inset-0 -z-10"></canvas>
+
+  <!-- Theme Toggle -->
+  <button id="themeToggle" class="fixed top-24 left-6 w-12 h-12 rounded-full glass-effect shadow-lg backdrop-blur-md z-40 flex items-center justify-center hover:scale-110 transition-transform duration-200">
+    <i class="fa-solid fa-moon text-textDark dark:text-darkText" id="themeIcon"></i>
+  </button>
+
+  <!-- Language Switcher -->
+  <div class="fixed top-24 right-6 z-30">
+    <select id="languageSwitch" class="glass-effect backdrop-blur-md rounded-2xl px-4 py-2 border border-gray-300 dark:border-gray-600 text-textDark dark:text-darkText">
+      <option value="fa">فارسی 🇮🇷</option>
+      <option value="en">English 🇺🇸</option>
+    </select>
+  </div>
+
+  <!-- Floating Action Buttons -->
+  <div class="fixed bottom-24 left-6 flex flex-col gap-3 z-30">
+    <button id="downloadResume" class="w-12 h-12 rounded-full bg-primaryEnd text-white shadow-lg hover:scale-110 transition-transform duration-200 flex items-center justify-center">
+      <i class="fa-solid fa-download"></i>
+    </button>
+    <button onclick="window.open('https://wa.me/989123456789', '_blank')" class="w-12 h-12 rounded-full bg-green-500 text-white shadow-lg hover:scale-110 transition-transform duration-200 flex items-center justify-center">
+      <i class="fa-brands fa-whatsapp"></i>
+    </button>
+    <button id="voiceAssistant" class="w-12 h-12 rounded-full bg-purple-500 text-white shadow-lg hover:scale-110 transition-transform duration-200 flex items-center justify-center">
+      <i class="fa-solid fa-microphone"></i>
+    </button>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="sticky top-0 z-50 glass-effect backdrop-blur-md shadow-sm">
+    <div class="container mx-auto px-6 py-4">
+      <div class="flex justify-between items-center">
+        <div class="flex items-center gap-2">
+          <div class="grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-[#1f4dbf] to-[#52a6ff] font-bold text-white text-sm">
+            SJ
+          </div>
+          <span class="font-bold">سجاد | AI & Data</span>
+        </div>
+        
+        <div class="hidden md:flex items-center gap-8">
+          <a href="#home" class="text-sm font-medium hover:text-primaryEnd transition-colors">خانه</a>
+          <a href="#about" class="text-sm font-medium hover:text-primaryEnd transition-colors">درباره من</a>
+          <a href="#skills" class="text-sm font-medium hover:text-primaryEnd transition-colors">مهارت‌ها</a>
+          <a href="#projects" class="text-sm font-medium hover:text-primaryEnd transition-colors">پروژه‌ها</a>
+          <a href="#contact" class="text-sm font-medium hover:text-primaryEnd transition-colors">تماس</a>
+        </div>
+        
+        <button class="md:hidden text-textDark dark:text-darkText">
+          <i class="fa-solid fa-bars text-xl"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="relative flex justify-center items-center min-h-screen pt-20">
     <div class="absolute -top-32 -left-36 h-[340px] w-[340px] rounded-full bg-[#6fb1ff59] blur-[70px] opacity-70 -z-10"></div>
     <div class="absolute -bottom-28 -right-32 h-[300px] w-[300px] rounded-full bg-[#1c6be147] blur-[70px] opacity-70 -z-10"></div>
 
-    <header class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
-      <div class="inline-flex items-center gap-2 rounded-full bg-white/95 px-4 py-2 text-sm text-muted shadow-[0_12px_35px_rgba(29,96,196,0.08)]">
-        <i class="fa-solid fa-user w-5 h-5 rounded-full bg-gradient-to-br from-primaryStart to-primaryEnd text-white text-xs flex items-center justify-center"></i>
-        مشخصات من
-      </div>
-      <div class="flex items-center gap-3 rounded-full bg-white/80 px-5 py-3 shadow-[0_18px_35px_rgba(47,91,175,0.12)] backdrop-blur-md">
-        <div class="grid h-11 w-11 place-items-center rounded-full bg-gradient-to-br from-[#1f4dbf] to-[#52a6ff] font-bold text-white text-lg tracking-tight">
-          SJ
-        </div>
-        <div class="flex flex-col gap-0.5">
-          <span class="font-bold text-base">Sajad | AI &amp; Data</span>
-          <span class="text-sm text-muted">تحلیل داده و یادگیری ماشین</span>
-        </div>
-      </div>
-    </header>
+    <div class="container mx-auto px-6 sm:px-10 lg:px-16 py-10 lg:py-14">
+      <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
+        <div class="flex flex-col gap-8 animate-fade-in">
+          <div class="space-y-4">
+            <h1 class="text-[clamp(2.2rem,5vw,3.6rem)] font-extrabold leading-snug text-textDark dark:text-darkText">
+              <span id="typewriter"></span><br />
+              <span class="bg-gradient-to-br from-primaryStart to-primaryEnd bg-clip-text text-transparent">متخصص هوش مصنوعی</span><br />
+              و تحلیل داده
+            </h1>
+            <p class="max-w-[34ch] text-base leading-8 text-muted dark:text-gray-300">
+              با مدل‌سازی یادگیری ماشین و مهندسی داده، تصمیم‌سازی را سریع‌تر و دقیق‌تر می‌کنم.
+            </p>
+          </div>
 
-    <section class="grid gap-10 lg:grid-cols-2 lg:items-center">
-      <div class="flex flex-col gap-8">
-        <div class="space-y-4">
-          <h1 class="text-[clamp(2.2rem,5vw,3.6rem)] font-extrabold leading-snug text-textDark">
-            سلام! من سجادم<br />
-            <span class="bg-gradient-to-br from-primaryStart to-primaryEnd bg-clip-text text-transparent">متخصص هوش مصنوعی</span><br />
-            و تحلیل داده
-          </h1>
-          <p class="max-w-[34ch] text-base leading-8 text-muted">
-            با مدلسازی یادگیری ماشین و هوش مصنوعی، تصمیم‌سازی را سریع‌تر، بهتر و دقیق‌تر می‌کنم.
-          </p>
-        </div>
-        <div class="flex flex-col sm:flex-row sm:items-center gap-3">
-          <a href="#" class="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-br from-primaryStart to-primaryEnd px-7 py-3 text-sm font-semibold text-white shadow-[0_18px_35px_rgba(47,91,175,0.25)] transition-transform duration-200 hover:-translate-y-1">
-            <i class="fa-brands fa-whatsapp text-lg"></i>
-            ارتباط واتساپ
-          </a>
-          <a href="#" class="inline-flex items-center justify-center gap-2 rounded-full border border-[#6fb1ff80] bg-white/80 px-7 py-3 text-sm font-semibold text-primaryEnd shadow-[0_12px_25px_rgba(65,120,200,0.12)] transition-transform duration-200 hover:-translate-y-1">
-            <i class="fa-solid fa-address-card text-base"></i>
-            رزومه من
-          </a>
-        </div>
-        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          <div class="rounded-2xl border border-[#8fb5ee59] bg-white/85 px-6 py-5 shadow-[0_18px_35px_rgba(40,90,170,0.1)]">
-            <div class="text-2xl font-extrabold text-primaryEnd">8+</div>
-            <div class="text-sm leading-7 text-muted">سال تجربه در تحلیل داده و ساخت مدل</div>
+          <!-- Buttons -->
+          <div class="flex flex-col sm:flex-row sm:items-center gap-3">
+            <a href="https://wa.me/989123456789" class="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-br from-primaryStart to-primaryEnd px-7 py-3 text-sm font-semibold text-white shadow-[0_18px_35px_rgba(47,91,175,0.25)] transition-transform duration-200 hover:-translate-y-1">
+              <i class="fa-brands fa-whatsapp text-lg"></i>
+              ارتباط در واتساپ
+            </a>
+            <a href="#contact" class="inline-flex items-center justify-center gap-2 rounded-full border border-[#6fb1ff80] bg-white/80 dark:bg-darkBg/80 px-7 py-3 text-sm font-semibold text-primaryEnd shadow-[0_12px_25px_rgba(65,120,200,0.12)] transition-transform duration-200 hover:-translate-y-1">
+              <i class="fa-solid fa-paper-plane text-base"></i>
+              ارسال پیام
+            </a>
           </div>
-          <div class="rounded-2xl border border-[#8fb5ee59] bg-white/85 px-6 py-5 shadow-[0_18px_35px_rgba(40,90,170,0.1)]">
-            <div class="text-2xl font-extrabold text-primaryEnd">40+</div>
-            <div class="text-sm leading-7 text-muted">پروژه موفق در حوزه هوش مصنوعی</div>
-          </div>
-          <div class="rounded-2xl border border-[#8fb5ee59] bg-white/85 px-6 py-5 shadow-[0_18px_35px_rgba(40,90,170,0.1)]">
-            <div class="text-2xl font-extrabold text-primaryEnd">100%</div>
-            <div class="text-sm leading-7 text-muted">رضایت مشتریان از راهکارهای ارائه‌شده</div>
-          </div>
-        </div>
-      </div>
 
-      <div class="order-first lg:order-none">
-        <div class="relative flex min-h-[360px] sm:min-h-[420px] flex-col justify-end overflow-hidden rounded-[32px] bg-[linear-gradient(160deg,_rgba(20,40,85,0.85),_rgba(36,90,170,0.7))] px-8 py-12 shadow-[0_30px_60px_rgba(20,54,120,0.3)]">
-          <div class="pointer-events-none absolute inset-0">
-            <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_25%,rgba(111,177,255,0.45),transparent_55%),radial-gradient(circle_at_70%_60%,rgba(73,130,230,0.5),transparent_65%)] mix-blend-screen"></div>
-            <span class="absolute left-1/2 top-1/2 h-[92px] w-[92px] -translate-x-1/2 -translate-y-1/2 rounded-[24px] border border-[rgba(160,198,255,0.65)] shadow-[0_0_25px_rgba(160,198,255,0.45)] rotate-45"></span>
-            <span class="absolute left-[32%] top-[38%] h-[68px] w-[68px] -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-[rgba(160,198,255,0.65)] rotate-45"></span>
-            <span class="absolute left-[70%] top-[30%] h-[68px] w-[68px] -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-[rgba(160,198,255,0.65)] rotate-45"></span>
-            <span class="absolute left-1/2 top-[78%] h-[68px] w-[68px] -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-[rgba(160,198,255,0.65)] rotate-45"></span>
+          <!-- Stats -->
+          <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div class="rounded-2xl border border-[#8fb5ee59] bg-white/85 dark:bg-darkBg/85 px-6 py-5 shadow-[0_18px_35px_rgba(40,90,170,0.1)]">
+              <div class="text-2xl font-extrabold text-primaryEnd" data-count="8">0+</div>
+              <div class="text-sm leading-7 text-muted dark:text-gray-300">سال تجربه در تحلیل داده و ساخت مدل</div>
+            </div>
+            <div class="rounded-2xl border border-[#8fb5ee59] bg-white/85 dark:bg-darkBg/85 px-6 py-5 shadow-[0_18px_35px_rgba(40,90,170,0.1)]">
+              <div class="text-2xl font-extrabold text-primaryEnd" data-count="40">0+</div>
+              <div class="text-sm leading-7 text-muted dark:text-gray-300">پروژه موفق در حوزه هوش مصنوعی</div>
+            </div>
+            <div class="rounded-2xl border border-[#8fb5ee59] bg-white/85 dark:bg-darkBg/85 px-6 py-5 shadow-[0_18px_35px_rgba(40,90,170,0.1)]">
+              <div class="text-2xl font-extrabold text-primaryEnd" data-count="100">0%</div>
+              <div class="text-sm leading-7 text-muted dark:text-gray-300">رضایت مشتریان از راهکارهای ارائه‌شده</div>
+            </div>
           </div>
-          <div class="relative flex items-center justify-between gap-6">
-            <div class="flex items-center gap-3 text-white">
-              <div class="grid h-11 w-11 place-items-center rounded-full bg-white/20 text-base font-semibold">ام</div>
-              <div class="space-y-1 text-sm">
-                <div class="font-semibold">امید</div>
-                <div class="text-white/80">همکاری پژوهشی</div>
+
+          <!-- Ready for Collaboration -->
+          <div class="flex items-center gap-3 rounded-2xl bg-white/80 dark:bg-darkBg/80 px-6 py-4 shadow-[0_12px_25px_rgba(65,120,200,0.12)]">
+            <div class="grid h-12 w-12 place-items-center rounded-full bg-green-100 dark:bg-green-900 text-green-600 dark:text-green-400">
+              <i class="fa-solid fa-handshake text-lg"></i>
+            </div>
+            <div class="flex flex-col">
+              <span class="font-semibold text-textDark dark:text-darkText">آماده همکاری</span>
+              <span class="text-sm text-muted dark:text-gray-300">پروژه‌های جدید و چالش‌های داده‌ای</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Visual Element -->
+        <div class="order-first lg:order-none animate-slide-up">
+          <div class="relative flex min-h-[360px] sm:min-h-[420px] flex-col justify-end overflow-hidden rounded-[32px] bg-[linear-gradient(160deg,_rgba(20,40,85,0.85),_rgba(36,90,170,0.7))] px-8 py-12 shadow-[0_30px_60px_rgba(20,54,120,0.3)]">
+            <!-- Background Pattern -->
+            <div class="pointer-events-none absolute inset-0">
+              <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_25%,rgba(111,177,255,0.45),transparent_55%),radial-gradient(circle_at_70%_60%,rgba(73,130,230,0.5),transparent_65%)] mix-blend-screen"></div>
+              <span class="absolute left-1/2 top-1/2 h-[92px] w-[92px] -translate-x-1/2 -translate-y-1/2 rounded-[24px] border border-[rgba(160,198,255,0.65)] shadow-[0_0_25px_rgba(160,198,255,0.45)] rotate-45"></span>
+              <span class="absolute left-[32%] top-[38%] h-[68px] w-[68px] -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-[rgba(160,198,255,0.65)] rotate-45"></span>
+              <span class="absolute left-[70%] top-[30%] h-[68px] w-[68px] -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-[rgba(160,198,255,0.65)] rotate-45"></span>
+              <span class="absolute left-1/2 top-[78%] h-[68px] w-[68px] -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-[rgba(160,198,255,0.65)] rotate-45"></span>
+            </div>
+            
+            <!-- Profile Card -->
+            <div class="relative flex items-center justify-between gap-6">
+              <div class="flex items-center gap-3 text-white">
+                <div class="grid h-11 w-11 place-items-center rounded-full bg-white/20 text-base font-semibold">س</div>
+                <div class="space-y-1 text-sm">
+                  <div class="font-semibold">سجاد</div>
+                  <div class="text-white/80">متخصص هوش مصنوعی</div>
+                </div>
+              </div>
+              <div class="inline-flex items-center gap-2">
+                <span class="h-[10px] w-[26px] rounded-full bg-white"></span>
+                <span class="h-[9px] w-[9px] rounded-full bg-white/40"></span>
+                <span class="h-[9px] w-[9px] rounded-full bg-white/40"></span>
               </div>
             </div>
-            <div class="inline-flex items-center gap-2">
-              <span class="h-[10px] w-[26px] rounded-full bg-white"></span>
-              <span class="h-[9px] w-[9px] rounded-full bg-white/40"></span>
-              <span class="h-[9px] w-[9px] rounded-full bg-white/40"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="py-20 bg-white/30 dark:bg-darkBg/50">
+    <div class="container mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-12 items-center section-hidden">
+        <div>
+          <h2 class="text-3xl font-bold mb-6">درباره من</h2>
+          <p class="text-muted dark:text-gray-300 leading-8 mb-6">
+            متخصص هوش مصنوعی و تحلیل داده با بیش از ۸ سال تجربه در طراحی و پیاده‌سازی راه‌حل‌های مبتنی بر داده. 
+            تخصص اصلی من در توسعه مدل‌های یادگیری ماشین، پردازش زبان طبیعی و بینایی کامپیوتر است.
+          </p>
+          <p class="text-muted dark:text-gray-300 leading-8 mb-8">
+            با تسلط بر ابزارهای مدرن تحلیل داده و فریم‌ورک‌های هوش مصنوعی، توانسته‌ام در پروژه‌های متعددی 
+            در صنایع مختلف از جمله مالی، سلامت و فناوری مشارکت مؤثر داشته باشم.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <div class="bg-white dark:bg-darkBg rounded-2xl px-6 py-4 shadow-md">
+              <div class="text-2xl font-bold text-primaryEnd mb-2">PhD</div>
+              <div class="text-sm text-muted dark:text-gray-300">هوش مصنوعی</div>
+            </div>
+            <div class="bg-white dark:bg-darkBg rounded-2xl px-6 py-4 shadow-md">
+              <div class="text-2xl font-bold text-primaryEnd mb-2">12+</div>
+              <div class="text-sm text-muted dark:text-gray-300">مقاله علمی</div>
+            </div>
+            <div class="bg-white dark:bg-darkBg rounded-2xl px-6 py-4 shadow-md">
+              <div class="text-2xl font-bold text-primaryEnd mb-2">5+</div>
+              <div class="text-sm text-muted dark:text-gray-300">جایزه صنعتی</div>
+            </div>
+          </div>
+        </div>
+        <div class="relative">
+          <!-- Timeline -->
+          <div class="relative timeline pl-8">
+            <div class="timeline-item mb-8 relative">
+              <div class="timeline-dot absolute w-4 h-4 bg-primaryEnd rounded-full -right-2 top-2 border-4 border-white dark:border-darkBg"></div>
+              <div class="timeline-content bg-white dark:bg-darkBg rounded-2xl p-6 shadow-lg">
+                <h4 class="font-bold text-textDark dark:text-darkText">Senior AI Engineer</h4>
+                <p class="text-muted dark:text-gray-300 text-sm mb-2">شرکت فناوری داده</p>
+                <span class="text-primaryEnd text-sm">۱۴۰۰ - اکنون</span>
+              </div>
+            </div>
+            <div class="timeline-item mb-8 relative">
+              <div class="timeline-dot absolute w-4 h-4 bg-primaryStart rounded-full -right-2 top-2 border-4 border-white dark:border-darkBg"></div>
+              <div class="timeline-content bg-white dark:bg-darkBg rounded-2xl p-6 shadow-lg">
+                <h4 class="font-bold text-textDark dark:text-darkText">Data Scientist</h4>
+                <p class="text-muted dark:text-gray-300 text-sm mb-2">استارتاپ هوشمند</p>
+                <span class="text-primaryEnd text-sm">۱۳۹۸ - ۱۴۰۰</span>
+              </div>
+            </div>
+            <div class="timeline-item relative">
+              <div class="timeline-dot absolute w-4 h-4 bg-primaryStart rounded-full -right-2 top-2 border-4 border-white dark:border-darkBg"></div>
+              <div class="timeline-content bg-white dark:bg-darkBg rounded-2xl p-6 shadow-lg">
+                <h4 class="font-bold text-textDark dark:text-darkText">ML Researcher</h4>
+                <p class="text-muted dark:text-gray-300 text-sm mb-2">دانشگاه صنعتی</p>
+                <span class="text-primaryEnd text-sm">۱۳۹۶ - ۱۳۹۸</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
-  </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="py-20">
+    <div class="container mx-auto px-6">
+      <h2 class="text-3xl font-bold text-center mb-4">مهارت‌های تخصصی</h2>
+      <p class="text-muted dark:text-gray-300 text-center mb-12 max-w-2xl mx-auto">
+        تسلط بر آخرین تکنولوژی‌ها و فریم‌ورک‌های حوزه هوش مصنوعی و تحلیل داده
+      </p>
+      
+      <div class="grid md:grid-cols-2 gap-8 section-hidden">
+        <!-- Technical Skills -->
+        <div class="bg-white dark:bg-darkBg rounded-3xl p-8 shadow-lg">
+          <h3 class="font-bold text-xl mb-6 flex items-center gap-2">
+            <i class="fa-solid fa-code text-primaryEnd"></i>
+            مهارت‌های فنی
+          </h3>
+          <div class="space-y-6">
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="font-medium">Python & TensorFlow</span>
+                <span class="text-primaryEnd font-bold">95%</span>
+              </div>
+              <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                <div class="bg-gradient-to-r from-primaryStart to-primaryEnd h-2 rounded-full skill-bar" style="width: 95%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="font-medium">SQL & Databases</span>
+                <span class="text-primaryEnd font-bold">90%</span>
+              </div>
+              <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                <div class="bg-gradient-to-r from-primaryStart to-primaryEnd h-2 rounded-full skill-bar" style="width: 90%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="font-medium">Deep Learning</span>
+                <span class="text-primaryEnd font-bold">88%</span>
+              </div>
+              <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                <div class="bg-gradient-to-r from-primaryStart to-primaryEnd h-2 rounded-full skill-bar" style="width: 88%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="font-medium">Data Visualization</span>
+                <span class="text-primaryEnd font-bold">85%</span>
+              </div>
+              <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                <div class="bg-gradient-to-r from-primaryStart to-primaryEnd h-2 rounded-full skill-bar" style="width: 85%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tools & Technologies -->
+        <div class="bg-white dark:bg-darkBg rounded-3xl p-8 shadow-lg">
+          <h3 class="font-bold text-xl mb-6 flex items-center gap-2">
+            <i class="fa-solid fa-tools text-primaryEnd"></i>
+            ابزارها و تکنولوژی‌ها
+          </h3>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="flex items-center gap-3 p-3 bg-blue-50 dark:bg-blue-900/30 rounded-2xl">
+              <i class="fa-brands fa-python text-primaryEnd text-xl"></i>
+              <span>Python</span>
+            </div>
+            <div class="flex items-center gap-3 p-3 bg-blue-50 dark:bg-blue-900/30 rounded-2xl">
+              <i class="fa-solid fa-database text-primaryEnd text-xl"></i>
+              <span>SQL</span>
+            </div>
+            <div class="flex items-center gap-3 p-3 bg-blue-50 dark:bg-blue-900/30 rounded-2xl">
+              <i class="fa-solid fa-brain text-primaryEnd text-xl"></i>
+              <span>TensorFlow</span>
+            </div>
+            <div class="flex items-center gap-3 p-3 bg-blue-50 dark:bg-blue-900/30 rounded-2xl">
+              <i class="fa-brands fa-aws text-primaryEnd text-xl"></i>
+              <span>AWS</span>
+            </div>
+            <div class="flex items-center gap-3 p-3 bg-blue-50 dark:bg-blue-900/30 rounded-2xl">
+              <i class="fa-solid fa-chart-line text-primaryEnd text-xl"></i>
+              <span>Tableau</span>
+            </div>
+            <div class="flex items-center gap-3 p-3 bg-blue-50 dark:bg-blue-900/30 rounded-2xl">
+              <i class="fa-brands fa-docker text-primaryEnd text-xl"></i>
+              <span>Docker</span>
+            </div>
+            <div class="flex items-center gap-3 p-3 bg-blue-50 dark:bg-blue-900/30 rounded-2xl">
+              <i class="fa-brands fa-git-alt text-primaryEnd text-xl"></i>
+              <span>Git</span>
+            </div>
+            <div class="flex items-center gap-3 p-3 bg-blue-50 dark:bg-blue-900/30 rounded-2xl">
+              <i class="fa-solid fa-cloud text-primaryEnd text-xl"></i>
+              <span>Azure ML</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Radar Chart -->
+      <div class="mt-12 bg-white dark:bg-darkBg rounded-3xl p-8 shadow-lg section-hidden">
+        <h3 class="font-bold text-xl mb-6 text-center">نمودار راداری مهارت‌ها</h3>
+        <div class="flex justify-center">
+          <canvas id="skillsRadar" width="400" height="400"></canvas>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="py-20 bg-white/30 dark:bg-darkBg/50">
+    <div class="container mx-auto px-6">
+      <h2 class="text-3xl font-bold text-center mb-4">پروژه‌های منتخب</h2>
+      <p class="text-muted dark:text-gray-300 text-center mb-12 max-w-2xl mx-auto">
+        نمونه‌ای از پروژه‌های موفق در حوزه هوش مصنوعی و تحلیل داده
+      </p>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 section-hidden">
+        <!-- Project 1 -->
+        <div class="project-card bg-white dark:bg-darkBg rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300">
+          <div class="w-full h-48 bg-gradient-to-br from-blue-400 to-purple-600 rounded-2xl mb-4 flex items-center justify-center">
+            <i class="fa-solid fa-chart-line text-white text-4xl"></i>
+          </div>
+          <h3 class="font-bold text-lg mb-2">سیستم پیش‌بینی بازار سهام</h3>
+          <p class="text-muted dark:text-gray-300 text-sm mb-4">مدل یادگیری عمیق برای پیش‌بینی روند بازار با دقت ۸۷٪</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs px-3 py-1 rounded-full">Python</span>
+            <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs px-3 py-1 rounded-full">LSTM</span>
+            <span class="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 text-xs px-3 py-1 rounded-full">TensorFlow</span>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="project-card bg-white dark:bg-darkBg rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300">
+          <div class="w-full h-48 bg-gradient-to-br from-green-400 to-blue-600 rounded-2xl mb-4 flex items-center justify-center">
+            <i class="fa-solid fa-comment-medical text-white text-4xl"></i>
+          </div>
+          <h3 class="font-bold text-lg mb-2">دستیار پزشکی هوشمند</h3>
+          <p class="text-muted dark:text-gray-300 text-sm mb-4">سیستم تشخیص بیماری با پردازش زبان طبیعی</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs px-3 py-1 rounded-full">NLP</span>
+            <span class="bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 text-xs px-3 py-1 rounded-full">BERT</span>
+            <span class="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 text-xs px-3 py-1 rounded-full">PyTorch</span>
+          </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="project-card bg-white dark:bg-darkBg rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300">
+          <div class="w-full h-48 bg-gradient-to-br from-orange-400 to-red-600 rounded-2xl mb-4 flex items-center justify-center">
+            <i class="fa-solid fa-robot text-white text-4xl"></i>
+          </div>
+          <h3 class="font-bold text-lg mb-2">سیستم تشخیص چهره</h3>
+          <p class="text-muted dark:text-gray-300 text-sm mb-4">الگوریتم تشخیص هویت با دقت ۹۴٪ در شرایط مختلف</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs px-3 py-1 rounded-full">OpenCV</span>
+            <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs px-3 py-1 rounded-full">CNN</span>
+            <span class="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 text-xs px-3 py-1 rounded-full">Keras</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-12">
+        <a href="#" class="inline-flex items-center gap-2 rounded-full border border-primaryEnd px-6 py-3 text-primaryEnd font-semibold hover:bg-primaryEnd hover:text-white transition-colors">
+          مشاهده همه پروژه‌ها
+          <i class="fa-solid fa-arrow-left"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-20">
+    <div class="container mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-12 items-start section-hidden">
+        <!-- Contact Info -->
+        <div>
+          <h2 class="text-3xl font-bold mb-6">در تماس باشید</h2>
+          <p class="text-muted dark:text-gray-300 leading-8 mb-8">
+            برای همکاری در پروژه‌های هوش مصنوعی یا مشاوره در زمینه تحلیل داده، 
+            از طریق راه‌های ارتباطی زیر با من در ارتباط باشید.
+          </p>
+          
+          <div class="space-y-6">
+            <div class="flex items-center gap-4">
+              <div class="grid h-12 w-12 place-items-center rounded-full bg-blue-100 dark:bg-blue-900 text-primaryEnd">
+                <i class="fa-solid fa-envelope"></i>
+              </div>
+              <div>
+                <div class="font-semibold">ایمیل</div>
+                <div class="text-muted dark:text-gray-300">sajad.ai@example.com</div>
+              </div>
+            </div>
+            
+            <div class="flex items-center gap-4">
+              <div class="grid h-12 w-12 place-items-center rounded-full bg-green-100 dark:bg-green-900 text-primaryEnd">
+                <i class="fa-brands fa-whatsapp"></i>
+              </div>
+              <div>
+                <div class="font-semibold">واتساپ</div>
+                <div class="text-muted dark:text-gray-300">+98 912 345 6789</div>
+              </div>
+            </div>
+            
+            <div class="flex items-center gap-4">
+              <div class="grid h-12 w-12 place-items-center rounded-full bg-purple-100 dark:bg-purple-900 text-primaryEnd">
+                <i class="fa-brands fa-linkedin"></i>
+              </div>
+              <div>
+                <div class="font-semibold">لینکدین</div>
+                <div class="text-muted dark:text-gray-300">linkedin.com/in/sajad-ai</div>
+              </div>
+            </div>
+            
+            <div class="flex items-center gap-4">
+              <div class="grid h-12 w-12 place-items-center rounded-full bg-gray-100 dark:bg-gray-800 text-primaryEnd">
+                <i class="fa-brands fa-github"></i>
+              </div>
+              <div>
+                <div class="font-semibold">گیت‌هاب</div>
+                <div class="text-muted dark:text-gray-300">github.com/sajad-ai</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="bg-white dark:bg-darkBg rounded-3xl p-8 shadow-lg">
+          <h3 class="font-bold text-xl mb-6">ارسال پیام</h3>
+          <form id="contactForm" class="space-y-6">
+            <div class="grid md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium mb-2">نام شما</label>
+                <input type="text" name="name" required class="w-full p-4 rounded-2xl border border-gray-300 dark:border-gray-600 bg-transparent focus:border-primaryEnd focus:ring-2 focus:ring-primaryEnd/20 outline-none transition-all">
+              </div>
+              <div>
+                <label class="block text-sm font-medium mb-2">ایمیل</label>
+                <input type="email" name="email" required class="w-full p-4 rounded-2xl border border-gray-300 dark:border-gray-600 bg-transparent focus:border-primaryEnd focus:ring-2 focus:ring-primaryEnd/20 outline-none transition-all">
+              </div>
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-2">موضوع</label>
+              <input type="text" name="subject" required class="w-full p-4 rounded-2xl border border-gray-300 dark:border-gray-600 bg-transparent focus:border-primaryEnd focus:ring-2 focus:ring-primaryEnd/20 outline-none transition-all">
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-2">پیام شما</label>
+              <textarea name="message" rows="5" required class="w-full p-4 rounded-2xl border border-gray-300 dark:border-gray-600 bg-transparent focus:border-primaryEnd focus:ring-2 focus:ring-primaryEnd/20 outline-none transition-all"></textarea>
+            </div>
+            <button type="submit" class="w-full bg-gradient-to-br from-primaryStart to-primaryEnd text-white py-4 rounded-2xl font-semibold shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-1">
+              ارسال پیام
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-textDark dark:bg-darkBg text-white py-12 rounded-t-3xl border-t border-gray-700">
+    <div class="container mx-auto px-6">
+      <div class="text-center">
+        <div class="flex justify-center gap-6 mb-8">
+          <a href="#" class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center hover:bg-primaryEnd transition-colors">
+            <i class="fa-brands fa-linkedin-in"></i>
+          </a>
+          <a href="#" class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center hover:bg-primaryEnd transition-colors">
+            <i class="fa-brands fa-github"></i>
+          </a>
+          <a href="#" class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center hover:bg-primaryEnd transition-colors">
+            <i class="fa-brands fa-twitter"></i>
+          </a>
+          <a href="#" class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center hover:bg-primaryEnd transition-colors">
+            <i class="fa-brands fa-telegram"></i>
+          </a>
+        </div>
+        
+        <p class="text-white/70 mb-4">© ۱۴۰۳ - سجاد | متخصص هوش مصنوعی و تحلیل داده</p>
+        <p class="text-white/50 text-sm">تمامی حقوق محفوظ است</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <button id="backToTop" class="fixed bottom-8 left-8 w-12 h-12 bg-primaryEnd text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-200 hidden z-40">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+  <!-- Notification Container -->
+  <div id="notification" class="fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-2xl shadow-lg z-50 hidden"></div>
+
+  <script>
+    // Preloader
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('preloader').style.opacity = '0';
+        setTimeout(() => {
+          document.getElementById('preloader').style.display = 'none';
+        }, 500);
+      }, 1500);
+    });
+
+    // Theme Toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    
+    if (localStorage.getItem('theme') === 'dark') {
+      document.documentElement.classList.add('dark');
+      themeIcon.classList.replace('fa-moon', 'fa-sun');
+    }
+    
+    themeToggle.addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+      if (document.documentElement.classList.contains('dark')) {
+        localStorage.setItem('theme', 'dark');
+        themeIcon.classList.replace('fa-moon', 'fa-sun');
+      } else {
+        localStorage.setItem('theme', 'light');
+        themeIcon.classList.replace('fa-sun', 'fa-moon');
+      }
+    });
+
+    // Typewriter Effect
+    class TypeWriter {
+      constructor(element, texts, speed = 100) {
+        this.element = element;
+        this.texts = texts;
+        this.speed = speed;
+        this.textIndex = 0;
+        this.charIndex = 0;
+        this.isDeleting = false;
+        this.type();
+      }
+      
+      type() {
+        const currentText = this.texts[this.textIndex];
+        
+        if (this.isDeleting) {
+          this.element.textContent = currentText.substring(0, this.charIndex - 1);
+          this.charIndex--;
+        } else {
+          this.element.textContent = currentText.substring(0, this.charIndex + 1);
+          this.charIndex++;
+        }
+        
+        if (!this.isDeleting && this.charIndex === currentText.length) {
+          setTimeout(() => this.isDeleting = true, 2000);
+        } else if (this.isDeleting && this.charIndex === 0) {
+          this.isDeleting = false;
+          this.textIndex = (this.textIndex + 1) % this.texts.length;
+        }
+        
+        setTimeout(() => this.type(), this.isDeleting ? this.speed / 2 : this.speed);
+      }
+    }
+
+    // Initialize Typewriter
+    new TypeWriter(document.getElementById('typewriter'), ['سلام! من سجادم']);
+
+    // Particle Background
+    class ParticleBackground {
+      constructor() {
+        this.canvas = document.getElementById('particleCanvas');
+        this.ctx = this.canvas.getContext('2d');
+        this.particles = [];
+        this.init();
+      }
+      
+      init() {
+        this.resize();
+        window.addEventListener('resize', () => this.resize());
+        
+        for (let i = 0; i < 50; i++) {
+          this.particles.push(new Particle(this.canvas));
+        }
+        
+        this.animate();
+      }
+      
+      resize() {
+        this.canvas.width = window.innerWidth;
+        this.canvas.height = window.innerHeight;
+      }
+      
+      animate() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        
+        this.particles.forEach(particle => {
+          particle.update();
+          particle.draw(this.ctx);
+        });
+        
+        requestAnimationFrame(() => this.animate());
+      }
+    }
+
+    class Particle {
+      constructor(canvas) {
+        this.canvas = canvas;
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 3 + 1;
+        this.speedX = Math.random() * 1 - 0.5;
+        this.speedY = Math.random() * 1 - 0.5;
+        this.color = `rgba(111, 177, 255, ${Math.random() * 0.5 + 0.2})`;
+      }
+      
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        
+        if (this.x > this.canvas.width) this.x = 0;
+        if (this.x < 0) this.x = this.canvas.width;
+        if (this.y > this.canvas.height) this.y = 0;
+        if (this.y < 0) this.y = this.canvas.height;
+      }
+      
+      draw(ctx) {
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    // Initialize Particle Background
+    new ParticleBackground();
+
+    // Animated Counter
+    function animateCounters() {
+      const counters = document.querySelectorAll('[data-count]');
+      
+      counters.forEach(counter => {
+        const target = parseInt(counter.getAttribute('data-count'));
+        const duration = 2000;
+        const step = target / (duration / 16);
+        let current = 0;
+        
+        const timer = setInterval(() => {
+          current += step;
+          if (current >= target) {
+            counter.textContent = target + (counter.textContent.includes('%') ? '%' : '+');
+            clearInterval(timer);
+          } else {
+            counter.textContent = Math.floor(current) + (counter.textContent.includes('%') ? '%' : '+');
+          }
+        }, 16);
+      });
+    }
+
+    // Skills Radar Chart
+    const radarCtx = document.getElementById('skillsRadar').getContext('2d');
+    const skillsChart = new Chart(radarCtx, {
+      type: 'radar',
+      data: {
+        labels: ['Python', 'یادگیری ماشین', 'یادگیری عمیق', 'SQL', 'تحلیل داده', 'ابزارهای Cloud'],
+        datasets: [{
+          label: 'سطح مهارت',
+          data: [95, 90, 88, 85, 80, 75],
+          backgroundColor: 'rgba(111, 177, 255, 0.2)',
+          borderColor: '#6fb1ff',
+          pointBackgroundColor: '#1c6be1',
+          pointBorderColor: '#fff',
+          pointHoverBackgroundColor: '#fff',
+          pointHoverBorderColor: '#1c6be1'
+        }]
+      },
+      options: {
+        scales: {
+          r: {
+            angleLines: {
+              color: 'rgba(255, 255, 255, 0.1)'
+            },
+            grid: {
+              color: 'rgba(255, 255, 255, 0.1)'
+            },
+            pointLabels: {
+              color: document.documentElement.classList.contains('dark') ? '#f1f5f9' : '#112a45',
+              font: {
+                family: 'Vazirmatn, sans-serif'
+              }
+            },
+            ticks: {
+              backdropColor: 'transparent',
+              color: document.documentElement.classList.contains('dark') ? '#f1f5f9' : '#112a45'
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            labels: {
+              color: document.documentElement.classList.contains('dark') ? '#f1f5f9' : '#112a45',
+              font: {
+                family: 'Vazirmatn, sans-serif'
+              }
+            }
+          }
+        }
+      }
+    });
+
+    // Scroll Animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('section-visible');
+          if (entry.target.id === 'skills') {
+            animateCounters();
+          }
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.section-hidden').forEach((section) => {
+      observer.observe(section);
+    });
+
+    // Back to top button
+    const backToTopButton = document.getElementById('backToTop');
+    
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) {
+        backToTopButton.classList.remove('hidden');
+      } else {
+        backToTopButton.classList.add('hidden');
+      }
+    });
+
+    backToTopButton.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+    // Animate skill bars on scroll
+    const skillBars = document.querySelectorAll('.skill-bar');
+    const skillObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const width = entry.target.style.width;
+          entry.target.style.width = '0';
+          setTimeout(() => {
+            entry.target.style.width = width;
+          }, 100);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    skillBars.forEach(bar => {
+      skillObserver.observe(bar);
+    });
+
+    // Download Resume
+    document.getElementById('downloadResume').addEventListener('click', () => {
+      showNotification('در حال دانلود رزومه...');
+      // در اینجا می‌توانید لینک دانلود واقعی را قرار دهید
+      setTimeout(() => {
+        const link = document.createElement('a');
+        link.href = '#';
+        link.download = 'resume-sajad-ai.pdf';
+        link.click();
+      }, 1000);
+    });
+
+    // Notification System
+    function showNotification(message, type = 'success') {
+      const notification = document.getElementById('notification');
+      notification.textContent = message;
+      notification.className = `fixed top-4 left-1/2 transform -translate-x-1/2 px-6 py-3 rounded-2xl shadow-lg z-50 transition-all duration-300 ${
+        type === 'success' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'
+      }`;
+      notification.classList.remove('hidden');
+      
+      setTimeout(() => {
+        notification.classList.add('hidden');
+      }, 3000);
+    }
+
+    // Contact Form Handling
+    document.getElementById('contactForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      showNotification('پیام شما با موفقیت ارسال شد!');
+      e.target.reset();
+    });
+
+    // Voice Assistant (Basic)
+    document.getElementById('voiceAssistant').addEventListener('click', () => {
+      showNotification('دستیار صوتی فعال شد - در حال توسعه...');
+    });
+
+    // Development Debug
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+      console.log('🎨 Frontend Debug Mode Active');
+      console.log('📱 Breakpoints: sm:640px, md:768px, lg:1024px, xl:1280px');
+    }
+  </script>
 </body>
 </html>
