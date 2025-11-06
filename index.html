@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>سجاد | متخصص هوش مصنوعی و تحلیل داده</title>
+  <title>سجاد | برنامه‌نویس فرانت‌اند و توسعه‌دهنده React</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800&display=swap" rel="stylesheet">
@@ -15,10 +15,11 @@
       theme: {
         extend: {
           colors: {
-            primaryStart: '#6fb1ff',
-            primaryEnd: '#1c6be1',
-            muted: '#5c7394',
-            textDark: '#112a45',
+            primaryStart: '#8b5cf6',
+            primaryEnd: '#6366f1',
+            accent: '#06b6d4',
+            muted: '#64748b',
+            textDark: '#1e293b',
             darkBg: '#0f172a',
             darkText: '#f1f5f9'
           },
@@ -31,7 +32,11 @@
             'typing': 'typing 3.5s steps(40, end)',
             'bounce-slow': 'bounce 2s infinite',
             'pulse-slow': 'pulse 3s infinite',
-            'spin-slow': 'spin 3s linear infinite'
+            'spin-slow': 'spin 3s linear infinite',
+            'float': 'float 6s ease-in-out infinite',
+            'gradient': 'gradient 8s ease infinite',
+            'shimmer': 'shimmer 2s linear infinite',
+            'code-typing': 'codeTyping 4s steps(40, end) infinite'
           },
           keyframes: {
             fadeIn: {
@@ -45,6 +50,23 @@
             typing: {
               'from': { width: '0' },
               'to': { width: '100%' }
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-20px)' }
+            },
+            gradient: {
+              '0%, 100%': { backgroundPosition: '0% 50%' },
+              '50%': { backgroundPosition: '100% 50%' }
+            },
+            shimmer: {
+              '0%': { backgroundPosition: '-1000px 0' },
+              '100%': { backgroundPosition: '1000px 0' }
+            },
+            codeTyping: {
+              '0%': { width: '0' },
+              '50%': { width: '100%' },
+              '100%': { width: '0' }
             }
           }
         }
@@ -53,199 +75,409 @@
   </script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
+    :root {
+      --primary-color: #8b5cf6;
+      --secondary-color: #6366f1;
+    }
+
     html {
       scroll-behavior: smooth;
     }
+
     .skill-bar {
       transition: width 1.5s ease-in-out;
     }
-    .project-card:hover {
-      transform: translateY(-8px);
-      transition: transform 0.3s ease;
+
+    .project-card {
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
+
+    .project-card:hover {
+      transform: translateY(-12px) scale(1.02);
+    }
+
     .section-hidden {
       opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.8s ease;
+      transform: translateY(50px);
+      transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     }
+
     .section-visible {
       opacity: 1;
       transform: translateY(0);
     }
+
     .timeline::before {
       content: '';
       position: absolute;
       right: 20px;
       top: 0;
       bottom: 0;
-      width: 2px;
-      background: linear-gradient(to bottom, #6fb1ff, #1c6be1);
+      width: 3px;
+      background: linear-gradient(to bottom, #8b5cf6, #6366f1, #06b6d4);
     }
+
     .dark .timeline::before {
-      background: linear-gradient(to bottom, #3b82f6, #1e40af);
+      background: linear-gradient(to bottom, #8b5cf6, #6366f1, #06b6d4);
     }
+
     .particle {
       position: absolute;
-      background: rgba(111, 177, 255, 0.6);
+      background: rgba(139, 92, 246, 0.6);
       border-radius: 50%;
       pointer-events: none;
+      animation: float 8s ease-in-out infinite;
     }
+
     .glass-effect {
-      backdrop-filter: blur(16px) saturate(180%);
+      backdrop-filter: blur(20px) saturate(180%);
       background-color: rgba(255, 255, 255, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.125);
     }
+
     .dark .glass-effect {
       background-color: rgba(15, 23, 42, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .magnetic-btn {
+      transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+    }
+
+    .magnetic-btn:hover {
+      transform: scale(1.05);
+    }
+
+    .custom-cursor {
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--primary-color);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      transition: all 0.1s ease;
+    }
+
+    .cursor-dot {
+      width: 4px;
+      height: 4px;
+      background: var(--secondary-color);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      transition: all 0.1s ease;
+    }
+
+    .code-editor {
+      background: #1e293b;
+      border-radius: 12px;
+      padding: 1.5rem;
+      font-family: 'Courier New', monospace;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .code-line {
+      color: #f8fafc;
+      margin-bottom: 0.5rem;
+      direction: ltr;
+      text-align: left;
+    }
+
+    .code-keyword {
+      color: #f472b6;
+    }
+
+    .code-function {
+      color: #7dd3fc;
+    }
+
+    .code-string {
+      color: #86efac;
+    }
+
+    .code-comment {
+      color: #64748b;
+    }
+
+    .code-cursor {
+      display: inline-block;
+      width: 8px;
+      height: 1.2em;
+      background: #06b6d4;
+      animation: blink 1s infinite;
+      vertical-align: middle;
+      margin-right: 2px;
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+
+    .tech-icon {
+      transition: all 0.3s ease;
+    }
+
+    .tech-icon:hover {
+      transform: scale(1.2) rotate(5deg);
+    }
+
+    .floating-shape {
+      animation: float 8s ease-in-out infinite;
+    }
+
+    .gradient-text {
+      background: linear-gradient(-45deg, #8b5cf6, #6366f1, #06b6d4);
+      background-size: 300% 300%;
+      animation: gradient 4s ease infinite;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hover-lift {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .hover-lift:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    .dark .hover-lift:hover {
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Reduced motion support */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
     }
   </style>
 </head>
-<body class="min-h-screen font-vazir bg-[radial-gradient(circle_at_top_left,_#f3f7ff,_#dce7ff_40%,_#e6f0ff_70%,_#f4f8ff_100%)] text-textDark dark:bg-darkBg dark:text-darkText transition-colors duration-300">
+<body class="min-h-screen font-vazir bg-gradient-to-br from-slate-50 to-blue-50 text-textDark dark:from-slate-900 dark:to-slate-800 dark:text-darkText transition-colors duration-500 overflow-x-hidden">
   
+  <!-- Custom Cursor -->
+  <div class="custom-cursor no-print"></div>
+  <div class="cursor-dot no-print"></div>
+
   <!-- Preloader -->
-  <div id="preloader" class="fixed inset-0 bg-white dark:bg-darkBg z-50 flex flex-col items-center justify-center transition-opacity duration-500">
-    <div class="animate-spin-slow rounded-full h-20 w-20 border-b-2 border-primaryEnd mb-4"></div>
-    <div class="text-lg font-semibold text-primaryEnd animate-pulse">در حال بارگذاری...</div>
+  <div id="preloader" class="fixed inset-0 bg-white dark:bg-darkBg z-[100] flex flex-col items-center justify-center transition-all duration-700">
+    <div class="relative">
+      <div class="animate-spin-slow rounded-full h-24 w-24 border-4 border-primaryStart border-t-transparent mb-6"></div>
+      <div class="absolute inset-0 animate-ping rounded-full h-24 w-24 border-2 border-primaryEnd opacity-75"></div>
+    </div>
+    <div class="text-xl font-semibold text-primaryEnd animate-pulse flex items-center gap-2">
+      <span class="code-comment">// در حال بارگذاری پورتفولیو</span>
+    </div>
   </div>
 
-  <!-- Particle Background -->
-  <canvas id="particleCanvas" class="fixed inset-0 -z-10"></canvas>
+  <!-- Floating Background Shapes -->
+  <div class="fixed inset-0 overflow-hidden pointer-events-none -z-10 no-print">
+    <div class="floating-shape absolute top-1/4 left-1/4 w-72 h-72 bg-gradient-to-br from-primaryStart/10 to-primaryEnd/10 rounded-full blur-3xl"></div>
+    <div class="floating-shape absolute top-3/4 right-1/4 w-96 h-96 bg-gradient-to-tr from-accent/5 to-primaryEnd/5 rounded-full blur-3xl" style="animation-delay: -2s;"></div>
+    <div class="floating-shape absolute bottom-1/4 left-3/4 w-64 h-64 bg-gradient-to-r from-primaryStart/15 to-accent/15 rounded-full blur-3xl" style="animation-delay: -4s;"></div>
+  </div>
 
   <!-- Theme Toggle -->
-  <button id="themeToggle" class="fixed top-24 left-6 w-12 h-12 rounded-full glass-effect shadow-lg backdrop-blur-md z-40 flex items-center justify-center hover:scale-110 transition-transform duration-200">
-    <i class="fa-solid fa-moon text-textDark dark:text-darkText" id="themeIcon"></i>
+  <button id="themeToggle" class="fixed top-24 left-6 w-14 h-14 rounded-full glass-effect shadow-2xl backdrop-blur-md z-40 flex items-center justify-center hover-lift magnetic-btn no-print group" aria-label="تغییر تم">
+    <i class="fa-solid fa-moon text-textDark dark:text-darkText text-xl group-hover:scale-110 transition-transform" id="themeIcon"></i>
   </button>
 
   <!-- Language Switcher -->
-  <div class="fixed top-24 right-6 z-30">
-    <select id="languageSwitch" class="glass-effect backdrop-blur-md rounded-2xl px-4 py-2 border border-gray-300 dark:border-gray-600 text-textDark dark:text-darkText">
+  <div class="fixed top-24 right-6 z-30 no-print">
+    <select id="languageSwitch" class="glass-effect backdrop-blur-md rounded-2xl px-4 py-3 border border-gray-300 dark:border-gray-600 text-textDark dark:text-darkText hover-lift focus-visible">
       <option value="fa">فارسی 🇮🇷</option>
       <option value="en">English 🇺🇸</option>
     </select>
   </div>
 
   <!-- Floating Action Buttons -->
-  <div class="fixed bottom-24 left-6 flex flex-col gap-3 z-30">
-    <button id="downloadResume" class="w-12 h-12 rounded-full bg-primaryEnd text-white shadow-lg hover:scale-110 transition-transform duration-200 flex items-center justify-center">
-      <i class="fa-solid fa-download"></i>
+  <div class="fixed bottom-24 left-6 flex flex-col gap-3 z-30 no-print">
+    <button id="downloadResume" class="w-14 h-14 rounded-full bg-gradient-to-br from-primaryStart to-primaryEnd text-white shadow-2xl hover-lift magnetic-btn flex items-center justify-center group" aria-label="دانلود رزومه">
+      <i class="fa-solid fa-download text-lg group-hover:scale-110 transition-transform"></i>
     </button>
-    <button onclick="window.open('https://wa.me/989123456789', '_blank')" class="w-12 h-12 rounded-full bg-green-500 text-white shadow-lg hover:scale-110 transition-transform duration-200 flex items-center justify-center">
-      <i class="fa-brands fa-whatsapp"></i>
+    <button onclick="window.open('https://wa.me/989123456789', '_blank')" class="w-14 h-14 rounded-full bg-gradient-to-br from-green-500 to-green-600 text-white shadow-2xl hover-lift magnetic-btn flex items-center justify-center group" aria-label="ارتباط در واتساپ">
+      <i class="fa-brands fa-whatsapp text-lg group-hover:scale-110 transition-transform"></i>
     </button>
-    <button id="voiceAssistant" class="w-12 h-12 rounded-full bg-purple-500 text-white shadow-lg hover:scale-110 transition-transform duration-200 flex items-center justify-center">
-      <i class="fa-solid fa-microphone"></i>
+    <button id="viewGithub" class="w-14 h-14 rounded-full bg-gradient-to-br from-gray-700 to-gray-800 text-white shadow-2xl hover-lift magnetic-btn flex items-center justify-center group" aria-label="گیت‌هاب">
+      <i class="fa-brands fa-github text-lg group-hover:scale-110 transition-transform"></i>
     </button>
   </div>
 
   <!-- Navigation -->
-  <nav class="sticky top-0 z-50 glass-effect backdrop-blur-md shadow-sm">
+  <nav class="sticky top-0 z-50 glass-effect backdrop-blur-md shadow-lg transition-all duration-300 no-print">
     <div class="container mx-auto px-6 py-4">
       <div class="flex justify-between items-center">
-        <div class="flex items-center gap-2">
-          <div class="grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-[#1f4dbf] to-[#52a6ff] font-bold text-white text-sm">
-            SJ
+        <div class="flex items-center gap-3">
+          <div class="grid h-12 w-12 place-items-center rounded-full bg-gradient-to-br from-primaryStart to-primaryEnd font-bold text-white text-lg shadow-lg magnetic-btn">
+            <i class="fa-solid fa-code"></i>
           </div>
-          <span class="font-bold">سجاد | AI & Data</span>
+          <span class="font-bold text-lg gradient-text">سجاد | Frontend Developer</span>
         </div>
         
         <div class="hidden md:flex items-center gap-8">
-          <a href="#home" class="text-sm font-medium hover:text-primaryEnd transition-colors">خانه</a>
-          <a href="#about" class="text-sm font-medium hover:text-primaryEnd transition-colors">درباره من</a>
-          <a href="#skills" class="text-sm font-medium hover:text-primaryEnd transition-colors">مهارت‌ها</a>
-          <a href="#projects" class="text-sm font-medium hover:text-primaryEnd transition-colors">پروژه‌ها</a>
-          <a href="#contact" class="text-sm font-medium hover:text-primaryEnd transition-colors">تماس</a>
+          <a href="#home" class="text-sm font-medium hover:text-primaryEnd transition-all duration-300 hover:scale-110 magnetic-btn">خانه</a>
+          <a href="#about" class="text-sm font-medium hover:text-primaryEnd transition-all duration-300 hover:scale-110 magnetic-btn">درباره من</a>
+          <a href="#skills" class="text-sm font-medium hover:text-primaryEnd transition-all duration-300 hover:scale-110 magnetic-btn">مهارت‌ها</a>
+          <a href="#projects" class="text-sm font-medium hover:text-primaryEnd transition-all duration-300 hover:scale-110 magnetic-btn">پروژه‌ها</a>
+          <a href="#contact" class="text-sm font-medium hover:text-primaryEnd transition-all duration-300 hover:scale-110 magnetic-btn">تماس</a>
         </div>
         
-        <button class="md:hidden text-textDark dark:text-darkText">
-          <i class="fa-solid fa-bars text-xl"></i>
+        <button class="md:hidden text-textDark dark:text-darkText text-xl hover-lift magnetic-btn" id="mobileMenuBtn" aria-label="منوی موبایل">
+          <i class="fa-solid fa-bars"></i>
         </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="absolute top-full left-0 right-0 bg-white dark:bg-darkBg shadow-2xl rounded-b-3xl p-6 hidden transition-all duration-300 origin-top">
+      <div class="flex flex-col gap-4">
+        <a href="#home" class="text-lg font-medium hover:text-primaryEnd transition-all duration-300 py-2 border-b border-gray-200 dark:border-gray-700">خانه</a>
+        <a href="#about" class="text-lg font-medium hover:text-primaryEnd transition-all duration-300 py-2 border-b border-gray-200 dark:border-gray-700">درباره من</a>
+        <a href="#skills" class="text-lg font-medium hover:text-primaryEnd transition-all duration-300 py-2 border-b border-gray-200 dark:border-gray-700">مهارت‌ها</a>
+        <a href="#projects" class="text-lg font-medium hover:text-primaryEnd transition-all duration-300 py-2 border-b border-gray-200 dark:border-gray-700">پروژه‌ها</a>
+        <a href="#contact" class="text-lg font-medium hover:text-primaryEnd transition-all duration-300 py-2">تماس</a>
       </div>
     </div>
   </nav>
 
   <!-- Hero Section -->
-  <section id="home" class="relative flex justify-center items-center min-h-screen pt-20">
-    <div class="absolute -top-32 -left-36 h-[340px] w-[340px] rounded-full bg-[#6fb1ff59] blur-[70px] opacity-70 -z-10"></div>
-    <div class="absolute -bottom-28 -right-32 h-[300px] w-[300px] rounded-full bg-[#1c6be147] blur-[70px] opacity-70 -z-10"></div>
-
+  <section id="home" class="relative min-h-screen flex items-center justify-center pt-20">
     <div class="container mx-auto px-6 sm:px-10 lg:px-16 py-10 lg:py-14">
       <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
         <div class="flex flex-col gap-8 animate-fade-in">
           <div class="space-y-4">
             <h1 class="text-[clamp(2.2rem,5vw,3.6rem)] font-extrabold leading-snug text-textDark dark:text-darkText">
-              <span id="typewriter"></span><br />
-              <span class="bg-gradient-to-br from-primaryStart to-primaryEnd bg-clip-text text-transparent">متخصص هوش مصنوعی</span><br />
-              و تحلیل داده
+              <span id="typewriter" class="gradient-text"></span><br />
+              <span class="bg-gradient-to-br from-primaryStart to-primaryEnd bg-clip-text text-transparent">توسعه‌دهنده فرانت‌اند</span><br />
+              و طراح رابط کاربری
             </h1>
             <p class="max-w-[34ch] text-base leading-8 text-muted dark:text-gray-300">
-              با مدل‌سازی یادگیری ماشین و مهندسی داده، تصمیم‌سازی را سریع‌تر و دقیق‌تر می‌کنم.
+              با تخصص در React، Next.js و TypeScript، تجربه‌های کاربری مدرن و به یاد ماندنی خلق می‌کنم.
             </p>
+          </div>
+
+          <!-- Live Code Preview -->
+          <div class="code-editor hover-lift">
+            <div class="code-line">
+              <span class="code-keyword">const</span> <span class="code-function">developer</span> = {
+            </div>
+            <div class="code-line ml-4">
+              name: <span class="code-string">"سجاد"</span>,
+            </div>
+            <div class="code-line ml-4">
+              role: <span class="code-string">"Frontend Developer"</span>,
+            </div>
+            <div class="code-line ml-4">
+              skills: [<span class="code-string">"React"</span>, <span class="code-string">"Next.js"</span>, <span class="code-string">"TypeScript"</span>],
+            </div>
+            <div class="code-line">
+              }<span class="code-cursor"></span>
+            </div>
+            <div class="code-line code-comment">
+              // آماده همکاری در پروژه‌های خلاقانه
+            </div>
           </div>
 
           <!-- Buttons -->
           <div class="flex flex-col sm:flex-row sm:items-center gap-3">
-            <a href="https://wa.me/989123456789" class="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-br from-primaryStart to-primaryEnd px-7 py-3 text-sm font-semibold text-white shadow-[0_18px_35px_rgba(47,91,175,0.25)] transition-transform duration-200 hover:-translate-y-1">
-              <i class="fa-brands fa-whatsapp text-lg"></i>
-              ارتباط در واتساپ
+            <a href="#projects" class="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-br from-primaryStart to-primaryEnd px-7 py-3 text-sm font-semibold text-white shadow-2xl hover-lift magnetic-btn group">
+              <i class="fa-solid fa-eye text-lg group-hover:scale-110 transition-transform"></i>
+              مشاهده پروژه‌ها
             </a>
-            <a href="#contact" class="inline-flex items-center justify-center gap-2 rounded-full border border-[#6fb1ff80] bg-white/80 dark:bg-darkBg/80 px-7 py-3 text-sm font-semibold text-primaryEnd shadow-[0_12px_25px_rgba(65,120,200,0.12)] transition-transform duration-200 hover:-translate-y-1">
-              <i class="fa-solid fa-paper-plane text-base"></i>
-              ارسال پیام
+            <a href="#contact" class="inline-flex items-center justify-center gap-2 rounded-full border border-primaryEnd/50 bg-white/80 dark:bg-darkBg/80 px-7 py-3 text-sm font-semibold text-primaryEnd shadow-lg hover-lift magnetic-btn group">
+              <i class="fa-solid fa-paper-plane text-base group-hover:scale-110 transition-transform"></i>
+              شروع همکاری
             </a>
           </div>
 
           <!-- Stats -->
           <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <div class="rounded-2xl border border-[#8fb5ee59] bg-white/85 dark:bg-darkBg/85 px-6 py-5 shadow-[0_18px_35px_rgba(40,90,170,0.1)]">
-              <div class="text-2xl font-extrabold text-primaryEnd" data-count="8">0+</div>
-              <div class="text-sm leading-7 text-muted dark:text-gray-300">سال تجربه در تحلیل داده و ساخت مدل</div>
+            <div class="rounded-2xl border border-primaryEnd/20 bg-white/85 dark:bg-darkBg/85 px-6 py-5 shadow-xl hover-lift">
+              <div class="text-2xl font-extrabold text-primaryEnd" data-count="3">0+</div>
+              <div class="text-sm leading-7 text-muted dark:text-gray-300">سال تجربه در توسعه فرانت‌اند</div>
             </div>
-            <div class="rounded-2xl border border-[#8fb5ee59] bg-white/85 dark:bg-darkBg/85 px-6 py-5 shadow-[0_18px_35px_rgba(40,90,170,0.1)]">
-              <div class="text-2xl font-extrabold text-primaryEnd" data-count="40">0+</div>
-              <div class="text-sm leading-7 text-muted dark:text-gray-300">پروژه موفق در حوزه هوش مصنوعی</div>
+            <div class="rounded-2xl border border-primaryEnd/20 bg-white/85 dark:bg-darkBg/85 px-6 py-5 shadow-xl hover-lift">
+              <div class="text-2xl font-extrabold text-primaryEnd" data-count="25">0+</div>
+              <div class="text-sm leading-7 text-muted dark:text-gray-300">پروژه موفق تحویل داده شده</div>
             </div>
-            <div class="rounded-2xl border border-[#8fb5ee59] bg-white/85 dark:bg-darkBg/85 px-6 py-5 shadow-[0_18px_35px_rgba(40,90,170,0.1)]">
+            <div class="rounded-2xl border border-primaryEnd/20 bg-white/85 dark:bg-darkBg/85 px-6 py-5 shadow-xl hover-lift">
               <div class="text-2xl font-extrabold text-primaryEnd" data-count="100">0%</div>
-              <div class="text-sm leading-7 text-muted dark:text-gray-300">رضایت مشتریان از راهکارهای ارائه‌شده</div>
-            </div>
-          </div>
-
-          <!-- Ready for Collaboration -->
-          <div class="flex items-center gap-3 rounded-2xl bg-white/80 dark:bg-darkBg/80 px-6 py-4 shadow-[0_12px_25px_rgba(65,120,200,0.12)]">
-            <div class="grid h-12 w-12 place-items-center rounded-full bg-green-100 dark:bg-green-900 text-green-600 dark:text-green-400">
-              <i class="fa-solid fa-handshake text-lg"></i>
-            </div>
-            <div class="flex flex-col">
-              <span class="font-semibold text-textDark dark:text-darkText">آماده همکاری</span>
-              <span class="text-sm text-muted dark:text-gray-300">پروژه‌های جدید و چالش‌های داده‌ای</span>
+              <div class="text-sm leading-7 text-muted dark:text-gray-300">رضایت مشتریان از کیفیت کار</div>
             </div>
           </div>
         </div>
 
-        <!-- Visual Element -->
+        <!-- Tech Stack Visual -->
         <div class="order-first lg:order-none animate-slide-up">
-          <div class="relative flex min-h-[360px] sm:min-h-[420px] flex-col justify-end overflow-hidden rounded-[32px] bg-[linear-gradient(160deg,_rgba(20,40,85,0.85),_rgba(36,90,170,0.7))] px-8 py-12 shadow-[0_30px_60px_rgba(20,54,120,0.3)]">
-            <!-- Background Pattern -->
-            <div class="pointer-events-none absolute inset-0">
-              <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_25%,rgba(111,177,255,0.45),transparent_55%),radial-gradient(circle_at_70%_60%,rgba(73,130,230,0.5),transparent_65%)] mix-blend-screen"></div>
-              <span class="absolute left-1/2 top-1/2 h-[92px] w-[92px] -translate-x-1/2 -translate-y-1/2 rounded-[24px] border border-[rgba(160,198,255,0.65)] shadow-[0_0_25px_rgba(160,198,255,0.45)] rotate-45"></span>
-              <span class="absolute left-[32%] top-[38%] h-[68px] w-[68px] -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-[rgba(160,198,255,0.65)] rotate-45"></span>
-              <span class="absolute left-[70%] top-[30%] h-[68px] w-[68px] -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-[rgba(160,198,255,0.65)] rotate-45"></span>
-              <span class="absolute left-1/2 top-[78%] h-[68px] w-[68px] -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-[rgba(160,198,255,0.65)] rotate-45"></span>
-            </div>
-            
-            <!-- Profile Card -->
-            <div class="relative flex items-center justify-between gap-6">
-              <div class="flex items-center gap-3 text-white">
-                <div class="grid h-11 w-11 place-items-center rounded-full bg-white/20 text-base font-semibold">س</div>
-                <div class="space-y-1 text-sm">
-                  <div class="font-semibold">سجاد</div>
-                  <div class="text-white/80">متخصص هوش مصنوعی</div>
+          <div class="relative bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-2xl hover-lift">
+            <h3 class="text-xl font-bold text-center mb-8 gradient-text">تکنولوژی‌های مورد استفاده</h3>
+            <div class="grid grid-cols-3 gap-6">
+              <!-- Row 1 -->
+              <div class="flex flex-col items-center gap-2 tech-icon group">
+                <div class="w-16 h-16 bg-orange-500 rounded-2xl flex items-center justify-center text-white text-2xl">
+                  <i class="fa-brands fa-html5"></i>
                 </div>
+                <span class="text-sm font-medium group-hover:text-primaryEnd transition-colors">HTML5</span>
               </div>
-              <div class="inline-flex items-center gap-2">
-                <span class="h-[10px] w-[26px] rounded-full bg-white"></span>
-                <span class="h-[9px] w-[9px] rounded-full bg-white/40"></span>
-                <span class="h-[9px] w-[9px] rounded-full bg-white/40"></span>
+              <div class="flex flex-col items-center gap-2 tech-icon group">
+                <div class="w-16 h-16 bg-blue-500 rounded-2xl flex items-center justify-center text-white text-2xl">
+                  <i class="fa-brands fa-css3-alt"></i>
+                </div>
+                <span class="text-sm font-medium group-hover:text-primaryEnd transition-colors">CSS3</span>
+              </div>
+              <div class="flex flex-col items-center gap-2 tech-icon group">
+                <div class="w-16 h-16 bg-yellow-500 rounded-2xl flex items-center justify-center text-white text-2xl">
+                  <i class="fa-brands fa-js"></i>
+                </div>
+                <span class="text-sm font-medium group-hover:text-primaryEnd transition-colors">JavaScript</span>
+              </div>
+              
+              <!-- Row 2 -->
+              <div class="flex flex-col items-center gap-2 tech-icon group">
+                <div class="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center text-white text-2xl">
+                  <i class="fa-brands fa-react"></i>
+                </div>
+                <span class="text-sm font-medium group-hover:text-primaryEnd transition-colors">React</span>
+              </div>
+              <div class="flex flex-col items-center gap-2 tech-icon group">
+                <div class="w-16 h-16 bg-gray-800 rounded-2xl flex items-center justify-center text-white text-2xl">
+                  <i class="fa-brands fa-next-js"></i>
+                </div>
+                <span class="text-sm font-medium group-hover:text-primaryEnd transition-colors">Next.js</span>
+              </div>
+              <div class="flex flex-col items-center gap-2 tech-icon group">
+                <div class="w-16 h-16 bg-green-500 rounded-2xl flex items-center justify-center text-white text-2xl">
+                  <i class="fa-brands fa-node-js"></i>
+                </div>
+                <span class="text-sm font-medium group-hover:text-primaryEnd transition-colors">Node.js</span>
+              </div>
+              
+              <!-- Row 3 -->
+              <div class="flex flex-col items-center gap-2 tech-icon group">
+                <div class="w-16 h-16 bg-purple-500 rounded-2xl flex items-center justify-center text-white text-2xl">
+                  <i class="fa-brands fa-bootstrap"></i>
+                </div>
+                <span class="text-sm font-medium group-hover:text-primaryEnd transition-colors">Bootstrap</span>
+              </div>
+              <div class="flex flex-col items-center gap-2 tech-icon group">
+                <div class="w-16 h-16 bg-cyan-500 rounded-2xl flex items-center justify-center text-white text-2xl">
+                  <i class="fa-brands fa-tailwind"></i>
+                </div>
+                <span class="text-sm font-medium group-hover:text-primaryEnd transition-colors">Tailwind</span>
+              </div>
+              <div class="flex flex-col items-center gap-2 tech-icon group">
+                <div class="w-16 h-16 bg-blue-700 rounded-2xl flex items-center justify-center text-white text-2xl">
+                  <i class="fa-brands fa-python"></i>
+                </div>
+                <span class="text-sm font-medium group-hover:text-primaryEnd transition-colors">Python</span>
               </div>
             </div>
           </div>
@@ -255,31 +487,31 @@
   </section>
 
   <!-- About Section -->
-  <section id="about" class="py-20 bg-white/30 dark:bg-darkBg/50">
+  <section id="about" class="py-20 bg-white/30 dark:bg-slate-900/50">
     <div class="container mx-auto px-6">
       <div class="grid lg:grid-cols-2 gap-12 items-center section-hidden">
         <div>
-          <h2 class="text-3xl font-bold mb-6">درباره من</h2>
+          <h2 class="text-3xl font-bold mb-6 gradient-text">درباره من</h2>
           <p class="text-muted dark:text-gray-300 leading-8 mb-6">
-            متخصص هوش مصنوعی و تحلیل داده با بیش از ۸ سال تجربه در طراحی و پیاده‌سازی راه‌حل‌های مبتنی بر داده. 
-            تخصص اصلی من در توسعه مدل‌های یادگیری ماشین، پردازش زبان طبیعی و بینایی کامپیوتر است.
+            یک توسعه‌دهنده فرانت‌اند پرشور با ۳ سال تجربه در ساخت رابط‌های کاربری مدرن و تعاملی. 
+            تخصص اصلی من در اکوسیستم React شامل Next.js، TypeScript و ابزارهای مدرن توسعه است.
           </p>
           <p class="text-muted dark:text-gray-300 leading-8 mb-8">
-            با تسلط بر ابزارهای مدرن تحلیل داده و فریم‌ورک‌های هوش مصنوعی، توانسته‌ام در پروژه‌های متعددی 
-            در صنایع مختلف از جمله مالی، سلامت و فناوری مشارکت مؤثر داشته باشم.
+            عاشق حل چالش‌های پیچیده و ایجاد تجربه‌های کاربری استثنایی هستم. 
+            همیشه در حال یادگیری تکنولوژی‌های جدید و بهبود مهارت‌هایم می‌باشم.
           </p>
           <div class="flex flex-wrap gap-4">
-            <div class="bg-white dark:bg-darkBg rounded-2xl px-6 py-4 shadow-md">
-              <div class="text-2xl font-bold text-primaryEnd mb-2">PhD</div>
-              <div class="text-sm text-muted dark:text-gray-300">هوش مصنوعی</div>
+            <div class="bg-white dark:bg-slate-800 rounded-2xl px-6 py-4 shadow-lg hover-lift">
+              <div class="text-2xl font-bold text-primaryEnd mb-2">UI/UX</div>
+              <div class="text-sm text-muted dark:text-gray-300">طراحی رابط کاربری</div>
             </div>
-            <div class="bg-white dark:bg-darkBg rounded-2xl px-6 py-4 shadow-md">
-              <div class="text-2xl font-bold text-primaryEnd mb-2">12+</div>
-              <div class="text-sm text-muted dark:text-gray-300">مقاله علمی</div>
+            <div class="bg-white dark:bg-slate-800 rounded-2xl px-6 py-4 shadow-lg hover-lift">
+              <div class="text-2xl font-bold text-primaryEnd mb-2">PWA</div>
+              <div class="text-sm text-muted dark:text-gray-300">اپلیکیشن‌های وب</div>
             </div>
-            <div class="bg-white dark:bg-darkBg rounded-2xl px-6 py-4 shadow-md">
-              <div class="text-2xl font-bold text-primaryEnd mb-2">5+</div>
-              <div class="text-sm text-muted dark:text-gray-300">جایزه صنعتی</div>
+            <div class="bg-white dark:bg-slate-800 rounded-2xl px-6 py-4 shadow-lg hover-lift">
+              <div class="text-2xl font-bold text-primaryEnd mb-2">SEO</div>
+              <div class="text-sm text-muted dark:text-gray-300">بهینه‌سازی موتور جستجو</div>
             </div>
           </div>
         </div>
@@ -287,27 +519,27 @@
           <!-- Timeline -->
           <div class="relative timeline pl-8">
             <div class="timeline-item mb-8 relative">
-              <div class="timeline-dot absolute w-4 h-4 bg-primaryEnd rounded-full -right-2 top-2 border-4 border-white dark:border-darkBg"></div>
-              <div class="timeline-content bg-white dark:bg-darkBg rounded-2xl p-6 shadow-lg">
-                <h4 class="font-bold text-textDark dark:text-darkText">Senior AI Engineer</h4>
-                <p class="text-muted dark:text-gray-300 text-sm mb-2">شرکت فناوری داده</p>
-                <span class="text-primaryEnd text-sm">۱۴۰۰ - اکنون</span>
+              <div class="timeline-dot absolute w-4 h-4 bg-primaryEnd rounded-full -right-2 top-2 border-4 border-white dark:border-slate-900 shadow-lg"></div>
+              <div class="timeline-content bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-xl hover-lift">
+                <h4 class="font-bold text-textDark dark:text-darkText">Frontend Developer</h4>
+                <p class="text-muted dark:text-gray-300 text-sm mb-2">شرکت فناوری وب</p>
+                <span class="text-primaryEnd text-sm">۱۴۰۱ - اکنون</span>
               </div>
             </div>
             <div class="timeline-item mb-8 relative">
-              <div class="timeline-dot absolute w-4 h-4 bg-primaryStart rounded-full -right-2 top-2 border-4 border-white dark:border-darkBg"></div>
-              <div class="timeline-content bg-white dark:bg-darkBg rounded-2xl p-6 shadow-lg">
-                <h4 class="font-bold text-textDark dark:text-darkText">Data Scientist</h4>
-                <p class="text-muted dark:text-gray-300 text-sm mb-2">استارتاپ هوشمند</p>
-                <span class="text-primaryEnd text-sm">۱۳۹۸ - ۱۴۰۰</span>
+              <div class="timeline-dot absolute w-4 h-4 bg-primaryStart rounded-full -right-2 top-2 border-4 border-white dark:border-slate-900 shadow-lg"></div>
+              <div class="timeline-content bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-xl hover-lift">
+                <h4 class="font-bold text-textDark dark:text-darkText">React Developer</h4>
+                <p class="text-muted dark:text-gray-300 text-sm mb-2">استارتاپ دیجیتال</p>
+                <span class="text-primaryEnd text-sm">۱۴۰۰ - ۱۴۰۱</span>
               </div>
             </div>
             <div class="timeline-item relative">
-              <div class="timeline-dot absolute w-4 h-4 bg-primaryStart rounded-full -right-2 top-2 border-4 border-white dark:border-darkBg"></div>
-              <div class="timeline-content bg-white dark:bg-darkBg rounded-2xl p-6 shadow-lg">
-                <h4 class="font-bold text-textDark dark:text-darkText">ML Researcher</h4>
-                <p class="text-muted dark:text-gray-300 text-sm mb-2">دانشگاه صنعتی</p>
-                <span class="text-primaryEnd text-sm">۱۳۹۶ - ۱۳۹۸</span>
+              <div class="timeline-dot absolute w-4 h-4 bg-accent rounded-full -right-2 top-2 border-4 border-white dark:border-slate-900 shadow-lg"></div>
+              <div class="timeline-content bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-xl hover-lift">
+                <h4 class="font-bold text-textDark dark:text-darkText">Web Developer</h4>
+                <p class="text-muted dark:text-gray-300 text-sm mb-2">فریلنسر</p>
+                <span class="text-primaryEnd text-sm">۱۳۹۹ - ۱۴۰۰</span>
               </div>
             </div>
           </div>
@@ -319,165 +551,168 @@
   <!-- Skills Section -->
   <section id="skills" class="py-20">
     <div class="container mx-auto px-6">
-      <h2 class="text-3xl font-bold text-center mb-4">مهارت‌های تخصصی</h2>
+      <h2 class="text-3xl font-bold text-center mb-4 gradient-text">مهارت‌های تخصصی</h2>
       <p class="text-muted dark:text-gray-300 text-center mb-12 max-w-2xl mx-auto">
-        تسلط بر آخرین تکنولوژی‌ها و فریم‌ورک‌های حوزه هوش مصنوعی و تحلیل داده
+        تسلط کامل بر تکنولوژی‌های مدرن توسعه فرانت‌اند و ابزارهای مرتبط
       </p>
       
-      <div class="grid md:grid-cols-2 gap-8 section-hidden">
-        <!-- Technical Skills -->
-        <div class="bg-white dark:bg-darkBg rounded-3xl p-8 shadow-lg">
-          <h3 class="font-bold text-xl mb-6 flex items-center gap-2">
-            <i class="fa-solid fa-code text-primaryEnd"></i>
-            مهارت‌های فنی
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 section-hidden">
+        <!-- Frontend Skills -->
+        <div class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-2xl hover-lift">
+          <h3 class="font-bold text-lg mb-4 flex items-center gap-2 text-primaryEnd">
+            <i class="fa-solid fa-desktop"></i>
+            فرانت‌اند
           </h3>
-          <div class="space-y-6">
-            <div>
-              <div class="flex justify-between mb-2">
-                <span class="font-medium">Python & TensorFlow</span>
-                <span class="text-primaryEnd font-bold">95%</span>
-              </div>
-              <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                <div class="bg-gradient-to-r from-primaryStart to-primaryEnd h-2 rounded-full skill-bar" style="width: 95%"></div>
-              </div>
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="text-sm">React</span>
+              <span class="text-primaryEnd font-bold text-sm">95%</span>
             </div>
-            <div>
-              <div class="flex justify-between mb-2">
-                <span class="font-medium">SQL & Databases</span>
-                <span class="text-primaryEnd font-bold">90%</span>
-              </div>
-              <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                <div class="bg-gradient-to-r from-primaryStart to-primaryEnd h-2 rounded-full skill-bar" style="width: 90%"></div>
-              </div>
+            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+              <div class="bg-gradient-to-r from-primaryStart to-primaryEnd h-2 rounded-full skill-bar" style="width: 95%"></div>
             </div>
-            <div>
-              <div class="flex justify-between mb-2">
-                <span class="font-medium">Deep Learning</span>
-                <span class="text-primaryEnd font-bold">88%</span>
-              </div>
-              <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                <div class="bg-gradient-to-r from-primaryStart to-primaryEnd h-2 rounded-full skill-bar" style="width: 88%"></div>
-              </div>
+            
+            <div class="flex items-center justify-between">
+              <span class="text-sm">Next.js</span>
+              <span class="text-primaryEnd font-bold text-sm">90%</span>
             </div>
-            <div>
-              <div class="flex justify-between mb-2">
-                <span class="font-medium">Data Visualization</span>
-                <span class="text-primaryEnd font-bold">85%</span>
-              </div>
-              <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                <div class="bg-gradient-to-r from-primaryStart to-primaryEnd h-2 rounded-full skill-bar" style="width: 85%"></div>
-              </div>
+            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+              <div class="bg-gradient-to-r from-primaryStart to-primaryEnd h-2 rounded-full skill-bar" style="width: 90%"></div>
+            </div>
+            
+            <div class="flex items-center justify-between">
+              <span class="text-sm">TypeScript</span>
+              <span class="text-primaryEnd font-bold text-sm">85%</span>
+            </div>
+            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+              <div class="bg-gradient-to-r from-primaryStart to-primaryEnd h-2 rounded-full skill-bar" style="width: 85%"></div>
             </div>
           </div>
         </div>
 
-        <!-- Tools & Technologies -->
-        <div class="bg-white dark:bg-darkBg rounded-3xl p-8 shadow-lg">
-          <h3 class="font-bold text-xl mb-6 flex items-center gap-2">
-            <i class="fa-solid fa-tools text-primaryEnd"></i>
-            ابزارها و تکنولوژی‌ها
+        <!-- Styling & Tools -->
+        <div class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-2xl hover-lift">
+          <h3 class="font-bold text-lg mb-4 flex items-center gap-2 text-accent">
+            <i class="fa-solid fa-palette"></i>
+            استایلینگ و ابزارها
           </h3>
-          <div class="grid grid-cols-2 gap-4">
-            <div class="flex items-center gap-3 p-3 bg-blue-50 dark:bg-blue-900/30 rounded-2xl">
-              <i class="fa-brands fa-python text-primaryEnd text-xl"></i>
-              <span>Python</span>
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="text-sm">Tailwind CSS</span>
+              <span class="text-primaryEnd font-bold text-sm">92%</span>
             </div>
-            <div class="flex items-center gap-3 p-3 bg-blue-50 dark:bg-blue-900/30 rounded-2xl">
-              <i class="fa-solid fa-database text-primaryEnd text-xl"></i>
-              <span>SQL</span>
+            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+              <div class="bg-gradient-to-r from-accent to-primaryEnd h-2 rounded-full skill-bar" style="width: 92%"></div>
             </div>
-            <div class="flex items-center gap-3 p-3 bg-blue-50 dark:bg-blue-900/30 rounded-2xl">
-              <i class="fa-solid fa-brain text-primaryEnd text-xl"></i>
-              <span>TensorFlow</span>
+            
+            <div class="flex items-center justify-between">
+              <span class="text-sm">Bootstrap</span>
+              <span class="text-primaryEnd font-bold text-sm">88%</span>
             </div>
-            <div class="flex items-center gap-3 p-3 bg-blue-50 dark:bg-blue-900/30 rounded-2xl">
-              <i class="fa-brands fa-aws text-primaryEnd text-xl"></i>
-              <span>AWS</span>
+            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+              <div class="bg-gradient-to-r from-accent to-primaryEnd h-2 rounded-full skill-bar" style="width: 88%"></div>
             </div>
-            <div class="flex items-center gap-3 p-3 bg-blue-50 dark:bg-blue-900/30 rounded-2xl">
-              <i class="fa-solid fa-chart-line text-primaryEnd text-xl"></i>
-              <span>Tableau</span>
+            
+            <div class="flex items-center justify-between">
+              <span class="text-sm">SASS/SCSS</span>
+              <span class="text-primaryEnd font-bold text-sm">80%</span>
             </div>
-            <div class="flex items-center gap-3 p-3 bg-blue-50 dark:bg-blue-900/30 rounded-2xl">
-              <i class="fa-brands fa-docker text-primaryEnd text-xl"></i>
-              <span>Docker</span>
-            </div>
-            <div class="flex items-center gap-3 p-3 bg-blue-50 dark:bg-blue-900/30 rounded-2xl">
-              <i class="fa-brands fa-git-alt text-primaryEnd text-xl"></i>
-              <span>Git</span>
-            </div>
-            <div class="flex items-center gap-3 p-3 bg-blue-50 dark:bg-blue-900/30 rounded-2xl">
-              <i class="fa-solid fa-cloud text-primaryEnd text-xl"></i>
-              <span>Azure ML</span>
+            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+              <div class="bg-gradient-to-r from-accent to-primaryEnd h-2 rounded-full skill-bar" style="width: 80%"></div>
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- Radar Chart -->
-      <div class="mt-12 bg-white dark:bg-darkBg rounded-3xl p-8 shadow-lg section-hidden">
-        <h3 class="font-bold text-xl mb-6 text-center">نمودار راداری مهارت‌ها</h3>
-        <div class="flex justify-center">
-          <canvas id="skillsRadar" width="400" height="400"></canvas>
+        <!-- Other Skills -->
+        <div class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-2xl hover-lift">
+          <h3 class="font-bold text-lg mb-4 flex items-center gap-2 text-green-500">
+            <i class="fa-solid fa-gears"></i>
+            سایر مهارت‌ها
+          </h3>
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="text-sm">Python</span>
+              <span class="text-primaryEnd font-bold text-sm">75%</span>
+            </div>
+            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+              <div class="bg-gradient-to-r from-green-500 to-accent h-2 rounded-full skill-bar" style="width: 75%"></div>
+            </div>
+            
+            <div class="flex items-center justify-between">
+              <span class="text-sm">Git & GitHub</span>
+              <span class="text-primaryEnd font-bold text-sm">90%</span>
+            </div>
+            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+              <div class="bg-gradient-to-r from-green-500 to-accent h-2 rounded-full skill-bar" style="width: 90%"></div>
+            </div>
+            
+            <div class="flex items-center justify-between">
+              <span class="text-sm">Responsive Design</span>
+              <span class="text-primaryEnd font-bold text-sm">95%</span>
+            </div>
+            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+              <div class="bg-gradient-to-r from-green-500 to-accent h-2 rounded-full skill-bar" style="width: 95%"></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Projects Section -->
-  <section id="projects" class="py-20 bg-white/30 dark:bg-darkBg/50">
+  <section id="projects" class="py-20 bg-white/30 dark:bg-slate-900/50">
     <div class="container mx-auto px-6">
-      <h2 class="text-3xl font-bold text-center mb-4">پروژه‌های منتخب</h2>
+      <h2 class="text-3xl font-bold text-center mb-4 gradient-text">پروژه‌های منتخب</h2>
       <p class="text-muted dark:text-gray-300 text-center mb-12 max-w-2xl mx-auto">
-        نمونه‌ای از پروژه‌های موفق در حوزه هوش مصنوعی و تحلیل داده
+        نمونه‌ای از پروژه‌های موفق در حوزه توسعه فرانت‌اند و طراحی رابط کاربری
       </p>
 
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 section-hidden">
         <!-- Project 1 -->
-        <div class="project-card bg-white dark:bg-darkBg rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300">
-          <div class="w-full h-48 bg-gradient-to-br from-blue-400 to-purple-600 rounded-2xl mb-4 flex items-center justify-center">
-            <i class="fa-solid fa-chart-line text-white text-4xl"></i>
+        <div class="project-card bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-xl">
+          <div class="w-full h-48 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl mb-4 flex items-center justify-center">
+            <i class="fa-solid fa-store text-white text-4xl"></i>
           </div>
-          <h3 class="font-bold text-lg mb-2">سیستم پیش‌بینی بازار سهام</h3>
-          <p class="text-muted dark:text-gray-300 text-sm mb-4">مدل یادگیری عمیق برای پیش‌بینی روند بازار با دقت ۸۷٪</p>
+          <h3 class="font-bold text-lg mb-2">فروشگاه آنلاین</h3>
+          <p class="text-muted dark:text-gray-300 text-sm mb-4">فروشگاه اینترنتی با React و TypeScript</p>
           <div class="flex flex-wrap gap-2">
-            <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs px-3 py-1 rounded-full">Python</span>
-            <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs px-3 py-1 rounded-full">LSTM</span>
-            <span class="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 text-xs px-3 py-1 rounded-full">TensorFlow</span>
+            <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs px-3 py-1 rounded-full">React</span>
+            <span class="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 text-xs px-3 py-1 rounded-full">TypeScript</span>
+            <span class="bg-cyan-100 dark:bg-cyan-900 text-cyan-800 dark:text-cyan-200 text-xs px-3 py-1 rounded-full">Tailwind</span>
           </div>
         </div>
 
         <!-- Project 2 -->
-        <div class="project-card bg-white dark:bg-darkBg rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300">
-          <div class="w-full h-48 bg-gradient-to-br from-green-400 to-blue-600 rounded-2xl mb-4 flex items-center justify-center">
-            <i class="fa-solid fa-comment-medical text-white text-4xl"></i>
+        <div class="project-card bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-xl">
+          <div class="w-full h-48 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-2xl mb-4 flex items-center justify-center">
+            <i class="fa-solid fa-chart-line text-white text-4xl"></i>
           </div>
-          <h3 class="font-bold text-lg mb-2">دستیار پزشکی هوشمند</h3>
-          <p class="text-muted dark:text-gray-300 text-sm mb-4">سیستم تشخیص بیماری با پردازش زبان طبیعی</p>
+          <h3 class="font-bold text-lg mb-2">داشبورد مدیریتی</h3>
+          <p class="text-muted dark:text-gray-300 text-sm mb-4">داشبورد پیشرفته با نمودارهای تعاملی</p>
           <div class="flex flex-wrap gap-2">
-            <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs px-3 py-1 rounded-full">NLP</span>
-            <span class="bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 text-xs px-3 py-1 rounded-full">BERT</span>
-            <span class="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 text-xs px-3 py-1 rounded-full">PyTorch</span>
+            <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs px-3 py-1 rounded-full">Next.js</span>
+            <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs px-3 py-1 rounded-full">Chart.js</span>
+            <span class="bg-cyan-100 dark:bg-cyan-900 text-cyan-800 dark:text-cyan-200 text-xs px-3 py-1 rounded-full">Material-UI</span>
           </div>
         </div>
 
         <!-- Project 3 -->
-        <div class="project-card bg-white dark:bg-darkBg rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300">
-          <div class="w-full h-48 bg-gradient-to-br from-orange-400 to-red-600 rounded-2xl mb-4 flex items-center justify-center">
-            <i class="fa-solid fa-robot text-white text-4xl"></i>
+        <div class="project-card bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-xl">
+          <div class="w-full h-48 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl mb-4 flex items-center justify-center">
+            <i class="fa-solid fa-mobile-screen text-white text-4xl"></i>
           </div>
-          <h3 class="font-bold text-lg mb-2">سیستم تشخیص چهره</h3>
-          <p class="text-muted dark:text-gray-300 text-sm mb-4">الگوریتم تشخیص هویت با دقت ۹۴٪ در شرایط مختلف</p>
+          <h3 class="font-bold text-lg mb-2">اپلیکیشن موبایل</h3>
+          <p class="text-muted dark:text-gray-300 text-sm mb-4">PWA با قابلیت آفلاین</p>
           <div class="flex flex-wrap gap-2">
-            <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs px-3 py-1 rounded-full">OpenCV</span>
-            <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs px-3 py-1 rounded-full">CNN</span>
-            <span class="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 text-xs px-3 py-1 rounded-full">Keras</span>
+            <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs px-3 py-1 rounded-full">React</span>
+            <span class="bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 text-xs px-3 py-1 rounded-full">PWA</span>
+            <span class="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 text-xs px-3 py-1 rounded-full">Bootstrap</span>
           </div>
         </div>
       </div>
 
       <div class="text-center mt-12">
-        <a href="#" class="inline-flex items-center gap-2 rounded-full border border-primaryEnd px-6 py-3 text-primaryEnd font-semibold hover:bg-primaryEnd hover:text-white transition-colors">
+        <a href="#" class="inline-flex items-center gap-2 rounded-full border border-primaryEnd px-6 py-3 text-primaryEnd font-semibold hover:bg-primaryEnd hover:text-white transition-all duration-300 magnetic-btn">
           مشاهده همه پروژه‌ها
           <i class="fa-solid fa-arrow-left"></i>
         </a>
@@ -491,24 +726,24 @@
       <div class="grid lg:grid-cols-2 gap-12 items-start section-hidden">
         <!-- Contact Info -->
         <div>
-          <h2 class="text-3xl font-bold mb-6">در تماس باشید</h2>
+          <h2 class="text-3xl font-bold mb-6 gradient-text">در تماس باشید</h2>
           <p class="text-muted dark:text-gray-300 leading-8 mb-8">
-            برای همکاری در پروژه‌های هوش مصنوعی یا مشاوره در زمینه تحلیل داده، 
+            برای همکاری در پروژه‌های فرانت‌اند یا مشاوره در زمینه توسعه وب، 
             از طریق راه‌های ارتباطی زیر با من در ارتباط باشید.
           </p>
           
           <div class="space-y-6">
-            <div class="flex items-center gap-4">
+            <div class="flex items-center gap-4 p-4 rounded-2xl bg-white/50 dark:bg-slate-800/50 hover-lift">
               <div class="grid h-12 w-12 place-items-center rounded-full bg-blue-100 dark:bg-blue-900 text-primaryEnd">
                 <i class="fa-solid fa-envelope"></i>
               </div>
               <div>
                 <div class="font-semibold">ایمیل</div>
-                <div class="text-muted dark:text-gray-300">sajad.ai@example.com</div>
+                <div class="text-muted dark:text-gray-300">sajad.frontend@example.com</div>
               </div>
             </div>
             
-            <div class="flex items-center gap-4">
+            <div class="flex items-center gap-4 p-4 rounded-2xl bg-white/50 dark:bg-slate-800/50 hover-lift">
               <div class="grid h-12 w-12 place-items-center rounded-full bg-green-100 dark:bg-green-900 text-primaryEnd">
                 <i class="fa-brands fa-whatsapp"></i>
               </div>
@@ -518,52 +753,55 @@
               </div>
             </div>
             
-            <div class="flex items-center gap-4">
+            <div class="flex items-center gap-4 p-4 rounded-2xl bg-white/50 dark:bg-slate-800/50 hover-lift">
               <div class="grid h-12 w-12 place-items-center rounded-full bg-purple-100 dark:bg-purple-900 text-primaryEnd">
                 <i class="fa-brands fa-linkedin"></i>
               </div>
               <div>
                 <div class="font-semibold">لینکدین</div>
-                <div class="text-muted dark:text-gray-300">linkedin.com/in/sajad-ai</div>
+                <div class="text-muted dark:text-gray-300">linkedin.com/in/sajad-frontend</div>
               </div>
             </div>
             
-            <div class="flex items-center gap-4">
+            <div class="flex items-center gap-4 p-4 rounded-2xl bg-white/50 dark:bg-slate-800/50 hover-lift">
               <div class="grid h-12 w-12 place-items-center rounded-full bg-gray-100 dark:bg-gray-800 text-primaryEnd">
                 <i class="fa-brands fa-github"></i>
               </div>
               <div>
                 <div class="font-semibold">گیت‌هاب</div>
-                <div class="text-muted dark:text-gray-300">github.com/sajad-ai</div>
+                <div class="text-muted dark:text-gray-300">github.com/sajad-frontend</div>
               </div>
             </div>
           </div>
         </div>
 
         <!-- Contact Form -->
-        <div class="bg-white dark:bg-darkBg rounded-3xl p-8 shadow-lg">
+        <div class="bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-2xl hover-lift">
           <h3 class="font-bold text-xl mb-6">ارسال پیام</h3>
           <form id="contactForm" class="space-y-6">
             <div class="grid md:grid-cols-2 gap-4">
               <div>
                 <label class="block text-sm font-medium mb-2">نام شما</label>
-                <input type="text" name="name" required class="w-full p-4 rounded-2xl border border-gray-300 dark:border-gray-600 bg-transparent focus:border-primaryEnd focus:ring-2 focus:ring-primaryEnd/20 outline-none transition-all">
+                <input type="text" name="name" required class="w-full p-4 rounded-2xl border border-gray-300 dark:border-gray-600 bg-transparent focus:border-primaryEnd focus:ring-2 focus:ring-primaryEnd/20 outline-none transition-all focus:scale-105">
               </div>
               <div>
                 <label class="block text-sm font-medium mb-2">ایمیل</label>
-                <input type="email" name="email" required class="w-full p-4 rounded-2xl border border-gray-300 dark:border-gray-600 bg-transparent focus:border-primaryEnd focus:ring-2 focus:ring-primaryEnd/20 outline-none transition-all">
+                <input type="email" name="email" required class="w-full p-4 rounded-2xl border border-gray-300 dark:border-gray-600 bg-transparent focus:border-primaryEnd focus:ring-2 focus:ring-primaryEnd/20 outline-none transition-all focus:scale-105">
               </div>
             </div>
             <div>
               <label class="block text-sm font-medium mb-2">موضوع</label>
-              <input type="text" name="subject" required class="w-full p-4 rounded-2xl border border-gray-300 dark:border-gray-600 bg-transparent focus:border-primaryEnd focus:ring-2 focus:ring-primaryEnd/20 outline-none transition-all">
+              <input type="text" name="subject" required class="w-full p-4 rounded-2xl border border-gray-300 dark:border-gray-600 bg-transparent focus:border-primaryEnd focus:ring-2 focus:ring-primaryEnd/20 outline-none transition-all focus:scale-105">
             </div>
             <div>
               <label class="block text-sm font-medium mb-2">پیام شما</label>
-              <textarea name="message" rows="5" required class="w-full p-4 rounded-2xl border border-gray-300 dark:border-gray-600 bg-transparent focus:border-primaryEnd focus:ring-2 focus:ring-primaryEnd/20 outline-none transition-all"></textarea>
+              <textarea name="message" rows="5" required class="w-full p-4 rounded-2xl border border-gray-300 dark:border-gray-600 bg-transparent focus:border-primaryEnd focus:ring-2 focus:ring-primaryEnd/20 outline-none transition-all focus:scale-105"></textarea>
             </div>
-            <button type="submit" class="w-full bg-gradient-to-br from-primaryStart to-primaryEnd text-white py-4 rounded-2xl font-semibold shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-1">
-              ارسال پیام
+            <button type="submit" class="w-full bg-gradient-to-br from-primaryStart to-primaryEnd text-white py-4 rounded-2xl font-semibold shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-1 magnetic-btn group">
+              <span class="flex items-center justify-center gap-2">
+                <span>ارسال پیام</span>
+                <i class="fa-solid fa-paper-plane group-hover:scale-110 transition-transform"></i>
+              </span>
             </button>
           </form>
         </div>
@@ -572,70 +810,143 @@
   </section>
 
   <!-- Footer -->
-  <footer class="bg-textDark dark:bg-darkBg text-white py-12 rounded-t-3xl border-t border-gray-700">
+  <footer class="bg-slate-800 dark:bg-slate-900 text-white py-12 rounded-t-3xl border-t border-slate-700">
     <div class="container mx-auto px-6">
       <div class="text-center">
         <div class="flex justify-center gap-6 mb-8">
-          <a href="#" class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center hover:bg-primaryEnd transition-colors">
+          <a href="#" class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center hover:bg-primaryEnd transition-all duration-300 hover:scale-110 magnetic-btn">
             <i class="fa-brands fa-linkedin-in"></i>
           </a>
-          <a href="#" class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center hover:bg-primaryEnd transition-colors">
+          <a href="#" class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center hover:bg-primaryEnd transition-all duration-300 hover:scale-110 magnetic-btn">
             <i class="fa-brands fa-github"></i>
           </a>
-          <a href="#" class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center hover:bg-primaryEnd transition-colors">
+          <a href="#" class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center hover:bg-primaryEnd transition-all duration-300 hover:scale-110 magnetic-btn">
             <i class="fa-brands fa-twitter"></i>
           </a>
-          <a href="#" class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center hover:bg-primaryEnd transition-colors">
+          <a href="#" class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center hover:bg-primaryEnd transition-all duration-300 hover:scale-110 magnetic-btn">
             <i class="fa-brands fa-telegram"></i>
           </a>
         </div>
         
-        <p class="text-white/70 mb-4">© ۱۴۰۳ - سجاد | متخصص هوش مصنوعی و تحلیل داده</p>
-        <p class="text-white/50 text-sm">تمامی حقوق محفوظ است</p>
+        <p class="text-white/70 mb-4">© ۱۴۰۳ - سجاد | توسعه‌دهنده فرانت‌اند</p>
+        <p class="text-white/50 text-sm">ساخته شده با ❤️ و React</p>
       </div>
     </div>
   </footer>
 
   <!-- Back to Top Button -->
-  <button id="backToTop" class="fixed bottom-8 left-8 w-12 h-12 bg-primaryEnd text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-200 hidden z-40">
-    <i class="fa-solid fa-arrow-up"></i>
+  <button id="backToTop" class="fixed bottom-8 left-8 w-14 h-14 bg-primaryEnd text-white rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 hidden z-40 magnetic-btn no-print group" aria-label="بازگشت به بالا">
+    <i class="fa-solid fa-arrow-up group-hover:scale-110 transition-transform"></i>
   </button>
 
   <!-- Notification Container -->
-  <div id="notification" class="fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-2xl shadow-lg z-50 hidden"></div>
+  <div id="notification" class="fixed top-4 left-1/2 transform -translate-x-1/2 px-6 py-3 rounded-2xl shadow-2xl z-50 hidden transition-all duration-300 no-print"></div>
+
+  <!-- Loading Overlay for Form -->
+  <div id="formLoading" class="fixed inset-0 bg-black/50 z-50 hidden items-center justify-center no-print">
+    <div class="bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-2xl">
+      <div class="animate-spin-slow rounded-full h-12 w-12 border-4 border-primaryStart border-t-transparent mx-auto mb-4"></div>
+      <p class="text-textDark dark:text-darkText">در حال ارسال پیام...</p>
+    </div>
+  </div>
 
   <script>
-    // Preloader
+    // ==================== PRELOADER ====================
     window.addEventListener('load', () => {
       setTimeout(() => {
-        document.getElementById('preloader').style.opacity = '0';
+        const preloader = document.getElementById('preloader');
+        preloader.style.opacity = '0';
         setTimeout(() => {
-          document.getElementById('preloader').style.display = 'none';
-        }, 500);
-      }, 1500);
+          preloader.style.display = 'none';
+        }, 700);
+      }, 2000);
     });
 
-    // Theme Toggle
-    const themeToggle = document.getElementById('themeToggle');
-    const themeIcon = document.getElementById('themeIcon');
-    
-    if (localStorage.getItem('theme') === 'dark') {
-      document.documentElement.classList.add('dark');
-      themeIcon.classList.replace('fa-moon', 'fa-sun');
+    // ==================== CUSTOM CURSOR ====================
+    class CustomCursor {
+      constructor() {
+        this.cursor = document.querySelector('.custom-cursor');
+        this.cursorDot = document.querySelector('.cursor-dot');
+        this.init();
+      }
+      
+      init() {
+        document.addEventListener('mousemove', (e) => {
+          this.cursor.style.left = e.clientX + 'px';
+          this.cursor.style.top = e.clientY + 'px';
+          
+          this.cursorDot.style.left = e.clientX + 'px';
+          this.cursorDot.style.top = e.clientY + 'px';
+        });
+        
+        // Magnetic effect for buttons
+        document.querySelectorAll('.magnetic-btn').forEach(btn => {
+          btn.addEventListener('mouseenter', () => {
+            this.cursor.style.transform = 'scale(1.5)';
+            this.cursor.style.background = 'rgba(139, 92, 246, 0.3)';
+          });
+          
+          btn.addEventListener('mouseleave', () => {
+            this.cursor.style.transform = 'scale(1)';
+            this.cursor.style.background = 'transparent';
+          });
+        });
+      }
     }
     
-    themeToggle.addEventListener('click', () => {
-      document.documentElement.classList.toggle('dark');
-      if (document.documentElement.classList.contains('dark')) {
-        localStorage.setItem('theme', 'dark');
-        themeIcon.classList.replace('fa-moon', 'fa-sun');
-      } else {
-        localStorage.setItem('theme', 'light');
-        themeIcon.classList.replace('fa-sun', 'fa-moon');
-      }
-    });
+    new CustomCursor();
 
-    // Typewriter Effect
+    // ==================== THEME MANAGEMENT ====================
+    class ThemeManager {
+      constructor() {
+        this.themeToggle = document.getElementById('themeToggle');
+        this.themeIcon = document.getElementById('themeIcon');
+        this.init();
+      }
+      
+      init() {
+        // Check saved theme or prefer-color-scheme
+        const savedTheme = localStorage.getItem('theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+          this.enableDarkMode();
+        }
+        
+        this.themeToggle.addEventListener('click', () => this.toggleTheme());
+        
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+          if (!localStorage.getItem('theme')) {
+            e.matches ? this.enableDarkMode() : this.enableLightMode();
+          }
+        });
+      }
+      
+      enableDarkMode() {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+        this.themeIcon.classList.replace('fa-moon', 'fa-sun');
+      }
+      
+      enableLightMode() {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+        this.themeIcon.classList.replace('fa-sun', 'fa-moon');
+      }
+      
+      toggleTheme() {
+        if (document.documentElement.classList.contains('dark')) {
+          this.enableLightMode();
+        } else {
+          this.enableDarkMode();
+        }
+      }
+    }
+    
+    new ThemeManager();
+
+    // ==================== TYPEWRITER EFFECT ====================
     class TypeWriter {
       constructor(element, texts, speed = 100) {
         this.element = element;
@@ -672,247 +983,353 @@
     // Initialize Typewriter
     new TypeWriter(document.getElementById('typewriter'), ['سلام! من سجادم']);
 
-    // Particle Background
-    class ParticleBackground {
+    // ==================== ANIMATED COUNTERS ====================
+    class AnimatedCounters {
       constructor() {
-        this.canvas = document.getElementById('particleCanvas');
-        this.ctx = this.canvas.getContext('2d');
-        this.particles = [];
+        this.counters = document.querySelectorAll('[data-count]');
         this.init();
       }
       
       init() {
-        this.resize();
-        window.addEventListener('resize', () => this.resize());
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              this.animateCounters();
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.5 });
         
-        for (let i = 0; i < 50; i++) {
-          this.particles.push(new Particle(this.canvas));
-        }
-        
-        this.animate();
+        this.counters.forEach(counter => observer.observe(counter));
       }
       
-      resize() {
-        this.canvas.width = window.innerWidth;
-        this.canvas.height = window.innerHeight;
+      animateCounters() {
+        this.counters.forEach(counter => {
+          const target = parseInt(counter.getAttribute('data-count'));
+          const duration = 2000;
+          const step = target / (duration / 16);
+          let current = 0;
+          
+          const timer = setInterval(() => {
+            current += step;
+            if (current >= target) {
+              counter.textContent = target + (counter.textContent.includes('%') ? '%' : '+');
+              clearInterval(timer);
+            } else {
+              counter.textContent = Math.floor(current) + (counter.textContent.includes('%') ? '%' : '+');
+            }
+          }, 16);
+        });
+      }
+    }
+    
+    new AnimatedCounters();
+
+    // ==================== SCROLL ANIMATIONS ====================
+    class ScrollAnimations {
+      constructor() {
+        this.observerOptions = {
+          threshold: 0.1,
+          rootMargin: '0px 0px -50px 0px'
+        };
+        this.init();
       }
       
-      animate() {
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+      init() {
+        this.observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('section-visible');
+              
+              // Animate skill bars when skills section is visible
+              if (entry.target.id === 'skills') {
+                this.animateSkillBars();
+              }
+            }
+          });
+        }, this.observerOptions);
         
-        this.particles.forEach(particle => {
-          particle.update();
-          particle.draw(this.ctx);
+        document.querySelectorAll('.section-hidden').forEach((section) => {
+          this.observer.observe(section);
+        });
+      }
+      
+      animateSkillBars() {
+        const skillBars = document.querySelectorAll('.skill-bar');
+        skillBars.forEach(bar => {
+          const width = bar.style.width;
+          bar.style.width = '0';
+          setTimeout(() => {
+            bar.style.width = width;
+          }, 300);
+        });
+      }
+    }
+    
+    new ScrollAnimations();
+
+    // ==================== BACK TO TOP BUTTON ====================
+    class BackToTop {
+      constructor() {
+        this.button = document.getElementById('backToTop');
+        this.init();
+      }
+      
+      init() {
+        window.addEventListener('scroll', () => {
+          if (window.pageYOffset > 300) {
+            this.button.classList.remove('hidden');
+          } else {
+            this.button.classList.add('hidden');
+          }
         });
         
-        requestAnimationFrame(() => this.animate());
+        this.button.addEventListener('click', () => {
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
       }
     }
-
-    class Particle {
-      constructor(canvas) {
-        this.canvas = canvas;
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 3 + 1;
-        this.speedX = Math.random() * 1 - 0.5;
-        this.speedY = Math.random() * 1 - 0.5;
-        this.color = `rgba(111, 177, 255, ${Math.random() * 0.5 + 0.2})`;
-      }
-      
-      update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-        
-        if (this.x > this.canvas.width) this.x = 0;
-        if (this.x < 0) this.x = this.canvas.width;
-        if (this.y > this.canvas.height) this.y = 0;
-        if (this.y < 0) this.y = this.canvas.height;
-      }
-      
-      draw(ctx) {
-        ctx.fillStyle = this.color;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
-      }
-    }
-
-    // Initialize Particle Background
-    new ParticleBackground();
-
-    // Animated Counter
-    function animateCounters() {
-      const counters = document.querySelectorAll('[data-count]');
-      
-      counters.forEach(counter => {
-        const target = parseInt(counter.getAttribute('data-count'));
-        const duration = 2000;
-        const step = target / (duration / 16);
-        let current = 0;
-        
-        const timer = setInterval(() => {
-          current += step;
-          if (current >= target) {
-            counter.textContent = target + (counter.textContent.includes('%') ? '%' : '+');
-            clearInterval(timer);
-          } else {
-            counter.textContent = Math.floor(current) + (counter.textContent.includes('%') ? '%' : '+');
-          }
-        }, 16);
-      });
-    }
-
-    // Skills Radar Chart
-    const radarCtx = document.getElementById('skillsRadar').getContext('2d');
-    const skillsChart = new Chart(radarCtx, {
-      type: 'radar',
-      data: {
-        labels: ['Python', 'یادگیری ماشین', 'یادگیری عمیق', 'SQL', 'تحلیل داده', 'ابزارهای Cloud'],
-        datasets: [{
-          label: 'سطح مهارت',
-          data: [95, 90, 88, 85, 80, 75],
-          backgroundColor: 'rgba(111, 177, 255, 0.2)',
-          borderColor: '#6fb1ff',
-          pointBackgroundColor: '#1c6be1',
-          pointBorderColor: '#fff',
-          pointHoverBackgroundColor: '#fff',
-          pointHoverBorderColor: '#1c6be1'
-        }]
-      },
-      options: {
-        scales: {
-          r: {
-            angleLines: {
-              color: 'rgba(255, 255, 255, 0.1)'
-            },
-            grid: {
-              color: 'rgba(255, 255, 255, 0.1)'
-            },
-            pointLabels: {
-              color: document.documentElement.classList.contains('dark') ? '#f1f5f9' : '#112a45',
-              font: {
-                family: 'Vazirmatn, sans-serif'
-              }
-            },
-            ticks: {
-              backdropColor: 'transparent',
-              color: document.documentElement.classList.contains('dark') ? '#f1f5f9' : '#112a45'
-            }
-          }
-        },
-        plugins: {
-          legend: {
-            labels: {
-              color: document.documentElement.classList.contains('dark') ? '#f1f5f9' : '#112a45',
-              font: {
-                family: 'Vazirmatn, sans-serif'
-              }
-            }
-          }
-        }
-      }
-    });
-
-    // Scroll Animations
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('section-visible');
-          if (entry.target.id === 'skills') {
-            animateCounters();
-          }
-        }
-      });
-    }, observerOptions);
-
-    document.querySelectorAll('.section-hidden').forEach((section) => {
-      observer.observe(section);
-    });
-
-    // Back to top button
-    const backToTopButton = document.getElementById('backToTop');
     
-    window.addEventListener('scroll', () => {
-      if (window.pageYOffset > 300) {
-        backToTopButton.classList.remove('hidden');
-      } else {
-        backToTopButton.classList.add('hidden');
+    new BackToTop();
+
+    // ==================== MOBILE MENU ====================
+    class MobileMenu {
+      constructor() {
+        this.menuBtn = document.getElementById('mobileMenuBtn');
+        this.mobileMenu = document.getElementById('mobileMenu');
+        this.init();
       }
-    });
+      
+      init() {
+        this.menuBtn.addEventListener('click', () => this.toggleMenu());
+        
+        // Close menu when clicking on links
+        this.mobileMenu.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => this.closeMenu());
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!this.menuBtn.contains(e.target) && !this.mobileMenu.contains(e.target)) {
+            this.closeMenu();
+          }
+        });
+      }
+      
+      toggleMenu() {
+        this.mobileMenu.classList.toggle('hidden');
+        this.mobileMenu.classList.toggle('scale-y-100');
+        this.mobileMenu.classList.toggle('opacity-100');
+      }
+      
+      closeMenu() {
+        this.mobileMenu.classList.add('hidden');
+        this.mobileMenu.classList.remove('scale-y-100', 'opacity-100');
+      }
+    }
+    
+    new MobileMenu();
 
-    backToTopButton.addEventListener('click', () => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    });
+    // ==================== NOTIFICATION SYSTEM ====================
+    class NotificationSystem {
+      constructor() {
+        this.notification = document.getElementById('notification');
+      }
+      
+      show(message, type = 'success', duration = 3000) {
+        this.notification.textContent = message;
+        this.notification.className = `fixed top-4 left-1/2 transform -translate-x-1/2 px-6 py-3 rounded-2xl shadow-2xl z-50 transition-all duration-300 ${
+          type === 'success' ? 'bg-green-500 text-white' : 
+          type === 'error' ? 'bg-red-500 text-white' :
+          'bg-blue-500 text-white'
+        }`;
+        this.notification.classList.remove('hidden');
+        
+        setTimeout(() => {
+          this.hide();
+        }, duration);
+      }
+      
+      hide() {
+        this.notification.classList.add('hidden');
+      }
+    }
+    
+    const notification = new NotificationSystem();
 
-    // Animate skill bars on scroll
-    const skillBars = document.querySelectorAll('.skill-bar');
-    const skillObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const width = entry.target.style.width;
-          entry.target.style.width = '0';
-          setTimeout(() => {
-            entry.target.style.width = width;
-          }, 100);
+    // ==================== FORM HANDLING ====================
+    class ContactForm {
+      constructor() {
+        this.form = document.getElementById('contactForm');
+        this.formLoading = document.getElementById('formLoading');
+        this.init();
+      }
+      
+      init() {
+        this.form.addEventListener('submit', (e) => this.handleSubmit(e));
+        
+        // Add real-time validation
+        this.form.querySelectorAll('input, textarea').forEach(input => {
+          input.addEventListener('blur', () => this.validateField(input));
+          input.addEventListener('input', () => this.clearValidation(input));
+        });
+      }
+      
+      validateField(field) {
+        const value = field.value.trim();
+        let isValid = true;
+        let message = '';
+        
+        if (field.type === 'email' && value && !this.isValidEmail(value)) {
+          isValid = false;
+          message = 'لطفا یک ایمیل معتبر وارد کنید';
+        } else if (field.required && !value) {
+          isValid = false;
+          message = 'این فیلد الزامی است';
         }
-      });
-    }, { threshold: 0.5 });
+        
+        if (!isValid) {
+          this.showFieldError(field, message);
+        } else {
+          this.clearValidation(field);
+        }
+        
+        return isValid;
+      }
+      
+      isValidEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      }
+      
+      showFieldError(field, message) {
+        this.clearValidation(field);
+        field.classList.add('border-red-500', 'ring-2', 'ring-red-500/20');
+        
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'text-red-500 text-sm mt-1';
+        errorDiv.textContent = message;
+        field.parentNode.appendChild(errorDiv);
+      }
+      
+      clearValidation(field) {
+        field.classList.remove('border-red-500', 'ring-2', 'ring-red-500/20');
+        const errorDiv = field.parentNode.querySelector('.text-red-500');
+        if (errorDiv) {
+          errorDiv.remove();
+        }
+      }
+      
+      async handleSubmit(e) {
+        e.preventDefault();
+        
+        // Validate all fields
+        let isValid = true;
+        this.form.querySelectorAll('input[required], textarea[required]').forEach(field => {
+          if (!this.validateField(field)) {
+            isValid = false;
+          }
+        });
+        
+        if (!isValid) {
+          notification.show('لطفا تمام فیلدهای الزامی را به درستی پر کنید', 'error');
+          return;
+        }
+        
+        // Show loading
+        this.formLoading.classList.remove('hidden');
+        
+        try {
+          // Simulate API call
+          await new Promise(resolve => setTimeout(resolve, 2000));
+          
+          notification.show('پیام شما با موفقیت ارسال شد! به زودی با شما تماس می‌گیرم.', 'success');
+          this.form.reset();
+        } catch (error) {
+          notification.show('مشکلی در ارسال پیام پیش آمد. لطفا دوباره تلاش کنید.', 'error');
+        } finally {
+          this.formLoading.classList.add('hidden');
+        }
+      }
+    }
+    
+    new ContactForm();
 
-    skillBars.forEach(bar => {
-      skillObserver.observe(bar);
-    });
-
-    // Download Resume
+    // ==================== DOWNLOAD RESUME ====================
     document.getElementById('downloadResume').addEventListener('click', () => {
-      showNotification('در حال دانلود رزومه...');
-      // در اینجا می‌توانید لینک دانلود واقعی را قرار دهید
+      notification.show('در حال دانلود رزومه...', 'success');
+      
+      // Simulate download
       setTimeout(() => {
         const link = document.createElement('a');
         link.href = '#';
-        link.download = 'resume-sajad-ai.pdf';
+        link.download = 'resume-sajad-frontend.pdf';
         link.click();
-      }, 1000);
+        
+        notification.show('رزومه با موفقیت دانلود شد!', 'success');
+      }, 1500);
     });
 
-    // Notification System
-    function showNotification(message, type = 'success') {
-      const notification = document.getElementById('notification');
-      notification.textContent = message;
-      notification.className = `fixed top-4 left-1/2 transform -translate-x-1/2 px-6 py-3 rounded-2xl shadow-lg z-50 transition-all duration-300 ${
-        type === 'success' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'
-      }`;
-      notification.classList.remove('hidden');
+    // ==================== GITHUB BUTTON ====================
+    document.getElementById('viewGithub').addEventListener('click', () => {
+      window.open('https://github.com/sajad-frontend', '_blank');
+      notification.show('در حال باز کردن گیت‌هاب...', 'success');
+    });
+
+    // ==================== PERFORMANCE MONITORING ====================
+    class PerformanceMonitor {
+      constructor() {
+        this.init();
+      }
       
-      setTimeout(() => {
-        notification.classList.add('hidden');
-      }, 3000);
+      init() {
+        // Monitor largest contentful paint
+        const observer = new PerformanceObserver((list) => {
+          for (const entry of list.getEntries()) {
+            console.log('LCP:', entry.startTime, 'ms');
+          }
+        });
+        
+        observer.observe({ entryTypes: ['largest-contentful-paint'] });
+        
+        // Log performance metrics
+        window.addEventListener('load', () => {
+          setTimeout(() => {
+            const perfData = performance.timing;
+            const loadTime = perfData.loadEventEnd - perfData.navigationStart;
+            console.log(`Page loaded in ${loadTime}ms`);
+          }, 0);
+        });
+      }
+    }
+    
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+      new PerformanceMonitor();
+      console.log('🎨 Frontend Debug Mode Active');
+      console.log('⚡ Performance monitoring enabled');
     }
 
-    // Contact Form Handling
-    document.getElementById('contactForm').addEventListener('submit', (e) => {
-      e.preventDefault();
-      showNotification('پیام شما با موفقیت ارسال شد!');
-      e.target.reset();
+    // ==================== ACCESSIBILITY ENHANCEMENTS ====================
+    document.addEventListener('keydown', (e) => {
+      // Close mobile menu on Escape key
+      if (e.key === 'Escape') {
+        document.getElementById('mobileMenu').classList.add('hidden');
+      }
     });
 
-    // Voice Assistant (Basic)
-    document.getElementById('voiceAssistant').addEventListener('click', () => {
-      showNotification('دستیار صوتی فعال شد - در حال توسعه...');
-    });
-
-    // Development Debug
-    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-      console.log('🎨 Frontend Debug Mode Active');
-      console.log('📱 Breakpoints: sm:640px, md:768px, lg:1024px, xl:1280px');
+    // Service Worker Registration for PWA
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(registration => {
+            console.log('SW registered: ', registration);
+          })
+          .catch(registrationError => {
+            console.log('SW registration failed: ', registrationError);
+          });
+      });
     }
   </script>
 </body>
