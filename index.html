@@ -8,69 +8,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800&display=swap" rel="stylesheet">
     
-    <!-- استفاده از Tailwind CSS از طریق CDN جایگزین -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        primaryStart: '#8b5cf6',
-                        primaryEnd: '#6366f1',
-                        accent: '#06b6d4',
-                        muted: '#64748b',
-                        textDark: '#1e293b',
-                        darkBg: '#0f172a',
-                        darkText: '#f1f5f9'
-                    },
-                    fontFamily: {
-                        vazir: ['\'Vazirmatn\'', 'sans-serif']
-                    },
-                    animation: {
-                        'fade-in': 'fadeIn 0.8s ease-in-out',
-                        'slide-up': 'slideUp 0.6s ease-out',
-                        'typing': 'typing 3.5s steps(40, end)',
-                        'bounce-slow': 'bounce 2s infinite',
-                        'pulse-slow': 'pulse 3s infinite',
-                        'spin-slow': 'spin 3s linear infinite',
-                        'float': 'float 6s ease-in-out infinite',
-                        'gradient': 'gradient 8s ease infinite',
-                        'shimmer': 'shimmer 2s linear infinite'
-                    },
-                    keyframes: {
-                        fadeIn: {
-                            '0%': { opacity: '0' },
-                            '100%': { opacity: '1' }
-                        },
-                        slideUp: {
-                            '0%': { transform: 'translateY(30px)', opacity: '0' },
-                            '100%': { transform: 'translateY(0)', opacity: '1' }
-                        },
-                        typing: {
-                            'from': { width: '0' },
-                            'to': { width: '100%' }
-                        },
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0px)' },
-                            '50%': { transform: 'translateY(-20px)' }
-                        },
-                        gradient: {
-                            '0%, 100%': { backgroundPosition: '0% 50%' },
-                            '50%': { backgroundPosition: '100% 50%' }
-                        },
-                        shimmer: {
-                            '0%': { backgroundPosition: '-1000px 0' },
-                            '100%': { backgroundPosition: '1000px 0' }
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/tailwind.css">
 </head>
 <body class="min-h-screen font-vazir bg-gradient-to-br from-slate-50 to-blue-50 text-textDark dark:from-slate-900 dark:to-slate-800 dark:text-darkText transition-colors duration-500 overflow-x-hidden">
 
@@ -155,19 +94,469 @@
     </nav>
 
     <!-- Home Page -->
-    <section id="home-page" class="page active" data-include="pages/home.html"></section>
+    <section id="home-page" class="page active">
+        <div class="container mx-auto px-6 sm:px-10 lg:px-16 py-10 lg:py-14">
+            <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
+                <div class="flex flex-col gap-8">
+                    <div class="space-y-6">
+                        <!-- Typewriter Effect -->
+                        <div class="h-24">
+                            <h1 class="text-[clamp(2.2rem,5vw,3.6rem)] font-extrabold leading-snug text-textDark dark:text-darkText">
+                                <div id="line1" class="typewriter-line mb-4">سلام! من رضا اسماعیلی هستم</div>
+                                <div id="line2" class="typewriter-line mb-4">توسعه دهنده فرانت اند</div>
+                                <div id="line3" class="typewriter-line">و طراح رابط کاربری</div>
+                            </h1>
+                        </div>
+
+                        <p class="max-w-[34ch] text-base leading-8 text-muted dark:text-gray-300">
+                            با تخصص در React، Next.js و TypeScript، تجربه‌های کاربری مدرن و به یاد ماندنی خلق می‌کنم.
+                        </p>
+                    </div>
+
+                    <!-- Live Code Preview -->
+                    <div class="code-editor hover-lift">
+                        <div class="code-line">
+                            <span class="code-keyword">const</span> <span class="code-function">developer</span> = {
+                        </div>
+                        <div class="code-line ml-4">
+                            name: <span class="code-string">"رضا اسماعیلی"</span>,
+                        </div>
+                        <div class="code-line ml-4">
+                            role: <span class="code-string">"Frontend Developer"</span>,
+                        </div>
+                        <div class="code-line ml-4">
+                            skills: [<span class="code-string">"React"</span>, <span class="code-string">"Next.js"</span>, <span class="code-string">"TypeScript"</span>],
+                        </div>
+                        <div class="code-line">
+                            }<span class="code-cursor"></span>
+                        </div>
+                        <div class="code-line code-comment">
+                            // آماده همکاری در پروژه‌های خلاقانه
+                        </div>
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="flex flex-col sm:flex-row sm:items-center gap-3">
+                        <button class="view-projects-btn inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-br from-primaryStart to-primaryEnd px-7 py-3 text-sm font-semibold text-white shadow-2xl hover-lift magnetic-btn">
+                            <i class="fa-solid fa-eye text-lg"></i>
+                            مشاهده پروژه‌ها
+                        </button>
+                        <button class="contact-btn inline-flex items-center justify-center gap-2 rounded-full border border-primaryEnd/50 bg-white/80 dark:bg-darkBg/80 px-7 py-3 text-sm font-semibold text-primaryEnd shadow-lg hover-lift magnetic-btn">
+                            <i class="fa-solid fa-paper-plane text-base"></i>
+                            شروع همکاری
+                        </button>
+                    </div>
+
+                    <!-- Stats -->
+                    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                        <div class="rounded-2xl border border-primaryEnd/20 bg-white/85 dark:bg-darkBg/85 px-6 py-5 shadow-xl hover-lift">
+                            <div class="text-2xl font-extrabold text-primaryEnd">3+</div>
+                            <div class="text-sm leading-7 text-muted dark:text-gray-300">سال تجربه در توسعه فرانت‌اند</div>
+                        </div>
+                        <div class="rounded-2xl border border-primaryEnd/20 bg-white/85 dark:bg-darkBg/85 px-6 py-5 shadow-xl hover-lift">
+                            <div class="text-2xl font-extrabold text-primaryEnd">25+</div>
+                            <div class="text-sm leading-7 text-muted dark:text-gray-300">پروژه موفق تحویل داده شده</div>
+                        </div>
+                        <div class="rounded-2xl border border-primaryEnd/20 bg-white/85 dark:bg-darkBg/85 px-6 py-5 shadow-xl hover-lift">
+                            <div class="text-2xl font-extrabold text-primaryEnd">100%</div>
+                            <div class="text-sm leading-7 text-muted dark:text-gray-300">رضایت مشتریان از کیفیت کار</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tech Stack Visual -->
+                <div class="order-first lg:order-none">
+                    <div class="relative bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-2xl hover-lift">
+                        <h3 class="text-xl font-bold text-center mb-8 gradient-text">تکنولوژی‌های مورد استفاده</h3>
+                        <div class="grid grid-cols-3 gap-6">
+                            <!-- Row 1 -->
+                            <div class="flex flex-col items-center gap-2 tech-icon">
+                                <div class="w-16 h-16 bg-orange-500 rounded-2xl flex items-center justify-center text-white text-2xl">
+                                    <i class="fa-brands fa-html5"></i>
+                                </div>
+                                <span class="text-sm font-medium">HTML5</span>
+                            </div>
+                            <div class="flex flex-col items-center gap-2 tech-icon">
+                                <div class="w-16 h-16 bg-blue-500 rounded-2xl flex items-center justify-center text-white text-2xl">
+                                    <i class="fa-brands fa-css3-alt"></i>
+                                </div>
+                                <span class="text-sm font-medium">CSS3</span>
+                            </div>
+                            <div class="flex flex-col items-center gap-2 tech-icon">
+                                <div class="w-16 h-16 bg-yellow-500 rounded-2xl flex items-center justify-center text-white text-2xl">
+                                    <i class="fa-brands fa-js"></i>
+                                </div>
+                                <span class="text-sm font-medium">JavaScript</span>
+                            </div>
+
+                            <!-- Row 2 -->
+                            <div class="flex flex-col items-center gap-2 tech-icon">
+                                <div class="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center text-white text-2xl">
+                                    <i class="fa-brands fa-react"></i>
+                                </div>
+                                <span class="text-sm font-medium">React</span>
+                            </div>
+                            <div class="flex flex-col items-center gap-2 tech-icon">
+                                <div class="w-16 h-16 bg-blue-800 rounded-2xl flex items-center justify-center text-white text-2xl">
+                                    <span class="text-lg font-bold">TS</span>
+                                </div>
+                                <span class="text-sm font-medium">TypeScript</span>
+                            </div>
+                            <div class="flex flex-col items-center gap-2 tech-icon">
+                                <div class="w-16 h-16 bg-cyan-500 rounded-2xl flex items-center justify-center text-white text-2xl">
+                                    <i class="fa-brands fa-tailwind"></i>
+                                </div>
+                                <span class="text-sm font-medium">Tailwind</span>
+                            </div>
+
+                            <!-- Row 3 -->
+                            <div class="flex flex-col items-center gap-2 tech-icon">
+                                <div class="w-16 h-16 bg-purple-500 rounded-2xl flex items-center justify-center text-white text-2xl">
+                                    <i class="fa-brands fa-bootstrap"></i>
+                                </div>
+                                <span class="text-sm font-medium">Bootstrap</span>
+                            </div>
+                            <div class="flex flex-col items-center gap-2 tech-icon">
+                                <div class="w-16 h-16 bg-pink-500 rounded-2xl flex items-center justify-center text-white text-2xl">
+                                    <i class="fa-solid fa-pen-ruler"></i>
+                                </div>
+                                <span class="text-sm font-medium">Figma</span>
+                            </div>
+                            <div class="flex flex-col items-center gap-2 tech-icon">
+                                <div class="w-16 h-16 bg-green-500 rounded-2xl flex items-center justify-center text-white text-2xl">
+                                    <i class="fa-brands fa-python"></i>
+                                </div>
+                                <span class="text-sm font-medium">Python</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- About Page -->
-    <section id="about-page" class="page" data-include="pages/about.html"></section>
+    <section id="about-page" class="page">
+        <div class="container mx-auto px-6 py-20">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl font-bold mb-6 gradient-text">درباره من</h2>
+                    <p class="text-muted dark:text-gray-300 leading-8 mb-6">
+                        یک توسعه‌دهنده فرانت‌اند پرشور با ۳ سال تجربه در ساخت رابط‌های کاربری مدرن و تعاملی.
+                        تخصص اصلی من در اکوسیستم React شامل Next.js، TypeScript و ابزارهای مدرن توسعه است.
+                    </p>
+                    <p class="text-muted dark:text-gray-300 leading-8 mb-8">
+                        عاشق حل چالش‌های پیچیده و ایجاد تجربه‌های کاربری استثنایی هستم.
+                        همیشه در حال یادگیری تکنولوژی‌های جدید و بهبود مهارت‌هایم می‌باشم.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <div class="bg-white dark:bg-slate-800 rounded-2xl px-6 py-4 shadow-lg hover-lift">
+                            <div class="text-2xl font-bold text-primaryEnd mb-2">UI/UX</div>
+                            <div class="text-sm text-muted dark:text-gray-300">طراحی رابط کاربری</div>
+                        </div>
+                        <div class="bg-white dark:bg-slate-800 rounded-2xl px-6 py-4 shadow-lg hover-lift">
+                            <div class="text-2xl font-bold text-primaryEnd mb-2">PWA</div>
+                            <div class="text-sm text-muted dark:text-gray-300">اپلیکیشن‌های وب</div>
+                        </div>
+                        <div class="bg-white dark:bg-slate-800 rounded-2xl px-6 py-4 shadow-lg hover-lift">
+                            <div class="text-2xl font-bold text-primaryEnd mb-2">SEO</div>
+                            <div class="text-sm text-muted dark:text-gray-300">بهینه‌سازی موتور جستجو</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative">
+                    <!-- Timeline -->
+                    <div class="relative timeline pl-8">
+                        <div class="timeline-item mb-8 relative">
+                            <div class="timeline-dot absolute w-4 h-4 bg-primaryEnd rounded-full -right-2 top-2 border-4 border-white dark:border-slate-900 shadow-lg"></div>
+                            <div class="timeline-content bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-xl hover-lift">
+                                <h4 class="font-bold text-textDark dark:text-darkText">Frontend Developer</h4>
+                                <p class="text-muted dark:text-gray-300 text-sm mb-2">شرکت فناوری وب</p>
+                                <span class="text-primaryEnd text-sm">۱۴۰۱ - اکنون</span>
+                            </div>
+                        </div>
+                        <div class="timeline-item mb-8 relative">
+                            <div class="timeline-dot absolute w-4 h-4 bg-primaryStart rounded-full -right-2 top-2 border-4 border-white dark:border-slate-900 shadow-lg"></div>
+                            <div class="timeline-content bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-xl hover-lift">
+                                <h4 class="font-bold text-textDark dark:text-darkText">React Developer</h4>
+                                <p class="text-muted dark:text-gray-300 text-sm mb-2">استارتاپ دیجیتال</p>
+                                <span class="text-primaryEnd text-sm">۱۴۰۰ - ۱۴۰۱</span>
+                            </div>
+                        </div>
+                        <div class="timeline-item relative">
+                            <div class="timeline-dot absolute w-4 h-4 bg-accent rounded-full -right-2 top-2 border-4 border-white dark:border-slate-900 shadow-lg"></div>
+                            <div class="timeline-content bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-xl hover-lift">
+                                <h4 class="font-bold text-textDark dark:text-darkText">Web Developer</h4>
+                                <p class="text-muted dark:text-gray-300 text-sm mb-2">فریلنسر</p>
+                                <span class="text-primaryEnd text-sm">۱۳۹۹ - ۱۴۰۰</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Skills Page -->
-    <section id="skills-page" class="page" data-include="pages/skills.html"></section>
+    <section id="skills-page" class="page">
+        <div class="container mx-auto px-6 py-20">
+            <h2 class="text-3xl font-bold text-center mb-4 gradient-text">مهارت‌های تخصصی</h2>
+            <p class="text-muted dark:text-gray-300 text-center mb-12 max-w-2xl mx-auto">
+                تسلط کامل بر تکنولوژی‌های مدرن توسعه فرانت‌اند و ابزارهای مرتبط
+            </p>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Frontend Skills -->
+                <div class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-2xl hover-lift">
+                    <h3 class="font-bold text-lg mb-4 flex items-center gap-2 text-primaryEnd">
+                        <i class="fa-solid fa-desktop"></i>
+                        فرانت‌اند
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm">React</span>
+                            <span class="text-primaryEnd font-bold text-sm">95%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                            <div class="skill-bar" style="width: 95%"></div>
+                        </div>
+
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm">TypeScript</span>
+                            <span class="text-primaryEnd font-bold text-sm">90%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                            <div class="skill-bar" style="width: 90%"></div>
+                        </div>
+
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm">JavaScript</span>
+                            <span class="text-primaryEnd font-bold text-sm">92%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                            <div class="skill-bar" style="width: 92%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Styling & Tools -->
+                <div class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-2xl hover-lift">
+                    <h3 class="font-bold text-lg mb-4 flex items-center gap-2 text-accent">
+                        <i class="fa-solid fa-palette"></i>
+                        استایلینگ و ابزارها
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm">Tailwind CSS</span>
+                            <span class="text-primaryEnd font-bold text-sm">92%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                            <div class="skill-bar" style="width: 92%"></div>
+                        </div>
+
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm">Bootstrap</span>
+                            <span class="text-primaryEnd font-bold text-sm">88%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                            <div class="skill-bar" style="width: 88%"></div>
+                        </div>
+
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm">Figma</span>
+                            <span class="text-primaryEnd font-bold text-sm">85%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                            <div class="skill-bar" style="width: 85%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Other Skills -->
+                <div class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-2xl hover-lift">
+                    <h3 class="font-bold text-lg mb-4 flex items-center gap-2 text-green-500">
+                        <i class="fa-solid fa-gears"></i>
+                        سایر مهارت‌ها
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm">Python</span>
+                            <span class="text-primaryEnd font-bold text-sm">75%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                            <div class="skill-bar" style="width: 75%"></div>
+                        </div>
+
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm">Git & GitHub</span>
+                            <span class="text-primaryEnd font-bold text-sm">90%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                            <div class="skill-bar" style="width: 90%"></div>
+                        </div>
+
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm">Responsive Design</span>
+                            <span class="text-primaryEnd font-bold text-sm">95%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                            <div class="skill-bar" style="width: 95%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Projects Page -->
-    <section id="projects-page" class="page" data-include="pages/projects.html"></section>
+    <section id="projects-page" class="page">
+        <div class="container mx-auto px-6 py-20">
+            <h2 class="text-3xl font-bold text-center mb-4 gradient-text">پروژه‌های منتخب</h2>
+            <p class="text-muted dark:text-gray-300 text-center mb-12 max-w-2xl mx-auto">
+                نمونه‌ای از پروژه‌های موفق در حوزه توسعه فرانت‌اند و طراحی رابط کاربری
+            </p>
+
+            <div class="project-grid grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Project 1 -->
+                <div class="project-card bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-xl">
+                    <div class="w-full h-48 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl mb-4 flex items-center justify-center">
+                        <i class="fa-solid fa-store text-white text-4xl"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">فروشگاه آنلاین</h3>
+                    <p class="text-muted dark:text-gray-300 text-sm mb-4">فروشگاه اینترنتی با React و TypeScript</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs px-3 py-1 rounded-full">React</span>
+                        <span class="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 text-xs px-3 py-1 rounded-full">TypeScript</span>
+                        <span class="bg-cyan-100 dark:bg-cyan-900 text-cyan-800 dark:text-cyan-200 text-xs px-3 py-1 rounded-full">Tailwind</span>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-xl">
+                    <div class="w-full h-48 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-2xl mb-4 flex items-center justify-center">
+                        <i class="fa-solid fa-chart-line text-white text-4xl"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">داشبورد مدیریتی</h3>
+                    <p class="text-muted dark:text-gray-300 text-sm mb-4">داشبورد پیشرفته با نمودارهای تعاملی</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs px-3 py-1 rounded-full">React</span>
+                        <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs px-3 py-1 rounded-full">Chart.js</span>
+                        <span class="bg-cyan-100 dark:bg-cyan-900 text-cyan-800 dark:text-cyan-200 text-xs px-3 py-1 rounded-full">Material-UI</span>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-xl">
+                    <div class="w-full h-48 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl mb-4 flex items-center justify-center">
+                        <i class="fa-solid fa-mobile-screen text-white text-4xl"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">اپلیکیشن موبایل</h3>
+                    <p class="text-muted dark:text-gray-300 text-sm mb-4">PWA با قابلیت آفلاین</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs px-3 py-1 rounded-full">JavaScript</span>
+                        <span class="bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 text-xs px-3 py-1 rounded-full">PWA</span>
+                        <span class="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 text-xs px-3 py-1 rounded-full">Bootstrap</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <button class="contact-btn inline-flex items-center gap-2 rounded-full border border-primaryEnd px-6 py-3 text-primaryEnd font-semibold hover:bg-primaryEnd hover:text-white transition-all duration-300 magnetic-btn">
+                    شروع پروژه جدید
+                    <i class="fa-solid fa-arrow-left"></i>
+                </button>
+            </div>
+        </div>
+    </section>
 
     <!-- Contact Page -->
-    <section id="contact-page" class="page" data-include="pages/contact.html"></section>
+    <section id="contact-page" class="page">
+        <div class="container mx-auto px-6 py-20">
+            <div class="grid lg:grid-cols-2 gap-12 items-start">
+                <!-- Contact Info -->
+                <div>
+                    <h2 class="text-3xl font-bold mb-6 gradient-text">در تماس باشید</h2>
+                    <p class="text-muted dark:text-gray-300 leading-8 mb-8">
+                        برای همکاری در پروژه‌های فرانت‌اند یا مشاوره در زمینه توسعه وب،
+                        از طریق راه‌های ارتباطی زیر با من در ارتباط باشید.
+                    </p>
+
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-4 p-4 rounded-2xl bg-white/50 dark:bg-slate-800/50 hover-lift">
+                            <div class="grid h-12 w-12 place-items-center rounded-full bg-blue-100 dark:bg-blue-900 text-primaryEnd">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold">ایمیل</div>
+                                <div class="text-muted dark:text-gray-300">reza.esmaeeli@example.com</div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4 p-4 rounded-2xl bg-white/50 dark:bg-slate-800/50 hover-lift">
+                            <div class="grid h-12 w-12 place-items-center rounded-full bg-green-100 dark:bg-green-900 text-primaryEnd">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold">واتساپ</div>
+                                <div class="text-muted dark:text-gray-300">+98 912 345 6789</div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4 p-4 rounded-2xl bg-white/50 dark:bg-slate-800/50 hover-lift">
+                            <div class="grid h-12 w-12 place-items-center rounded-full bg-purple-100 dark:bg-purple-900 text-primaryEnd">
+                                <i class="fa-brands fa-linkedin"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold">لینکدین</div>
+                                <div class="text-muted dark:text-gray-300">linkedin.com/in/reza-esmaeeli</div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4 p-4 rounded-2xl bg-white/50 dark:bg-slate-800/50 hover-lift">
+                            <div class="grid h-12 w-12 place-items-center rounded-full bg-gray-100 dark:bg-gray-800 text-primaryEnd">
+                                <i class="fa-brands fa-github"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold">گیت‌هاب</div>
+                                <div class="text-muted dark:text-gray-300">github.com/reza-esmaeeli</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-2xl hover-lift">
+                    <h3 class="font-bold text-xl mb-6">ارسال پیام</h3>
+                    <form id="contactForm" class="space-y-6">
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">نام شما</label>
+                                <input type="text" name="name" required class="w-full p-4 rounded-2xl border border-gray-300 dark:border-gray-600 bg-transparent focus:border-primaryEnd focus:ring-2 focus:ring-primaryEnd/20 outline-none transition-all">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">ایمیل</label>
+                                <input type="email" name="email" required class="w-full p-4 rounded-2xl border border-gray-300 dark:border-gray-600 bg-transparent focus:border-primaryEnd focus:ring-2 focus:ring-primaryEnd/20 outline-none transition-all">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">موضوع</label>
+                            <input type="text" name="subject" required class="w-full p-4 rounded-2xl border border-gray-300 dark:border-gray-600 bg-transparent focus:border-primaryEnd focus:ring-2 focus:ring-primaryEnd/20 outline-none transition-all">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">پیام شما</label>
+                            <textarea name="message" rows="5" required class="w-full p-4 rounded-2xl border border-gray-300 dark:border-gray-600 bg-transparent focus:border-primaryEnd focus:ring-2 focus:ring-primaryEnd/20 outline-none transition-all"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-gradient-to-br from-primaryStart to-primaryEnd text-white py-4 rounded-2xl font-semibold shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-1 magnetic-btn">
+                            <span class="flex items-center justify-center gap-2">
+                                <span>ارسال پیام</span>
+                                <i class="fa-solid fa-paper-plane"></i>
+                            </span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer class="bg-slate-800 dark:bg-slate-900 text-white py-12 rounded-t-3xl border-t border-slate-700">
