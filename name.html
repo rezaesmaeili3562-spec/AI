@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>پورتفولیو سجاد | مجموعه صفحات</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primaryStart: '#8b5cf6',
+            primaryEnd: '#6366f1',
+            accent: '#06b6d4',
+            muted: '#64748b',
+            textDark: '#1e293b',
+            darkBg: '#0f172a',
+            darkText: '#f1f5f9'
+          },
+          fontFamily: {
+            vazir: ['\\'Vazirmatn\\'', 'sans-serif']
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.8s ease-in-out',
+            'slide-up': 'slideUp 0.6s ease-out',
+            'typing': 'typing 3.5s steps(40, end)',
+            'bounce-slow': 'bounce 2s infinite',
+            'pulse-slow': 'pulse 3s infinite',
+            'spin-slow': 'spin 3s linear infinite',
+            'float': 'float 6s ease-in-out infinite',
+            'gradient': 'gradient 8s ease infinite',
+            'shimmer': 'shimmer 2s linear infinite',
+            'code-typing': 'codeTyping 4s steps(40, end) infinite'
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' }
+            },
+            slideUp: {
+              '0%': { transform: 'translateY(30px)', opacity: '0' },
+              '100%': { transform: 'translateY(0)', opacity: '1' }
+            },
+            typing: {
+              from: { width: '0' },
+              to: { width: '100%' }
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-20px)' }
+            },
+            gradient: {
+              '0%, 100%': { backgroundPosition: '0% 50%' },
+              '50%': { backgroundPosition: '100% 50%' }
+            },
+            shimmer: {
+              '0%': { backgroundPosition: '-1000px 0' },
+              '100%': { backgroundPosition: '1000px 0' }
+            },
+            codeTyping: {
+              '0%': { width: '0' },
+              '50%': { width: '100%' },
+              '100%': { width: '0' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body class="min-h-screen font-vazir bg-gradient-to-br from-slate-50 to-blue-50 text-textDark dark:from-slate-900 dark:to-slate-800 dark:text-darkText transition-colors duration-500 overflow-x-hidden">
+  <div id="preloader" class="preloader fixed inset-0 bg-white dark:bg-darkBg z-50 flex flex-col items-center justify-center">
+    <div class="relative">
+      <div class="animate-spin-slow rounded-full h-20 w-20 border-4 border-primaryStart border-t-transparent mb-6"></div>
+      <div class="absolute inset-0 animate-ping rounded-full h-20 w-20 border-2 border-primaryEnd opacity-75"></div>
+    </div>
+    <p class="text-primaryEnd font-semibold">در حال بارگذاری محتوا...</p>
+  </div>
+
+  <button id="themeToggle" class="fixed top-6 left-6 w-14 h-14 rounded-full glass-effect shadow-2xl backdrop-blur-md z-40 flex items-center justify-center hover-lift magnetic-btn" aria-label="تغییر تم">
+    <i class="fa-solid fa-moon text-textDark dark:text-darkText text-xl transition-transform" id="themeIcon"></i>
+  </button>
+
+  <div class="fixed bottom-24 left-6 flex flex-col gap-3 z-30">
+    <button id="downloadResume" class="w-14 h-14 rounded-full bg-gradient-to-br from-primaryStart to-primaryEnd text-white shadow-2xl hover-lift magnetic-btn flex items-center justify-center" aria-label="دانلود رزومه">
+      <i class="fa-solid fa-download text-lg"></i>
+    </button>
+    <button id="viewGithub" class="w-14 h-14 rounded-full bg-gradient-to-br from-gray-700 to-gray-800 text-white shadow-2xl hover-lift magnetic-btn flex items-center justify-center" aria-label="گیت‌هاب">
+      <i class="fa-brands fa-github text-lg"></i>
+    </button>
+  </div>
+
+  <div class="fixed bottom-24 right-6 flex flex-col gap-3 z-30">
+    <a href="https://wa.me/989123456789" target="_blank" class="w-14 h-14 rounded-full bg-gradient-to-br from-green-500 to-green-600 text-white shadow-2xl hover-lift magnetic-btn flex items-center justify-center" aria-label="ارتباط در واتساپ">
+      <i class="fa-brands fa-whatsapp text-lg"></i>
+    </a>
+    <a href="pages/contact.html" target="contentFrame" class="w-14 h-14 rounded-full bg-gradient-to-br from-primaryStart to-primaryEnd text-white shadow-2xl hover-lift magnetic-btn flex items-center justify-center" aria-label="شروع همکاری">
+      <i class="fa-solid fa-paper-plane text-lg"></i>
+    </a>
+  </div>
+
+  <nav class="sticky top-0 z-30 glass-effect backdrop-blur-md shadow-lg">
+    <div class="container mx-auto px-6 py-4">
+      <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        <div class="flex items-center gap-3">
+          <div class="grid h-12 w-12 place-items-center rounded-full bg-gradient-to-br from-primaryStart to-primaryEnd font-bold text-white text-lg shadow-lg">
+            <i class="fa-solid fa-code"></i>
+          </div>
+          <span class="font-bold text-lg gradient-text">سجاد | Frontend Developer</span>
+        </div>
+        <div class="flex flex-wrap gap-3 md:gap-6">
+          <a href="pages/home.html" data-page="pages/home.html" class="text-sm font-medium hover:text-primaryEnd transition-all duration-300 hover:scale-105 magnetic-btn active-link">خانه</a>
+          <a href="pages/about.html" data-page="pages/about.html" class="text-sm font-medium hover:text-primaryEnd transition-all duration-300 hover:scale-105 magnetic-btn">درباره من</a>
+          <a href="pages/skills.html" data-page="pages/skills.html" class="text-sm font-medium hover:text-primaryEnd transition-all duration-300 hover:scale-105 magnetic-btn">مهارت‌ها</a>
+          <a href="pages/projects.html" data-page="pages/projects.html" class="text-sm font-medium hover:text-primaryEnd transition-all duration-300 hover:scale-105 magnetic-btn">پروژه‌ها</a>
+          <a href="pages/contact.html" data-page="pages/contact.html" class="text-sm font-medium hover:text-primaryEnd transition-all duration-300 hover:scale-105 magnetic-btn">تماس</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container mx-auto px-4 md:px-10 lg:px-16 py-10">
+    <div class="iframe-wrapper bg-white/70 dark:bg-slate-900/70">
+      <iframe id="contentFrame" name="contentFrame" src="pages/home.html" title="محتوای پورتفولیو" class="iframe-container w-full" frameborder="0"></iframe>
+    </div>
+  </main>
+
+  <div id="notification" class="fixed top-4 left-1/2 transform -translate-x-1/2 px-6 py-3 rounded-2xl shadow-2xl z-50 hidden transition-all duration-300"></div>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

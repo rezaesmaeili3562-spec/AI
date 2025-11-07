@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>مهارت‌ها | پورتفولیو سجاد</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primaryStart: '#8b5cf6',
+            primaryEnd: '#6366f1',
+            accent: '#06b6d4',
+            muted: '#64748b',
+            textDark: '#1e293b',
+            darkBg: '#0f172a',
+            darkText: '#f1f5f9'
+          },
+          fontFamily: {
+            vazir: ['\\'Vazirmatn\\'', 'sans-serif']
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.8s ease-in-out',
+            'slide-up': 'slideUp 0.6s ease-out',
+            'typing': 'typing 3.5s steps(40, end)',
+            'bounce-slow': 'bounce 2s infinite',
+            'pulse-slow': 'pulse 3s infinite',
+            'spin-slow': 'spin 3s linear infinite',
+            'float': 'float 6s ease-in-out infinite',
+            'gradient': 'gradient 8s ease infinite',
+            'shimmer': 'shimmer 2s linear infinite',
+            'code-typing': 'codeTyping 4s steps(40, end) infinite'
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' }
+            },
+            slideUp: {
+              '0%': { transform: 'translateY(30px)', opacity: '0' },
+              '100%': { transform: 'translateY(0)', opacity: '1' }
+            },
+            typing: {
+              from: { width: '0' },
+              to: { width: '100%' }
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-20px)' }
+            },
+            gradient: {
+              '0%, 100%': { backgroundPosition: '0% 50%' },
+              '50%': { backgroundPosition: '100% 50%' }
+            },
+            shimmer: {
+              '0%': { backgroundPosition: '-1000px 0' },
+              '100%': { backgroundPosition: '1000px 0' }
+            },
+            codeTyping: {
+              '0%': { width: '0' },
+              '50%': { width: '100%' },
+              '100%': { width: '0' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body class="min-h-screen font-vazir bg-gradient-to-br from-slate-50 to-blue-50 text-textDark dark:from-slate-900 dark:to-slate-800 dark:text-darkText transition-colors duration-500">
+  <section id="skills" class="py-20">
+    <div class="container mx-auto px-6">
+      <h2 class="text-3xl font-bold text-center mb-4 gradient-text">مهارت‌های تخصصی</h2>
+      <p class="text-muted dark:text-gray-300 text-center mb-12 max-w-2xl mx-auto">
+        تسلط کامل بر تکنولوژی‌های مدرن توسعه فرانت‌اند و ابزارهای مرتبط
+      </p>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 section-hidden">
+        <div class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-2xl hover-lift">
+          <h3 class="font-bold text-lg mb-4 flex items-center gap-2 text-primaryEnd">
+            <i class="fa-solid fa-desktop"></i>
+            فرانت‌اند
+          </h3>
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="text-sm">React</span>
+              <span class="text-primaryEnd font-bold text-sm">95%</span>
+            </div>
+            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+              <div class="bg-gradient-to-r from-primaryStart to-primaryEnd h-2 rounded-full skill-bar" data-width="95%"></div>
+            </div>
+
+            <div class="flex items-center justify-between">
+              <span class="text-sm">Next.js</span>
+              <span class="text-primaryEnd font-bold text-sm">90%</span>
+            </div>
+            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+              <div class="bg-gradient-to-r from-primaryStart to-primaryEnd h-2 rounded-full skill-bar" data-width="90%"></div>
+            </div>
+
+            <div class="flex items-center justify-between">
+              <span class="text-sm">TypeScript</span>
+              <span class="text-primaryEnd font-bold text-sm">85%</span>
+            </div>
+            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+              <div class="bg-gradient-to-r from-primaryStart to-primaryEnd h-2 rounded-full skill-bar" data-width="85%"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-2xl hover-lift">
+          <h3 class="font-bold text-lg mb-4 flex items-center gap-2 text-accent">
+            <i class="fa-solid fa-palette"></i>
+            استایلینگ و ابزارها
+          </h3>
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="text-sm">Tailwind CSS</span>
+              <span class="text-primaryEnd font-bold text-sm">92%</span>
+            </div>
+            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+              <div class="bg-gradient-to-r from-accent to-primaryEnd h-2 rounded-full skill-bar" data-width="92%"></div>
+            </div>
+
+            <div class="flex items-center justify-between">
+              <span class="text-sm">Bootstrap</span>
+              <span class="text-primaryEnd font-bold text-sm">88%</span>
+            </div>
+            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+              <div class="bg-gradient-to-r from-accent to-primaryEnd h-2 rounded-full skill-bar" data-width="88%"></div>
+            </div>
+
+            <div class="flex items-center justify-between">
+              <span class="text-sm">SASS/SCSS</span>
+              <span class="text-primaryEnd font-bold text-sm">80%</span>
+            </div>
+            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+              <div class="bg-gradient-to-r from-accent to-primaryEnd h-2 rounded-full skill-bar" data-width="80%"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-2xl hover-lift">
+          <h3 class="font-bold text-lg mb-4 flex items-center gap-2 text-green-500">
+            <i class="fa-solid fa-gears"></i>
+            سایر مهارت‌ها
+          </h3>
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="text-sm">Python</span>
+              <span class="text-primaryEnd font-bold text-sm">75%</span>
+            </div>
+            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+              <div class="bg-gradient-to-r from-green-500 to-accent h-2 rounded-full skill-bar" data-width="75%"></div>
+            </div>
+
+            <div class="flex items-center justify-between">
+              <span class="text-sm">Git & GitHub</span>
+              <span class="text-primaryEnd font-bold text-sm">90%</span>
+            </div>
+            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+              <div class="bg-gradient-to-r from-green-500 to-accent h-2 rounded-full skill-bar" data-width="90%"></div>
+            </div>
+
+            <div class="flex items-center justify-between">
+              <span class="text-sm">Responsive Design</span>
+              <span class="text-primaryEnd font-bold text-sm">95%</span>
+            </div>
+            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+              <div class="bg-gradient-to-r from-green-500 to-accent h-2 rounded-full skill-bar" data-width="95%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="../assets/js/skills.js"></script>
+</body>
+</html>

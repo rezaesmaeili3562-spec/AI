@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>تماس | پورتفولیو سجاد</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primaryStart: '#8b5cf6',
+            primaryEnd: '#6366f1',
+            accent: '#06b6d4',
+            muted: '#64748b',
+            textDark: '#1e293b',
+            darkBg: '#0f172a',
+            darkText: '#f1f5f9'
+          },
+          fontFamily: {
+            vazir: ['\\'Vazirmatn\\'', 'sans-serif']
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.8s ease-in-out',
+            'slide-up': 'slideUp 0.6s ease-out',
+            'typing': 'typing 3.5s steps(40, end)',
+            'bounce-slow': 'bounce 2s infinite',
+            'pulse-slow': 'pulse 3s infinite',
+            'spin-slow': 'spin 3s linear infinite',
+            'float': 'float 6s ease-in-out infinite',
+            'gradient': 'gradient 8s ease infinite',
+            'shimmer': 'shimmer 2s linear infinite',
+            'code-typing': 'codeTyping 4s steps(40, end) infinite'
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' }
+            },
+            slideUp: {
+              '0%': { transform: 'translateY(30px)', opacity: '0' },
+              '100%': { transform: 'translateY(0)', opacity: '1' }
+            },
+            typing: {
+              from: { width: '0' },
+              to: { width: '100%' }
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-20px)' }
+            },
+            gradient: {
+              '0%, 100%': { backgroundPosition: '0% 50%' },
+              '50%': { backgroundPosition: '100% 50%' }
+            },
+            shimmer: {
+              '0%': { backgroundPosition: '-1000px 0' },
+              '100%': { backgroundPosition: '1000px 0' }
+            },
+            codeTyping: {
+              '0%': { width: '0' },
+              '50%': { width: '100%' },
+              '100%': { width: '0' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body class="min-h-screen font-vazir bg-gradient-to-br from-slate-50 to-blue-50 text-textDark dark:from-slate-900 dark:to-slate-800 dark:text-darkText transition-colors duration-500">
+  <section id="contact" class="py-20">
+    <div class="container mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-12 items-start section-hidden">
+        <div>
+          <h2 class="text-3xl font-bold mb-6 gradient-text">در تماس باشید</h2>
+          <p class="text-muted dark:text-gray-300 leading-8 mb-8">
+            برای همکاری در پروژه‌های فرانت‌اند یا مشاوره در زمینه توسعه وب،
+            از طریق راه‌های ارتباطی زیر با من در ارتباط باشید.
+          </p>
+
+          <div class="space-y-6">
+            <div class="flex items-center gap-4 p-4 rounded-2xl bg-white/50 dark:bg-slate-800/50 hover-lift">
+              <div class="grid h-12 w-12 place-items-center rounded-full bg-blue-100 dark:bg-blue-900 text-primaryEnd">
+                <i class="fa-solid fa-envelope"></i>
+              </div>
+              <div>
+                <div class="font-semibold">ایمیل</div>
+                <div class="text-muted dark:text-gray-300">sajad.frontend@example.com</div>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-4 p-4 rounded-2xl bg-white/50 dark:bg-slate-800/50 hover-lift">
+              <div class="grid h-12 w-12 place-items-center rounded-full bg-green-100 dark:bg-green-900 text-primaryEnd">
+                <i class="fa-brands fa-whatsapp"></i>
+              </div>
+              <div>
+                <div class="font-semibold">واتساپ</div>
+                <div class="text-muted dark:text-gray-300">+98 912 345 6789</div>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-4 p-4 rounded-2xl bg-white/50 dark:bg-slate-800/50 hover-lift">
+              <div class="grid h-12 w-12 place-items-center rounded-full bg-purple-100 dark:bg-purple-900 text-primaryEnd">
+                <i class="fa-brands fa-linkedin"></i>
+              </div>
+              <div>
+                <div class="font-semibold">لینکدین</div>
+                <div class="text-muted dark:text-gray-300">linkedin.com/in/sajad-frontend</div>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-4 p-4 rounded-2xl bg-white/50 dark:bg-slate-800/50 hover-lift">
+              <div class="grid h-12 w-12 place-items-center rounded-full bg-gray-100 dark:bg-gray-800 text-primaryEnd">
+                <i class="fa-brands fa-github"></i>
+              </div>
+              <div>
+                <div class="font-semibold">گیت‌هاب</div>
+                <div class="text-muted dark:text-gray-300">github.com/sajad-frontend</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-2xl hover-lift">
+          <h3 class="font-bold text-xl mb-6">ارسال پیام</h3>
+          <form id="contactForm" class="space-y-6" novalidate>
+            <div class="grid md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium mb-2">نام شما</label>
+                <input type="text" name="name" required class="w-full p-4 rounded-2xl border border-gray-300 dark:border-gray-600 bg-transparent focus:border-primaryEnd focus:ring-2 focus:ring-primaryEnd/20 outline-none transition-all">
+              </div>
+              <div>
+                <label class="block text-sm font-medium mb-2">ایمیل</label>
+                <input type="email" name="email" required class="w-full p-4 rounded-2xl border border-gray-300 dark:border-gray-600 bg-transparent focus:border-primaryEnd focus:ring-2 focus:ring-primaryEnd/20 outline-none transition-all">
+              </div>
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-2">موضوع</label>
+              <input type="text" name="subject" required class="w-full p-4 rounded-2xl border border-gray-300 dark:border-gray-600 bg-transparent focus:border-primaryEnd focus:ring-2 focus:ring-primaryEnd/20 outline-none transition-all">
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-2">پیام شما</label>
+              <textarea name="message" rows="5" required class="w-full p-4 rounded-2xl border border-gray-300 dark:border-gray-600 bg-transparent focus:border-primaryEnd focus:ring-2 focus:ring-primaryEnd/20 outline-none transition-all"></textarea>
+            </div>
+            <button type="submit" class="w-full bg-gradient-to-br from-primaryStart to-primaryEnd text-white py-4 rounded-2xl font-semibold shadow-lg hover:shadow-xl transition-all duration-200">
+              ارسال پیام
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="contactNotification" class="fixed bottom-6 right-6 px-5 py-3 rounded-2xl shadow-2xl hidden"></div>
+  <div id="contactLoading" class="fixed inset-0 bg-black/40 hidden items-center justify-center">
+    <div class="bg-white dark:bg-slate-800 rounded-2xl px-8 py-6 shadow-2xl text-center">
+      <div class="animate-spin-slow rounded-full h-10 w-10 border-4 border-primaryStart border-t-transparent mx-auto mb-4"></div>
+      <p class="text-textDark dark:text-darkText">در حال ارسال پیام...</p>
+    </div>
+  </div>
+
+  <script src="../assets/js/contact.js"></script>
+</body>
+</html>
