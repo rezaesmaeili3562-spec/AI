@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>درباره من | رضا اسماعیلی</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-3h3H9f23wxYpTQmMNVrYzP0uohsEiL/KZ8nfdXbra+0Ul3Bd6mV9Ezg4Q8VE3d2rYZRk5v0zzakDxKHU2PptLw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../dist/styles.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body data-page="about" class="min-h-screen font-vazir bg-gradient-to-br from-slate-50 to-blue-50 text-textDark dark:from-slate-900 dark:to-slate-800 dark:text-darkText transition-colors duration-500 overflow-x-hidden">
+    <div id="preloader">
+        <div class="relative">
+            <div class="animate-spin rounded-full h-24 w-24 border-4 border-primaryStart border-t-transparent mb-6"></div>
+        </div>
+        <div class="text-xl font-semibold text-primaryEnd animate-pulse">در حال بارگذاری...</div>
+    </div>
+
+    <button id="themeToggle" class="fixed top-6 left-6 z-50 w-12 h-12 rounded-full bg-white/80 dark:bg-slate-800/80 shadow-xl flex items-center justify-center hover:-translate-y-1 transition-all">
+        <i id="themeIcon" class="fa-solid fa-moon text-lg text-primaryEnd"></i>
+    </button>
+
+    <header class="fixed top-6 inset-x-0 z-40">
+        <div class="container mx-auto px-6">
+            <div class="glass-effect rounded-3xl shadow-2xl px-6 py-4 flex items-center justify-between">
+                <a href="home.html" class="text-xl font-extrabold text-primaryEnd">رضا اسماعیلی</a>
+                <nav class="hidden lg:flex items-center gap-8 text-sm">
+                    <a href="home.html" data-nav="home" class="hover:text-primaryEnd transition">خانه</a>
+                    <a href="about.html" data-nav="about" class="hover:text-primaryEnd transition">درباره من</a>
+                    <a href="skills.html" data-nav="skills" class="hover:text-primaryEnd transition">مهارت‌ها</a>
+                    <a href="projects.html" data-nav="projects" class="hover:text-primaryEnd transition">پروژه‌ها</a>
+                    <a href="contact.html" data-nav="contact" class="hover:text-primaryEnd transition">ارتباط</a>
+                </nav>
+                <div class="flex items-center gap-3">
+                    <a href="https://github.com/reza-esmaeeli" target="_blank" class="hidden sm:flex items-center gap-2 rounded-full border border-primaryEnd px-4 py-2 text-primaryEnd hover:bg-primaryEnd hover:text-white transition magnetic-btn">
+                        <i class="fa-brands fa-github"></i>
+                        گیت‌هاب
+                    </a>
+                    <button id="mobileMenuBtn" class="lg:hidden w-12 h-12 rounded-2xl bg-primaryEnd text-white flex items-center justify-center">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobileMenu" class="lg:hidden hidden mt-4 mx-6 glass-effect rounded-3xl shadow-xl">
+            <nav class="flex flex-col p-6 gap-4 text-sm">
+                <a href="home.html" data-nav="home" class="hover:text-primaryEnd transition">خانه</a>
+                <a href="about.html" data-nav="about" class="hover:text-primaryEnd transition">درباره من</a>
+                <a href="skills.html" data-nav="skills" class="hover:text-primaryEnd transition">مهارت‌ها</a>
+                <a href="projects.html" data-nav="projects" class="hover:text-primaryEnd transition">پروژه‌ها</a>
+                <a href="contact.html" data-nav="contact" class="hover:text-primaryEnd transition">ارتباط</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="pt-36 pb-20">
+        <section class="container mx-auto px-6 py-12">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h1 class="text-3xl font-bold mb-6 gradient-text">درباره من</h1>
+                    <p class="text-muted dark:text-gray-300 leading-8 mb-6">
+                        یک توسعه‌دهنده فرانت‌اند پرشور با ۳ سال تجربه در ساخت رابط‌های کاربری مدرن و تعاملی.
+                        تخصص اصلی من در اکوسیستم React شامل Next.js، TypeScript و ابزارهای مدرن توسعه است.
+                    </p>
+                    <p class="text-muted dark:text-gray-300 leading-8 mb-8">
+                        عاشق حل چالش‌های پیچیده و ایجاد تجربه‌های کاربری استثنایی هستم.
+                        همیشه در حال یادگیری تکنولوژی‌های جدید و بهبود مهارت‌هایم می‌باشم.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <div class="bg-white dark:bg-slate-800 rounded-2xl px-6 py-4 shadow-lg hover-lift">
+                            <div class="text-2xl font-bold text-primaryEnd mb-2">UI/UX</div>
+                            <div class="text-sm text-muted dark:text-gray-300">طراحی رابط کاربری</div>
+                        </div>
+                        <div class="bg-white dark:bg-slate-800 rounded-2xl px-6 py-4 shadow-lg hover-lift">
+                            <div class="text-2xl font-bold text-primaryEnd mb-2">PWA</div>
+                            <div class="text-sm text-muted dark:text-gray-300">اپلیکیشن‌های وب</div>
+                        </div>
+                        <div class="bg-white dark:bg-slate-800 rounded-2xl px-6 py-4 shadow-lg hover-lift">
+                            <div class="text-2xl font-bold text-primaryEnd mb-2">SEO</div>
+                            <div class="text-sm text-muted dark:text-gray-300">بهینه‌سازی موتور جستجو</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="relative timeline pl-8">
+                        <div class="timeline-item mb-8 relative">
+                            <div class="timeline-dot absolute w-4 h-4 bg-primaryEnd rounded-full -right-2 top-2 border-4 border-white dark:border-slate-900 shadow-lg"></div>
+                            <div class="timeline-content bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-xl hover-lift">
+                                <h4 class="font-bold text-textDark dark:text-darkText">Frontend Developer</h4>
+                                <p class="text-muted dark:text-gray-300 text-sm mb-2">شرکت فناوری وب</p>
+                                <span class="text-primaryEnd text-sm">۱۴۰۱ - اکنون</span>
+                            </div>
+                        </div>
+                        <div class="timeline-item mb-8 relative">
+                            <div class="timeline-dot absolute w-4 h-4 bg-primaryStart rounded-full -right-2 top-2 border-4 border-white dark:border-slate-900 shadow-lg"></div>
+                            <div class="timeline-content bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-xl hover-lift">
+                                <h4 class="font-bold text-textDark dark:text-darkText">React Developer</h4>
+                                <p class="text-muted dark:text-gray-300 text-sm mb-2">استارتاپ دیجیتال</p>
+                                <span class="text-primaryEnd text-sm">۱۴۰۰ - ۱۴۰۱</span>
+                            </div>
+                        </div>
+                        <div class="timeline-item relative">
+                            <div class="timeline-dot absolute w-4 h-4 bg-accent rounded-full -right-2 top-2 border-4 border-white dark:border-slate-900 shadow-lg"></div>
+                            <div class="timeline-content bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-xl hover-lift">
+                                <h4 class="font-bold text-textDark dark:text-darkText">Web Developer</h4>
+                                <p class="text-muted dark:text-gray-300 text-sm mb-2">فریلنسر</p>
+                                <span class="text-primaryEnd text-sm">۱۳۹۹ - ۱۴۰۰</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-slate-800 dark:bg-slate-900 text-white py-12 mt-20">
+        <div class="container mx-auto px-6">
+            <div class="text-center">
+                <div class="flex justify-center gap-6 mb-8">
+                    <a href="https://linkedin.com" target="_blank" class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center hover:bg-primaryEnd transition-all duration-300 hover:scale-110 magnetic-btn">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://github.com/reza-esmaeeli" target="_blank" class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center hover:bg-primaryEnd transition-all duration-300 hover:scale-110 magnetic-btn">
+                        <i class="fa-brands fa-github"></i>
+                    </a>
+                    <a href="https://twitter.com" target="_blank" class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center hover:bg-primaryEnd transition-all duration-300 hover:scale-110 magnetic-btn">
+                        <i class="fa-brands fa-twitter"></i>
+                    </a>
+                    <a href="https://t.me" target="_blank" class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center hover:bg-primaryEnd transition-all duration-300 hover:scale-110 magnetic-btn">
+                        <i class="fa-brands fa-telegram"></i>
+                    </a>
+                </div>
+                <p class="text-white/70 mb-4">© ۱۴۰۳ - رضا اسماعیلی | توسعه‌دهنده فرانت‌اند</p>
+                <p class="text-white/50 text-sm">ساخته شده با ❤️ و کدنویسی خلاقانه</p>
+            </div>
+        </div>
+    </footer>
+
+    <button id="backToTop" class="fixed bottom-8 left-8 w-14 h-14 bg-primaryEnd text-white rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 hidden z-40 magnetic-btn" aria-label="بازگشت به بالا">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <div id="notification" class="hidden"></div>
+
+    <script defer src="../scripts/common.js"></script>
+    <script defer src="../scripts/about.js"></script>
+</body>
+</html>

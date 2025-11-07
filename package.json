@@ -1,0 +1,21 @@
+{
+  "name": "ai-portfolio",
+  "version": "1.0.0",
+  "description": "نسخه تفکیک شده نمونه کار رضا اسماعیلی با پشتیبانی از Tailwind CLI",
+  "main": "index.js",
+  "scripts": {
+    "build:css": "tailwindcss -i ./src/styles/input.css -o ./dist/styles.css --minify",
+    "watch:css": "tailwindcss -i ./src/styles/input.css -o ./dist/styles.css --watch"
+  },
+  "keywords": [
+    "portfolio",
+    "tailwind",
+    "rtl"
+  ],
+  "author": "رضا اسماعیلی",
+  "license": "MIT",
+  "type": "commonjs",
+  "devDependencies": {
+    "tailwindcss": "^3.4.13"
+  }
+}

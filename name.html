@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>نمای کلی پروژه | رضا اسماعیلی</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-3h3H9f23wxYpTQmMNVrYzP0uohsEiL/KZ8nfdXbra+0Ul3Bd6mV9Ezg4Q8VE3d2rYZRk5v0zzakDxKHU2PptLw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="dist/styles.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen font-vazir bg-slate-100 text-textDark dark:bg-slate-900 dark:text-darkText transition-colors">
+    <div class="max-w-7xl mx-auto px-6 py-10">
+        <header class="glass-effect rounded-3xl shadow-2xl px-6 py-5 flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-8">
+            <div>
+                <h1 class="text-2xl font-extrabold text-primaryEnd">نمونه‌کار رضا اسماعیلی</h1>
+                <p class="text-muted dark:text-gray-300 text-sm mt-2">برای مشاهده هر بخش روی گزینه‌های زیر کلیک کنید.</p>
+            </div>
+            <div class="flex items-center gap-3">
+                <button id="themeToggle" class="w-11 h-11 rounded-full bg-white/80 dark:bg-slate-800/80 shadow-lg flex items-center justify-center transition">
+                    <i id="themeIcon" class="fa-solid fa-moon text-primaryEnd"></i>
+                </button>
+                <a href="pages/home.html" target="_blank" class="inline-flex items-center gap-2 rounded-full border border-primaryEnd px-5 py-2 text-primaryEnd hover:bg-primaryEnd hover:text-white transition magnetic-btn">
+                    <i class="fa-solid fa-up-right-from-square"></i>
+                    باز کردن در تب جدید
+                </a>
+            </div>
+        </header>
+
+        <nav class="grid sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
+            <button data-page="pages/home.html" class="page-link bg-white dark:bg-slate-800 rounded-2xl px-4 py-3 shadow-lg hover-lift flex items-center justify-between">
+                <span>خانه</span>
+                <i class="fa-solid fa-house"></i>
+            </button>
+            <button data-page="pages/about.html" class="page-link bg-white dark:bg-slate-800 rounded-2xl px-4 py-3 shadow-lg hover-lift flex items-center justify-between">
+                <span>درباره من</span>
+                <i class="fa-solid fa-user"></i>
+            </button>
+            <button data-page="pages/skills.html" class="page-link bg-white dark:bg-slate-800 rounded-2xl px-4 py-3 shadow-lg hover-lift flex items-center justify-between">
+                <span>مهارت‌ها</span>
+                <i class="fa-solid fa-star"></i>
+            </button>
+            <button data-page="pages/projects.html" class="page-link bg-white dark:bg-slate-800 rounded-2xl px-4 py-3 shadow-lg hover-lift flex items-center justify-between">
+                <span>پروژه‌ها</span>
+                <i class="fa-solid fa-diagram-project"></i>
+            </button>
+            <button data-page="pages/contact.html" class="page-link bg-white dark:bg-slate-800 rounded-2xl px-4 py-3 shadow-lg hover-lift flex items-center justify-between">
+                <span>ارتباط</span>
+                <i class="fa-solid fa-envelope"></i>
+            </button>
+        </nav>
+
+        <div class="bg-white dark:bg-slate-800 rounded-3xl shadow-2xl overflow-hidden">
+            <iframe id="contentFrame" src="pages/home.html" class="w-full h-[75vh]" loading="lazy" title="پیش‌نمایش صفحات"></iframe>
+        </div>
+    </div>
+
+    <div id="notification" class="hidden"></div>
+
+    <script src="scripts/common.js" defer></script>
+    <script src="scripts/name.js" defer></script>
+</body>
+</html>
