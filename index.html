@@ -68,11 +68,21 @@
                 </div>
                 
                 <div class="hidden md:flex items-center gap-8">
-                    <a href="#home" class="nav-link text-sm font-medium hover:text-primaryEnd transition-all duration-300 hover:scale-110 magnetic-btn" data-page="home">خانه</a>
-                    <a href="#about" class="nav-link text-sm font-medium hover:text-primaryEnd transition-all duration-300 hover:scale-110 magnetic-btn" data-page="about">درباره من</a>
-                    <a href="#skills" class="nav-link text-sm font-medium hover:text-primaryEnd transition-all duration-300 hover:scale-110 magnetic-btn" data-page="skills">مهارت‌ها</a>
-                    <a href="#projects" class="nav-link text-sm font-medium hover:text-primaryEnd transition-all duration-300 hover:scale-110 magnetic-btn" data-page="projects">پروژه‌ها</a>
-                    <a href="#contact" class="nav-link text-sm font-medium hover:text-primaryEnd transition-all duration-300 hover:scale-110 magnetic-btn" data-page="contact">تماس</a>
+                    <a href="#home" class="nav-link text-sm font-medium hover:text-primaryEnd transition-all duration-300 hover:scale-110 magnetic-btn" data-page="home">
+                        <span data-i18n="nav.home">خانه</span>
+                    </a>
+                    <a href="#about" class="nav-link text-sm font-medium hover:text-primaryEnd transition-all duration-300 hover:scale-110 magnetic-btn" data-page="about">
+                        <span data-i18n="nav.about">درباره من</span>
+                    </a>
+                    <a href="#skills" class="nav-link text-sm font-medium hover:text-primaryEnd transition-all duration-300 hover:scale-110 magnetic-btn" data-page="skills">
+                        <span data-i18n="nav.skills">مهارت‌ها</span>
+                    </a>
+                    <a href="#projects" class="nav-link text-sm font-medium hover:text-primaryEnd transition-all duration-300 hover:scale-110 magnetic-btn" data-page="projects">
+                        <span data-i18n="nav.projects">پروژه‌ها</span>
+                    </a>
+                    <a href="#contact" class="nav-link text-sm font-medium hover:text-primaryEnd transition-all duration-300 hover:scale-110 magnetic-btn" data-page="contact">
+                        <span data-i18n="nav.contact">تماس</span>
+                    </a>
                 </div>
                 
                 <button class="md:hidden text-textDark dark:text-darkText text-xl hover-lift magnetic-btn" id="mobileMenuBtn" aria-label="منوی موبایل">
@@ -84,11 +94,21 @@
         <!-- Mobile Menu -->
         <div id="mobileMenu" class="absolute top-full left-0 right-0 bg-white dark:bg-darkBg shadow-2xl rounded-b-3xl p-6 hidden">
             <div class="flex flex-col gap-4">
-                <a href="#home" class="nav-link text-lg font-medium hover:text-primaryEnd transition-all duration-300 py-2 border-b border-gray-200 dark:border-gray-700" data-page="home">خانه</a>
-                <a href="#about" class="nav-link text-lg font-medium hover:text-primaryEnd transition-all duration-300 py-2 border-b border-gray-200 dark:border-gray-700" data-page="about">درباره من</a>
-                <a href="#skills" class="nav-link text-lg font-medium hover:text-primaryEnd transition-all duration-300 py-2 border-b border-gray-200 dark:border-gray-700" data-page="skills">مهارت‌ها</a>
-                <a href="#projects" class="nav-link text-lg font-medium hover:text-primaryEnd transition-all duration-300 py-2 border-b border-gray-200 dark:border-gray-700" data-page="projects">پروژه‌ها</a>
-                <a href="#contact" class="nav-link text-lg font-medium hover:text-primaryEnd transition-all duration-300 py-2" data-page="contact">تماس</a>
+                <a href="#home" class="nav-link text-lg font-medium hover:text-primaryEnd transition-all duration-300 py-2 border-b border-gray-200 dark:border-gray-700" data-page="home">
+                    <span data-i18n="nav.home">خانه</span>
+                </a>
+                <a href="#about" class="nav-link text-lg font-medium hover:text-primaryEnd transition-all duration-300 py-2 border-b border-gray-200 dark:border-gray-700" data-page="about">
+                    <span data-i18n="nav.about">درباره من</span>
+                </a>
+                <a href="#skills" class="nav-link text-lg font-medium hover:text-primaryEnd transition-all duration-300 py-2 border-b border-gray-200 dark:border-gray-700" data-page="skills">
+                    <span data-i18n="nav.skills">مهارت‌ها</span>
+                </a>
+                <a href="#projects" class="nav-link text-lg font-medium hover:text-primaryEnd transition-all duration-300 py-2 border-b border-gray-200 dark:border-gray-700" data-page="projects">
+                    <span data-i18n="nav.projects">پروژه‌ها</span>
+                </a>
+                <a href="#contact" class="nav-link text-lg font-medium hover:text-primaryEnd transition-all duration-300 py-2" data-page="contact">
+                    <span data-i18n="nav.contact">تماس</span>
+                </a>
             </div>
         </div>
     </nav>
@@ -97,18 +117,18 @@
     <section id="home-page" class="page active">
         <div class="container mx-auto px-6 sm:px-10 lg:px-16 py-10 lg:py-14">
             <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
-                <div class="flex flex-col gap-8">
+            <div class="flex flex-col gap-8">
                     <div class="space-y-6">
                         <!-- Typewriter Effect -->
                         <div class="h-24">
                             <h1 class="text-[clamp(2.2rem,5vw,3.6rem)] font-extrabold leading-snug text-textDark dark:text-darkText">
-                                <div id="line1" class="typewriter-line mb-4">سلام! من رضا اسماعیلی هستم</div>
-                                <div id="line2" class="typewriter-line mb-4">توسعه دهنده فرانت اند</div>
-                                <div id="line3" class="typewriter-line">و طراح رابط کاربری</div>
+                                <div id="line1" class="typewriter-line mb-4" data-i18n="hero.title1">سلام! من رضا اسماعیلی هستم</div>
+                                <div id="line2" class="typewriter-line mb-4" data-i18n="hero.title2">توسعه دهنده فرانت اند</div>
+                                <div id="line3" class="typewriter-line" data-i18n="hero.title3">و طراح رابط کاربری</div>
                             </h1>
                         </div>
 
-                        <p class="max-w-[34ch] text-base leading-8 text-muted dark:text-gray-300">
+                        <p class="max-w-[34ch] text-base leading-8 text-muted dark:text-gray-300" data-i18n="hero.description">
                             با تخصص در React، Next.js و TypeScript، تجربه‌های کاربری مدرن و به یاد ماندنی خلق می‌کنم.
                         </p>
                     </div>
@@ -130,7 +150,7 @@
                         <div class="code-line">
                             }<span class="code-cursor"></span>
                         </div>
-                        <div class="code-line code-comment">
+                        <div class="code-line code-comment" data-i18n="hero.codeComment">
                             // آماده همکاری در پروژه‌های خلاقانه
                         </div>
                     </div>
@@ -139,11 +159,11 @@
                     <div class="flex flex-col sm:flex-row sm:items-center gap-3">
                         <button class="view-projects-btn inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-br from-primaryStart to-primaryEnd px-7 py-3 text-sm font-semibold text-white shadow-2xl hover-lift magnetic-btn">
                             <i class="fa-solid fa-eye text-lg"></i>
-                            مشاهده پروژه‌ها
+                            <span data-i18n="hero.viewProjects">مشاهده پروژه‌ها</span>
                         </button>
                         <button class="contact-btn inline-flex items-center justify-center gap-2 rounded-full border border-primaryEnd/50 bg-white/80 dark:bg-darkBg/80 px-7 py-3 text-sm font-semibold text-primaryEnd shadow-lg hover-lift magnetic-btn">
                             <i class="fa-solid fa-paper-plane text-base"></i>
-                            شروع همکاری
+                            <span data-i18n="hero.startCollaboration">شروع همکاری</span>
                         </button>
                     </div>
 
@@ -151,15 +171,15 @@
                     <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                         <div class="rounded-2xl border border-primaryEnd/20 bg-white/85 dark:bg-darkBg/85 px-6 py-5 shadow-xl hover-lift">
                             <div class="text-2xl font-extrabold text-primaryEnd">3+</div>
-                            <div class="text-sm leading-7 text-muted dark:text-gray-300">سال تجربه در توسعه فرانت‌اند</div>
+                            <div class="text-sm leading-7 text-muted dark:text-gray-300" data-i18n="hero.stats.experience">سال تجربه در توسعه فرانت‌اند</div>
                         </div>
                         <div class="rounded-2xl border border-primaryEnd/20 bg-white/85 dark:bg-darkBg/85 px-6 py-5 shadow-xl hover-lift">
                             <div class="text-2xl font-extrabold text-primaryEnd">25+</div>
-                            <div class="text-sm leading-7 text-muted dark:text-gray-300">پروژه موفق تحویل داده شده</div>
+                            <div class="text-sm leading-7 text-muted dark:text-gray-300" data-i18n="hero.stats.projects">پروژه موفق تحویل داده شده</div>
                         </div>
                         <div class="rounded-2xl border border-primaryEnd/20 bg-white/85 dark:bg-darkBg/85 px-6 py-5 shadow-xl hover-lift">
                             <div class="text-2xl font-extrabold text-primaryEnd">100%</div>
-                            <div class="text-sm leading-7 text-muted dark:text-gray-300">رضایت مشتریان از کیفیت کار</div>
+                            <div class="text-sm leading-7 text-muted dark:text-gray-300" data-i18n="hero.stats.satisfaction">رضایت مشتریان از کیفیت کار</div>
                         </div>
                     </div>
                 </div>
@@ -167,7 +187,7 @@
                 <!-- Tech Stack Visual -->
                 <div class="order-first lg:order-none">
                     <div class="relative bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-2xl hover-lift">
-                        <h3 class="text-xl font-bold text-center mb-8 gradient-text">تکنولوژی‌های مورد استفاده</h3>
+                        <h3 class="text-xl font-bold text-center mb-8 gradient-text" data-i18n="hero.techTitle">تکنولوژی‌های مورد استفاده</h3>
                         <div class="grid grid-cols-3 gap-6">
                             <!-- Row 1 -->
                             <div class="flex flex-col items-center gap-2 tech-icon">
@@ -240,27 +260,27 @@
         <div class="container mx-auto px-6 py-20">
             <div class="grid lg:grid-cols-2 gap-12 items-center">
                 <div>
-                    <h2 class="text-3xl font-bold mb-6 gradient-text">درباره من</h2>
-                    <p class="text-muted dark:text-gray-300 leading-8 mb-6">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text" data-i18n="about.title">درباره من</h2>
+                    <p class="text-muted dark:text-gray-300 leading-8 mb-6" data-i18n="about.intro1">
                         یک توسعه‌دهنده فرانت‌اند پرشور با ۳ سال تجربه در ساخت رابط‌های کاربری مدرن و تعاملی.
                         تخصص اصلی من در اکوسیستم React شامل Next.js، TypeScript و ابزارهای مدرن توسعه است.
                     </p>
-                    <p class="text-muted dark:text-gray-300 leading-8 mb-8">
+                    <p class="text-muted dark:text-gray-300 leading-8 mb-8" data-i18n="about.intro2">
                         عاشق حل چالش‌های پیچیده و ایجاد تجربه‌های کاربری استثنایی هستم.
                         همیشه در حال یادگیری تکنولوژی‌های جدید و بهبود مهارت‌هایم می‌باشم.
                     </p>
                     <div class="flex flex-wrap gap-4">
                         <div class="bg-white dark:bg-slate-800 rounded-2xl px-6 py-4 shadow-lg hover-lift">
                             <div class="text-2xl font-bold text-primaryEnd mb-2">UI/UX</div>
-                            <div class="text-sm text-muted dark:text-gray-300">طراحی رابط کاربری</div>
+                            <div class="text-sm text-muted dark:text-gray-300" data-i18n="about.specialties.uiux">طراحی رابط کاربری</div>
                         </div>
                         <div class="bg-white dark:bg-slate-800 rounded-2xl px-6 py-4 shadow-lg hover-lift">
                             <div class="text-2xl font-bold text-primaryEnd mb-2">PWA</div>
-                            <div class="text-sm text-muted dark:text-gray-300">اپلیکیشن‌های وب</div>
+                            <div class="text-sm text-muted dark:text-gray-300" data-i18n="about.specialties.pwa">اپلیکیشن‌های وب</div>
                         </div>
                         <div class="bg-white dark:bg-slate-800 rounded-2xl px-6 py-4 shadow-lg hover-lift">
                             <div class="text-2xl font-bold text-primaryEnd mb-2">SEO</div>
-                            <div class="text-sm text-muted dark:text-gray-300">بهینه‌سازی موتور جستجو</div>
+                            <div class="text-sm text-muted dark:text-gray-300" data-i18n="about.specialties.seo">بهینه‌سازی موتور جستجو</div>
                         </div>
                     </div>
                 </div>
@@ -270,25 +290,25 @@
                         <div class="timeline-item mb-8 relative">
                             <div class="timeline-dot absolute w-4 h-4 bg-primaryEnd rounded-full -right-2 top-2 border-4 border-white dark:border-slate-900 shadow-lg"></div>
                             <div class="timeline-content bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-xl hover-lift">
-                                <h4 class="font-bold text-textDark dark:text-darkText">Frontend Developer</h4>
-                                <p class="text-muted dark:text-gray-300 text-sm mb-2">شرکت فناوری وب</p>
-                                <span class="text-primaryEnd text-sm">۱۴۰۱ - اکنون</span>
+                                <h4 class="font-bold text-textDark dark:text-darkText" data-i18n="timeline.job1.role">Frontend Developer</h4>
+                                <p class="text-muted dark:text-gray-300 text-sm mb-2" data-i18n="timeline.job1.company">شرکت فناوری وب</p>
+                                <span class="text-primaryEnd text-sm" data-i18n="timeline.job1.period">۱۴۰۱ - اکنون</span>
                             </div>
                         </div>
                         <div class="timeline-item mb-8 relative">
                             <div class="timeline-dot absolute w-4 h-4 bg-primaryStart rounded-full -right-2 top-2 border-4 border-white dark:border-slate-900 shadow-lg"></div>
                             <div class="timeline-content bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-xl hover-lift">
-                                <h4 class="font-bold text-textDark dark:text-darkText">React Developer</h4>
-                                <p class="text-muted dark:text-gray-300 text-sm mb-2">استارتاپ دیجیتال</p>
-                                <span class="text-primaryEnd text-sm">۱۴۰۰ - ۱۴۰۱</span>
+                                <h4 class="font-bold text-textDark dark:text-darkText" data-i18n="timeline.job2.role">React Developer</h4>
+                                <p class="text-muted dark:text-gray-300 text-sm mb-2" data-i18n="timeline.job2.company">استارتاپ دیجیتال</p>
+                                <span class="text-primaryEnd text-sm" data-i18n="timeline.job2.period">۱۴۰۰ - ۱۴۰۱</span>
                             </div>
                         </div>
                         <div class="timeline-item relative">
                             <div class="timeline-dot absolute w-4 h-4 bg-accent rounded-full -right-2 top-2 border-4 border-white dark:border-slate-900 shadow-lg"></div>
                             <div class="timeline-content bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-xl hover-lift">
-                                <h4 class="font-bold text-textDark dark:text-darkText">Web Developer</h4>
-                                <p class="text-muted dark:text-gray-300 text-sm mb-2">فریلنسر</p>
-                                <span class="text-primaryEnd text-sm">۱۳۹۹ - ۱۴۰۰</span>
+                                <h4 class="font-bold text-textDark dark:text-darkText" data-i18n="timeline.job3.role">Web Developer</h4>
+                                <p class="text-muted dark:text-gray-300 text-sm mb-2" data-i18n="timeline.job3.company">فریلنسر</p>
+                                <span class="text-primaryEnd text-sm" data-i18n="timeline.job3.period">۱۳۹۹ - ۱۴۰۰</span>
                             </div>
                         </div>
                     </div>
@@ -300,8 +320,8 @@
     <!-- Skills Page -->
     <section id="skills-page" class="page">
         <div class="container mx-auto px-6 py-20">
-            <h2 class="text-3xl font-bold text-center mb-4 gradient-text">مهارت‌های تخصصی</h2>
-            <p class="text-muted dark:text-gray-300 text-center mb-12 max-w-2xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-4 gradient-text" data-i18n="skills.title">مهارت‌های تخصصی</h2>
+            <p class="text-muted dark:text-gray-300 text-center mb-12 max-w-2xl mx-auto" data-i18n="skills.subtitle">
                 تسلط کامل بر تکنولوژی‌های مدرن توسعه فرانت‌اند و ابزارهای مرتبط
             </p>
 
@@ -310,7 +330,7 @@
                 <div class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-2xl hover-lift">
                     <h3 class="font-bold text-lg mb-4 flex items-center gap-2 text-primaryEnd">
                         <i class="fa-solid fa-desktop"></i>
-                        فرانت‌اند
+                        <span data-i18n="skills.frontend">فرانت‌اند</span>
                     </h3>
                     <div class="space-y-4">
                         <div class="flex items-center justify-between">
@@ -343,7 +363,7 @@
                 <div class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-2xl hover-lift">
                     <h3 class="font-bold text-lg mb-4 flex items-center gap-2 text-accent">
                         <i class="fa-solid fa-palette"></i>
-                        استایلینگ و ابزارها
+                        <span data-i18n="skills.styling">استایلینگ و ابزارها</span>
                     </h3>
                     <div class="space-y-4">
                         <div class="flex items-center justify-between">
@@ -376,7 +396,7 @@
                 <div class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-2xl hover-lift">
                     <h3 class="font-bold text-lg mb-4 flex items-center gap-2 text-green-500">
                         <i class="fa-solid fa-gears"></i>
-                        سایر مهارت‌ها
+                        <span data-i18n="skills.other">سایر مهارت‌ها</span>
                     </h3>
                     <div class="space-y-4">
                         <div class="flex items-center justify-between">
@@ -411,8 +431,8 @@
     <!-- Projects Page -->
     <section id="projects-page" class="page">
         <div class="container mx-auto px-6 py-20">
-            <h2 class="text-3xl font-bold text-center mb-4 gradient-text">پروژه‌های منتخب</h2>
-            <p class="text-muted dark:text-gray-300 text-center mb-12 max-w-2xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-4 gradient-text" data-i18n="projects.title">پروژه‌های منتخب</h2>
+            <p class="text-muted dark:text-gray-300 text-center mb-12 max-w-2xl mx-auto" data-i18n="projects.subtitle">
                 نمونه‌ای از پروژه‌های موفق در حوزه توسعه فرانت‌اند و طراحی رابط کاربری
             </p>
 
@@ -422,8 +442,8 @@
                     <div class="w-full h-48 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl mb-4 flex items-center justify-center">
                         <i class="fa-solid fa-store text-white text-4xl"></i>
                     </div>
-                    <h3 class="font-bold text-lg mb-2">فروشگاه آنلاین</h3>
-                    <p class="text-muted dark:text-gray-300 text-sm mb-4">فروشگاه اینترنتی با React و TypeScript</p>
+                    <h3 class="font-bold text-lg mb-2" data-i18n="projects.items.store.title">فروشگاه آنلاین</h3>
+                    <p class="text-muted dark:text-gray-300 text-sm mb-4" data-i18n="projects.items.store.description">فروشگاه اینترنتی با React و TypeScript</p>
                     <div class="flex flex-wrap gap-2">
                         <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs px-3 py-1 rounded-full">React</span>
                         <span class="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 text-xs px-3 py-1 rounded-full">TypeScript</span>
@@ -436,8 +456,8 @@
                     <div class="w-full h-48 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-2xl mb-4 flex items-center justify-center">
                         <i class="fa-solid fa-chart-line text-white text-4xl"></i>
                     </div>
-                    <h3 class="font-bold text-lg mb-2">داشبورد مدیریتی</h3>
-                    <p class="text-muted dark:text-gray-300 text-sm mb-4">داشبورد پیشرفته با نمودارهای تعاملی</p>
+                    <h3 class="font-bold text-lg mb-2" data-i18n="projects.items.dashboard.title">داشبورد مدیریتی</h3>
+                    <p class="text-muted dark:text-gray-300 text-sm mb-4" data-i18n="projects.items.dashboard.description">داشبورد پیشرفته با نمودارهای تعاملی</p>
                     <div class="flex flex-wrap gap-2">
                         <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs px-3 py-1 rounded-full">React</span>
                         <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs px-3 py-1 rounded-full">Chart.js</span>
@@ -450,8 +470,8 @@
                     <div class="w-full h-48 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl mb-4 flex items-center justify-center">
                         <i class="fa-solid fa-mobile-screen text-white text-4xl"></i>
                     </div>
-                    <h3 class="font-bold text-lg mb-2">اپلیکیشن موبایل</h3>
-                    <p class="text-muted dark:text-gray-300 text-sm mb-4">PWA با قابلیت آفلاین</p>
+                    <h3 class="font-bold text-lg mb-2" data-i18n="projects.items.pwa.title">اپلیکیشن موبایل</h3>
+                    <p class="text-muted dark:text-gray-300 text-sm mb-4" data-i18n="projects.items.pwa.description">PWA با قابلیت آفلاین</p>
                     <div class="flex flex-wrap gap-2">
                         <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs px-3 py-1 rounded-full">JavaScript</span>
                         <span class="bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 text-xs px-3 py-1 rounded-full">PWA</span>
@@ -462,8 +482,8 @@
 
             <div class="text-center mt-12">
                 <button class="contact-btn inline-flex items-center gap-2 rounded-full border border-primaryEnd px-6 py-3 text-primaryEnd font-semibold hover:bg-primaryEnd hover:text-white transition-all duration-300 magnetic-btn">
-                    شروع پروژه جدید
-                    <i class="fa-solid fa-arrow-left"></i>
+                    <span data-i18n="projects.cta">شروع پروژه جدید</span>
+                    <i class="fa-solid fa-arrow-left dir-aware-icon"></i>
                 </button>
             </div>
         </div>
@@ -475,8 +495,8 @@
             <div class="grid lg:grid-cols-2 gap-12 items-start">
                 <!-- Contact Info -->
                 <div>
-                    <h2 class="text-3xl font-bold mb-6 gradient-text">در تماس باشید</h2>
-                    <p class="text-muted dark:text-gray-300 leading-8 mb-8">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text" data-i18n="contact.title">در تماس باشید</h2>
+                    <p class="text-muted dark:text-gray-300 leading-8 mb-8" data-i18n="contact.subtitle">
                         برای همکاری در پروژه‌های فرانت‌اند یا مشاوره در زمینه توسعه وب،
                         از طریق راه‌های ارتباطی زیر با من در ارتباط باشید.
                     </p>
@@ -487,8 +507,8 @@
                                 <i class="fa-solid fa-envelope"></i>
                             </div>
                             <div>
-                                <div class="font-semibold">ایمیل</div>
-                                <div class="text-muted dark:text-gray-300">reza.esmaeeli@example.com</div>
+                                <div class="font-semibold" data-i18n="contact.methods.email.label">ایمیل</div>
+                                <div class="text-muted dark:text-gray-300" data-i18n="contact.methods.email.value">reza.esmaeeli@example.com</div>
                             </div>
                         </div>
 
@@ -497,8 +517,8 @@
                                 <i class="fa-brands fa-whatsapp"></i>
                             </div>
                             <div>
-                                <div class="font-semibold">واتساپ</div>
-                                <div class="text-muted dark:text-gray-300">+98 912 345 6789</div>
+                                <div class="font-semibold" data-i18n="contact.methods.whatsapp.label">واتساپ</div>
+                                <div class="text-muted dark:text-gray-300" data-i18n="contact.methods.whatsapp.value">+98 912 345 6789</div>
                             </div>
                         </div>
 
@@ -507,8 +527,8 @@
                                 <i class="fa-brands fa-linkedin"></i>
                             </div>
                             <div>
-                                <div class="font-semibold">لینکدین</div>
-                                <div class="text-muted dark:text-gray-300">linkedin.com/in/reza-esmaeeli</div>
+                                <div class="font-semibold" data-i18n="contact.methods.linkedin.label">لینکدین</div>
+                                <div class="text-muted dark:text-gray-300" data-i18n="contact.methods.linkedin.value">linkedin.com/in/reza-esmaeeli</div>
                             </div>
                         </div>
 
@@ -517,8 +537,8 @@
                                 <i class="fa-brands fa-github"></i>
                             </div>
                             <div>
-                                <div class="font-semibold">گیت‌هاب</div>
-                                <div class="text-muted dark:text-gray-300">github.com/reza-esmaeeli</div>
+                                <div class="font-semibold" data-i18n="contact.methods.github.label">گیت‌هاب</div>
+                                <div class="text-muted dark:text-gray-300" data-i18n="contact.methods.github.value">github.com/reza-esmaeeli</div>
                             </div>
                         </div>
                     </div>
@@ -526,29 +546,29 @@
 
                 <!-- Contact Form -->
                 <div class="bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-2xl hover-lift">
-                    <h3 class="font-bold text-xl mb-6">ارسال پیام</h3>
+                    <h3 class="font-bold text-xl mb-6" data-i18n="contact.form.title">ارسال پیام</h3>
                     <form id="contactForm" class="space-y-6">
                         <div class="grid md:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-sm font-medium mb-2">نام شما</label>
+                                <label class="block text-sm font-medium mb-2" data-i18n="contact.form.name">نام شما</label>
                                 <input type="text" name="name" required class="w-full p-4 rounded-2xl border border-gray-300 dark:border-gray-600 bg-transparent focus:border-primaryEnd focus:ring-2 focus:ring-primaryEnd/20 outline-none transition-all">
                             </div>
                             <div>
-                                <label class="block text-sm font-medium mb-2">ایمیل</label>
+                                <label class="block text-sm font-medium mb-2" data-i18n="contact.form.email">ایمیل</label>
                                 <input type="email" name="email" required class="w-full p-4 rounded-2xl border border-gray-300 dark:border-gray-600 bg-transparent focus:border-primaryEnd focus:ring-2 focus:ring-primaryEnd/20 outline-none transition-all">
                             </div>
                         </div>
                         <div>
-                            <label class="block text-sm font-medium mb-2">موضوع</label>
+                            <label class="block text-sm font-medium mb-2" data-i18n="contact.form.subject">موضوع</label>
                             <input type="text" name="subject" required class="w-full p-4 rounded-2xl border border-gray-300 dark:border-gray-600 bg-transparent focus:border-primaryEnd focus:ring-2 focus:ring-primaryEnd/20 outline-none transition-all">
                         </div>
                         <div>
-                            <label class="block text-sm font-medium mb-2">پیام شما</label>
+                            <label class="block text-sm font-medium mb-2" data-i18n="contact.form.message">پیام شما</label>
                             <textarea name="message" rows="5" required class="w-full p-4 rounded-2xl border border-gray-300 dark:border-gray-600 bg-transparent focus:border-primaryEnd focus:ring-2 focus:ring-primaryEnd/20 outline-none transition-all"></textarea>
                         </div>
                         <button type="submit" class="w-full bg-gradient-to-br from-primaryStart to-primaryEnd text-white py-4 rounded-2xl font-semibold shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-1 magnetic-btn">
                             <span class="flex items-center justify-center gap-2">
-                                <span>ارسال پیام</span>
+                                <span data-i18n="contact.form.submit">ارسال پیام</span>
                                 <i class="fa-solid fa-paper-plane"></i>
                             </span>
                         </button>
@@ -577,8 +597,8 @@
                     </a>
                 </div>
                 
-                <p class="text-white/70 mb-4">© ۱۴۰۳ - رضا اسماعیلی | توسعه‌دهنده فرانت‌اند</p>
-                <p class="text-white/50 text-sm">ساخته شده با ❤️ و کد نویسی خلاقانه</p>
+                <p class="text-white/70 mb-4" data-i18n="footer.copyright">© ۱۴۰۳ - رضا اسماعیلی | توسعه‌دهنده فرانت‌اند</p>
+                <p class="text-white/50 text-sm" data-i18n="footer.tagline">ساخته شده با ❤️ و کد نویسی خلاقانه</p>
             </div>
         </div>
     </footer>
