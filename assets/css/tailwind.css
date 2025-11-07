@@ -798,6 +798,14 @@ body { font-family: "Vazirmatn", sans-serif; color: var(--color-text-dark); back
     transform: translateY(-8px);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
+.nav-link.active {
+    color: var(--color-primary-end);
+    font-weight: 600;
+}
+.input-error {
+    border-color: #ef4444 !important;
+    box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2);
+}
 .dark .hover-lift:hover {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
@@ -830,6 +838,28 @@ body { font-family: "Vazirmatn", sans-serif; color: var(--color-text-dark); back
 }
 .dark .timeline::before {
     background: linear-gradient(to bottom, #8b5cf6, #6366f1, #06b6d4);
+}
+[dir="ltr"] .timeline {
+    padding-left: 0 !important;
+    padding-right: 2rem;
+}
+[dir="ltr"] .timeline::before {
+    right: auto;
+    left: 20px;
+}
+[dir="ltr"] .timeline-content {
+    margin-right: 0;
+    margin-left: 2.5rem;
+}
+[dir="ltr"] .timeline .timeline-dot {
+    right: auto !important;
+    left: -0.5rem;
+}
+.dir-aware-icon {
+    transition: transform 0.3s ease;
+}
+[dir="ltr"] .dir-aware-icon {
+    transform: rotate(180deg);
 }
 #preloader {
     position: fixed;
