@@ -1,0 +1,32 @@
+{
+  "name": "reza-portfolio",
+  "version": "1.0.0",
+  "description": "پورتفولیو حرفه‌ای رضا اسماعیلی - توسعه‌دهنده فرانت‌اند",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve",
+    "dev": "npx tailwindcss -i ./src/styles/input.css -o ./src/styles/main.css --watch",
+    "build": "npx tailwindcss -i ./src/styles/input.css -o ./src/styles/main.css --minify"
+  },
+  "keywords": [
+    "portfolio",
+    "frontend",
+    "javascript",
+    "tailwindcss",
+    "html",
+    "css",
+    "responsive",
+    "design"
+  ],
+  "author": "رضا اسماعیلی",
+  "license": "MIT",
+  "devDependencies": {
+    "tailwindcss": "^3.4.1",
+    "serve": "^14.2.1"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}
