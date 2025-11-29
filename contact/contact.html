@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تماس با من - رضا اسماعیلی</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/tailwind.css">
+    <link rel="stylesheet" href="contact.css">
+</head>
+<body class="font-vazir bg-gradient-to-br from-slate-50 to-blue-50 text-textDark dark:from-slate-900 dark:to-slate-800 dark:text-darkText transition-colors duration-500">
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 glass-effect backdrop-blur-md shadow-lg transition-all duration-300">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <div class="grid h-12 w-12 place-items-center rounded-full bg-gradient-to-br from-primaryStart to-primaryEnd font-bold text-white text-lg shadow-lg magnetic-btn">
+                        <i class="fa-solid fa-code"></i>
+                    </div>
+                    <span class="font-bold text-lg gradient-text">رضا اسماعیلی | Frontend Developer</span>
+                </div>
+                
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="../home/home.html" class="nav-link text-sm font-medium hover:text-primaryEnd transition-all duration-300 hover:scale-110 magnetic-btn">خانه</a>
+                    <a href="../about/about.html" class="nav-link text-sm font-medium hover:text-primaryEnd transition-all duration-300 hover:scale-110 magnetic-btn">درباره من</a>
+                    <a href="../skills/skills.html" class="nav-link text-sm font-medium hover:text-primaryEnd transition-all duration-300 hover:scale-110 magnetic-btn">مهارت‌ها</a>
+                    <a href="../projects/projects.html" class="nav-link text-sm font-medium hover:text-primaryEnd transition-all duration-300 hover:scale-110 magnetic-btn">پروژه‌ها</a>
+                    <a href="#" class="nav-link text-sm font-medium hover:text-primaryEnd transition-all duration-300 hover:scale-110 magnetic-btn active">تماس</a>
+                </div>
+                
+                <button class="md:hidden text-textDark dark:text-darkText text-xl hover-lift magnetic-btn" id="mobileMenuBtn" aria-label="منوی موبایل">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="absolute top-full left-0 right-0 bg-white dark:bg-darkBg shadow-2xl rounded-b-3xl p-6 hidden">
+            <div class="flex flex-col gap-4">
+                <a href="../home/home.html" class="nav-link text-lg font-medium hover:text-primaryEnd transition-all duration-300 py-2 border-b border-gray-200 dark:border-gray-700">خانه</a>
+                <a href="../about/about.html" class="nav-link text-lg font-medium hover:text-primaryEnd transition-all duration-300 py-2 border-b border-gray-200 dark:border-gray-700">درباره من</a>
+                <a href="../skills/skills.html" class="nav-link text-lg font-medium hover:text-primaryEnd transition-all duration-300 py-2 border-b border-gray-200 dark:border-gray-700">مهارت‌ها</a>
+                <a href="../projects/projects.html" class="nav-link text-lg font-medium hover:text-primaryEnd transition-all duration-300 py-2 border-b border-gray-200 dark:border-gray-700">پروژه‌ها</a>
+                <a href="#" class="nav-link text-lg font-medium hover:text-primaryEnd transition-all duration-300 py-2 active">تماس</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contact Page Content -->
+    <main class="container mx-auto px-6 py-20">
+        <div class="grid lg:grid-cols-2 gap-12 items-start">
+            <!-- Contact Info -->
+            <div>
+                <h2 class="text-3xl font-bold mb-6 gradient-text">در تماس باشید</h2>
+                <p class="text-muted dark:text-gray-300 leading-8 mb-8">
+                    برای همکاری در پروژه‌های فرانت‌اند یا مشاوره در زمینه توسعه وب،
+                    از طریق راه‌های ارتباطی زیر با من در ارتباط باشید.
+                </p>
+
+                <div class="space-y-6">
+                    <div class="flex items-center gap-4 p-4 rounded-2xl bg-white/50 dark:bg-slate-800/50 hover-lift">
+                        <div class="grid h-12 w-12 place-items-center rounded-full bg-blue-100 dark:bg-blue-900 text-primaryEnd">
+                            <i class="fa-solid fa-envelope"></i>
+                        </div>
+                        <div>
+                            <div class="font-semibold">ایمیل</div>
+                            <div class="text-muted dark:text-gray-300">reza.esmaeeli@example.com</div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-4 p-4 rounded-2xl bg-white/50 dark:bg-slate-800/50 hover-lift">
+                        <div class="grid h-12 w-12 place-items-center rounded-full bg-green-100 dark:bg-green-900 text-primaryEnd">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </div>
+                        <div>
+                            <div class="font-semibold">واتساپ</div>
+                            <div class="text-muted dark:text-gray-300">+98 912 345 6789</div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-4 p-4 rounded-2xl bg-white/50 dark:bg-slate-800/50 hover-lift">
+                        <div class="grid h-12 w-12 place-items-center rounded-full bg-purple-100 dark:bg-purple-900 text-primaryEnd">
+                            <i class="fa-brands fa-linkedin"></i>
+                        </div>
+                        <div>
+                            <div class="font-semibold">لینکدین</div>
+                            <div class="text-muted dark:text-gray-300">linkedin.com/in/reza-esmaeeli</div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-4 p-4 rounded-2xl bg-white/50 dark:bg-slate-800/50 hover-lift">
+                        <div class="grid h-12 w-12 place-items-center rounded-full bg-gray-100 dark:bg-gray-800 text-primaryEnd">
+                            <i class="fa-brands fa-github"></i>
+                        </div>
+                        <div>
+                            <div class="font-semibold">گیت‌هاب</div>
+                            <div class="text-muted dark:text-gray-300">github.com/reza-esmaeeli</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-2xl hover-lift">
+                <h3 class="font-bold text-xl mb-6">ارسال پیام</h3>
+                <form id="contactForm" class="space-y-6">
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">نام شما</label>
+                            <input type="text" name="name" required class="w-full p-4 rounded-2xl border border-gray-300 dark:border-gray-600 bg-transparent focus:border-primaryEnd focus:ring-2 focus:ring-primaryEnd/20 outline-none transition-all">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">ایمیل</label>
+                            <input type="email" name="email" required class="w-full p-4 rounded-2xl border border-gray-300 dark:border-gray-600 bg-transparent focus:border-primaryEnd focus:ring-2 focus:ring-primaryEnd/20 outline-none transition-all">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">موضوع</label>
+                        <input type="text" name="subject" required class="w-full p-4 rounded-2xl border border-gray-300 dark:border-gray-600 bg-transparent focus:border-primaryEnd focus:ring-2 focus:ring-primaryEnd/20 outline-none transition-all">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">پیام شما</label>
+                        <textarea name="message" rows="5" required class="w-full p-4 rounded-2xl border border-gray-300 dark:border-gray-600 bg-transparent focus:border-primaryEnd focus:ring-2 focus:ring-primaryEnd/20 outline-none transition-all"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-gradient-to-br from-primaryStart to-primaryEnd text-white py-4 rounded-2xl font-semibold shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-1 magnetic-btn">
+                        <span class="flex items-center justify-center gap-2">
+                            <span>ارسال پیام</span>
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-800 dark:bg-slate-900 text-white py-12 rounded-t-3xl border-t border-slate-700">
+        <div class="container mx-auto px-6">
+            <div class="text-center">
+                <div class="flex justify-center gap-6 mb-8">
+                    <a href="https://linkedin.com/in/reza-esmaeeli" target="_blank" class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center hover:bg-primaryEnd transition-all duration-300 hover:scale-110 magnetic-btn">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://github.com/reza-esmaeeli" target="_blank" class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center hover:bg-primaryEnd transition-all duration-300 hover:scale-110 magnetic-btn">
+                        <i class="fa-brands fa-github"></i>
+                    </a>
+                    <a href="#" class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center hover:bg-primaryEnd transition-all duration-300 hover:scale-110 magnetic-btn">
+                        <i class="fa-brands fa-twitter"></i>
+                    </a>
+                    <a href="#" class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center hover:bg-primaryEnd transition-all duration-300 hover:scale-110 magnetic-btn">
+                        <i class="fa-brands fa-telegram"></i>
+                    </a>
+                </div>
+                
+                <p class="text-white/70 mb-4">© ۱۴۰۳ - رضا اسماعیلی | توسعه‌دهنده فرانت‌اند</p>
+                <p class="text-white/50 text-sm">ساخته شده با ❤️ و کد نویسی خلاقانه</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="fixed bottom-8 left-8 w-14 h-14 bg-primaryEnd text-white rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 hidden z-40 magnetic-btn" aria-label="بازگشت به بالا">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <!-- Notification Container -->
+    <div id="notification" class="fixed top-4 left-1/2 transform -translate-x-1/2 px-6 py-3 rounded-2xl shadow-2xl z-50 hidden"></div>
+
+    <script src="contact.js"></script>
+</body>
+</html>

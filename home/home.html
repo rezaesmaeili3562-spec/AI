@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>خانه - رضا اسماعیلی</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/tailwind.css">
+    <link rel="stylesheet" href="home.css">
+</head>
+<body class="min-h-screen font-vazir bg-gradient-to-br from-slate-50 to-blue-50 text-textDark dark:from-slate-900 dark:to-slate-800 dark:text-darkText transition-colors duration-500 overflow-x-hidden">
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="relative">
+            <div class="animate-spin rounded-full h-24 w-24 border-4 border-primaryStart border-t-transparent mb-6"></div>
+        </div>
+        <div class="text-xl font-semibold text-primaryEnd animate-pulse">
+            در حال بارگذاری...
+        </div>
+    </div>
+
+    <!-- Floating Background Shapes -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none -z-10">
+        <div class="floating-shape absolute top-1/4 left-1/4 w-72 h-72 bg-gradient-to-br from-primaryStart/10 to-primaryEnd/10 rounded-full blur-3xl"></div>
+        <div class="floating-shape absolute top-3/4 right-1/4 w-96 h-96 bg-gradient-to-tr from-accent/5 to-primaryEnd/5 rounded-full blur-3xl" style="animation-delay: -2s;"></div>
+        <div class="floating-shape absolute bottom-1/4 left-3/4 w-64 h-64 bg-gradient-to-r from-primaryStart/15 to-accent/15 rounded-full blur-3xl" style="animation-delay: -4s;"></div>
+    </div>
+
+    <!-- Theme Toggle -->
+    <button id="themeToggle" class="fixed top-24 left-6 w-14 h-14 rounded-full glass-effect shadow-2xl backdrop-blur-md z-40 flex items-center justify-center hover-lift magnetic-btn" aria-label="تغییر تم">
+        <i class="fa-solid fa-moon text-textDark dark:text-darkText text-xl" id="themeIcon"></i>
+    </button>
+
+    <!-- Language Switcher -->
+    <div class="fixed top-24 right-6 z-30">
+        <select id="languageSwitch" class="glass-effect backdrop-blur-md rounded-2xl px-4 py-3 border border-gray-300 dark:border-gray-600 text-textDark dark:text-darkText hover-lift">
+            <option value="fa">فارسی 🇮🇷</option>
+            <option value="en">English 🇺🇸</option>
+        </select>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 glass-effect backdrop-blur-md shadow-lg transition-all duration-300">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <div class="grid h-12 w-12 place-items-center rounded-full bg-gradient-to-br from-primaryStart to-primaryEnd font-bold text-white text-lg shadow-lg magnetic-btn">
+                        <i class="fa-solid fa-code"></i>
+                    </div>
+                    <span class="font-bold text-lg gradient-text">رضا اسماعیلی | Frontend Developer</span>
+                </div>
+                
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#" class="nav-link text-sm font-medium hover:text-primaryEnd transition-all duration-300 hover:scale-110 magnetic-btn">خانه</a>
+                    <a href="../about/about.html" class="nav-link text-sm font-medium hover:text-primaryEnd transition-all duration-300 hover:scale-110 magnetic-btn">درباره من</a>
+                    <a href="../skills/skills.html" class="nav-link text-sm font-medium hover:text-primaryEnd transition-all duration-300 hover:scale-110 magnetic-btn">مهارت‌ها</a>
+                    <a href="../projects/projects.html" class="nav-link text-sm font-medium hover:text-primaryEnd transition-all duration-300 hover:scale-110 magnetic-btn">پروژه‌ها</a>
+                    <a href="../contact/contact.html" class="nav-link text-sm font-medium hover:text-primaryEnd transition-all duration-300 hover:scale-110 magnetic-btn">تماس</a>
+                </div>
+                
+                <button class="md:hidden text-textDark dark:text-darkText text-xl hover-lift magnetic-btn" id="mobileMenuBtn" aria-label="منوی موبایل">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="absolute top-full left-0 right-0 bg-white dark:bg-darkBg shadow-2xl rounded-b-3xl p-6 hidden">
+            <div class="flex flex-col gap-4">
+                <a href="#" class="nav-link text-lg font-medium hover:text-primaryEnd transition-all duration-300 py-2 border-b border-gray-200 dark:border-gray-700">خانه</a>
+                <a href="../about/about.html" class="nav-link text-lg font-medium hover:text-primaryEnd transition-all duration-300 py-2 border-b border-gray-200 dark:border-gray-700">درباره من</a>
+                <a href="../skills/skills.html" class="nav-link text-lg font-medium hover:text-primaryEnd transition-all duration-300 py-2 border-b border-gray-200 dark:border-gray-700">مهارت‌ها</a>
+                <a href="../projects/projects.html" class="nav-link text-lg font-medium hover:text-primaryEnd transition-all duration-300 py-2 border-b border-gray-200 dark:border-gray-700">پروژه‌ها</a>
+                <a href="../contact/contact.html" class="nav-link text-lg font-medium hover:text-primaryEnd transition-all duration-300 py-2">تماس</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 sm:px-10 lg:px-16 py-10 lg:py-14">
+        <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
+            <div class="flex flex-col gap-8">
+                <div class="space-y-6">
+                    <!-- Typewriter Effect -->
+                    <div class="h-24">
+                        <h1 class="text-[clamp(2.2rem,5vw,3.6rem)] font-extrabold leading-snug text-textDark dark:text-darkText">
+                            <div id="line1" class="typewriter-line mb-4">سلام! من رضا اسماعیلی هستم</div>
+                            <div id="line2" class="typewriter-line mb-4">توسعه دهنده فرانت اند</div>
+                            <div id="line3" class="typewriter-line">و طراح رابط کاربری</div>
+                        </h1>
+                    </div>
+
+                    <p class="max-w-[34ch] text-base leading-8 text-muted dark:text-gray-300">
+                        با تخصص در React، Next.js و TypeScript، تجربه‌های کاربری مدرن و به یاد ماندنی خلق می‌کنم.
+                    </p>
+                </div>
+
+                <!-- Live Code Preview -->
+                <div class="code-editor hover-lift">
+                    <div class="code-line">
+                        <span class="code-keyword">const</span> <span class="code-function">developer</span> = {
+                    </div>
+                    <div class="code-line ml-4">
+                        name: <span class="code-string">"رضا اسماعیلی"</span>,
+                    </div>
+                    <div class="code-line ml-4">
+                        role: <span class="code-string">"Frontend Developer"</span>,
+                    </div>
+                    <div class="code-line ml-4">
+                        skills: [<span class="code-string">"React"</span>, <span class="code-string">"Next.js"</span>, <span class="code-string">"TypeScript"</span>],
+                    </div>
+                    <div class="code-line">
+                        }<span class="code-cursor"></span>
+                    </div>
+                    <div class="code-line code-comment">
+                        // آماده همکاری در پروژه‌های خلاقانه
+                    </div>
+                </div>
+
+                <!-- Buttons -->
+                <div class="flex flex-col sm:flex-row sm:items-center gap-3">
+                    <a href="../projects/projects.html" class="view-projects-btn inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-br from-primaryStart to-primaryEnd px-7 py-3 text-sm font-semibold text-white shadow-2xl hover-lift magnetic-btn">
+                        <i class="fa-solid fa-eye text-lg"></i>
+                        مشاهده پروژه‌ها
+                    </a>
+                    <a href="../contact/contact.html" class="contact-btn inline-flex items-center justify-center gap-2 rounded-full border border-primaryEnd/50 bg-white/80 dark:bg-darkBg/80 px-7 py-3 text-sm font-semibold text-primaryEnd shadow-lg hover-lift magnetic-btn">
+                        <i class="fa-solid fa-paper-plane text-base"></i>
+                        شروع همکاری
+                    </a>
+                </div>
+
+                <!-- Stats -->
+                <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                    <div class="rounded-2xl border border-primaryEnd/20 bg-white/85 dark:bg-darkBg/85 px-6 py-5 shadow-xl hover-lift">
+                        <div class="text-2xl font-extrabold text-primaryEnd">3+</div>
+                        <div class="text-sm leading-7 text-muted dark:text-gray-300">سال تجربه در توسعه فرانت‌اند</div>
+                    </div>
+                    <div class="rounded-2xl border border-primaryEnd/20 bg-white/85 dark:bg-darkBg/85 px-6 py-5 shadow-xl hover-lift">
+                        <div class="text-2xl font-extrabold text-primaryEnd">25+</div>
+                        <div class="text-sm leading-7 text-muted dark:text-gray-300">پروژه موفق تحویل داده شده</div>
+                    </div>
+                    <div class="rounded-2xl border border-primaryEnd/20 bg-white/85 dark:bg-darkBg/85 px-6 py-5 shadow-xl hover-lift">
+                        <div class="text-2xl font-extrabold text-primaryEnd">100%</div>
+                        <div class="text-sm leading-7 text-muted dark:text-gray-300">رضایت مشتریان از کیفیت کار</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tech Stack Visual -->
+            <div class="order-first lg:order-none">
+                <div class="relative bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-2xl hover-lift">
+                    <h3 class="text-xl font-bold text-center mb-8 gradient-text">تکنولوژی‌های مورد استفاده</h3>
+                    <div class="grid grid-cols-3 gap-6">
+                        <!-- Row 1 -->
+                        <div class="flex flex-col items-center gap-2 tech-icon">
+                            <div class="w-16 h-16 bg-orange-500 rounded-2xl flex items-center justify-center text-white text-2xl">
+                                <i class="fa-brands fa-html5"></i>
+                            </div>
+                            <span class="text-sm font-medium">HTML5</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-2 tech-icon">
+                            <div class="w-16 h-16 bg-blue-500 rounded-2xl flex items-center justify-center text-white text-2xl">
+                                <i class="fa-brands fa-css3-alt"></i>
+                            </div>
+                            <span class="text-sm font-medium">CSS3</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-2 tech-icon">
+                            <div class="w-16 h-16 bg-yellow-500 rounded-2xl flex items-center justify-center text-white text-2xl">
+                                <i class="fa-brands fa-js"></i>
+                            </div>
+                            <span class="text-sm font-medium">JavaScript</span>
+                        </div>
+
+                        <!-- Row 2 -->
+                        <div class="flex flex-col items-center gap-2 tech-icon">
+                            <div class="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center text-white text-2xl">
+                                <i class="fa-brands fa-react"></i>
+                            </div>
+                            <span class="text-sm font-medium">React</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-2 tech-icon">
+                            <div class="w-16 h-16 bg-blue-800 rounded-2xl flex items-center justify-center text-white text-2xl">
+                                <span class="text-lg font-bold">TS</span>
+                            </div>
+                            <span class="text-sm font-medium">TypeScript</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-2 tech-icon">
+                            <div class="w-16 h-16 bg-cyan-500 rounded-2xl flex items-center justify-center text-white text-2xl">
+                                <i class="fa-brands fa-tailwind"></i>
+                            </div>
+                            <span class="text-sm font-medium">Tailwind</span>
+                        </div>
+
+                        <!-- Row 3 -->
+                        <div class="flex flex-col items-center gap-2 tech-icon">
+                            <div class="w-16 h-16 bg-purple-500 rounded-2xl flex items-center justify-center text-white text-2xl">
+                                <i class="fa-brands fa-bootstrap"></i>
+                            </div>
+                            <span class="text-sm font-medium">Bootstrap</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-2 tech-icon">
+                            <div class="w-16 h-16 bg-pink-500 rounded-2xl flex items-center justify-center text-white text-2xl">
+                                <i class="fa-solid fa-pen-ruler"></i>
+                            </div>
+                            <span class="text-sm font-medium">Figma</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-2 tech-icon">
+                            <div class="w-16 h-16 bg-green-500 rounded-2xl flex items-center justify-center text-white text-2xl">
+                                <i class="fa-brands fa-python"></i>
+                            </div>
+                            <span class="text-sm font-medium">Python</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Floating Action Buttons -->
+    <div class="fixed bottom-24 left-6 flex flex-col gap-3 z-30">
+        <button id="downloadResume" class="w-14 h-14 rounded-full bg-gradient-to-br from-primaryStart to-primaryEnd text-white shadow-2xl hover-lift magnetic-btn flex items-center justify-center">
+            <i class="fa-solid fa-download text-lg"></i>
+        </button>
+        <button id="whatsappBtn" class="w-14 h-14 rounded-full bg-gradient-to-br from-green-500 to-green-600 text-white shadow-2xl hover-lift magnetic-btn flex items-center justify-center">
+            <i class="fa-brands fa-whatsapp text-lg"></i>
+        </button>
+        <a href="https://github.com/reza-esmaeeli" target="_blank" class="viewGithub w-14 h-14 rounded-full bg-gradient-to-br from-gray-700 to-gray-800 text-white shadow-2xl hover-lift magnetic-btn flex items-center justify-center">
+            <i class="fa-brands fa-github text-lg"></i>
+        </a>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="fixed bottom-8 left-8 w-14 h-14 bg-primaryEnd text-white rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 hidden z-40 magnetic-btn" aria-label="بازگشت به بالا">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <!-- Notification Container -->
+    <div id="notification" class="fixed top-4 left-1/2 transform -translate-x-1/2 px-6 py-3 rounded-2xl shadow-2xl z-50 hidden"></div>
+
+    <script src="home.js"></script>
+</body>
+</html>

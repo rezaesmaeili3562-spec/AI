@@ -1,0 +1,57 @@
+/* About Section Specific Styles */
+.timeline {
+    border-right: 2px solid #e2e8f0;
+    position: relative;
+}
+
+.dark .timeline {
+    border-right-color: #334155;
+}
+
+.timeline-item {
+    position: relative;
+}
+
+.timeline-dot {
+    right: -11px;
+    top: 8px;
+    z-index: 10;
+}
+
+.timeline-content {
+    position: relative;
+    margin-right: 20px;
+}
+
+/* Hover effects for timeline items */
+.timeline-content:hover {
+    transform: translateY(-5px);
+    transition: transform 0.3s ease;
+}
+
+/* Responsive adjustments for about section */
+@media (max-width: 1024px) {
+    .timeline {
+        border-right: none;
+        border-top: 2px solid #e2e8f0;
+    }
+    
+    .dark .timeline {
+        border-top-color: #334155;
+    }
+    
+    .timeline-item {
+        margin-bottom: 2rem;
+    }
+    
+    .timeline-dot {
+        top: -11px;
+        right: 50%;
+        transform: translateX(50%);
+    }
+    
+    .timeline-content {
+        margin-right: 0;
+        margin-top: 20px;
+    }
+}

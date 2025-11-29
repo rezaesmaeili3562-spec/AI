@@ -1,0 +1,85 @@
+/* Contact Section Specific Styles */
+/* Contact info card styling */
+.contact-info-card {
+    transition: all 0.3s ease;
+}
+
+.contact-info-card:hover {
+    transform: translateX(10px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* Contact form styling */
+#contactForm input,
+#contactForm textarea {
+    transition: all 0.3s ease;
+}
+
+#contactForm input:focus,
+#contactForm textarea:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+}
+
+/* Form input hover effect */
+#contactForm input:hover,
+#contactForm textarea:hover {
+    border-color: #7e8cb3;
+}
+
+/* Footer styling */
+footer {
+    margin-top: 4rem;
+}
+
+/* Contact section animations */
+.contact-info,
+.contact-form {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: slideUp 0.6s ease-out 0.2s forwards;
+}
+
+.contact-info {
+    animation-delay: 0.1s;
+}
+
+.contact-form {
+    animation-delay: 0.2s;
+}
+
+@keyframes slideUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Footer social icons animation */
+footer .magnetic-btn {
+    transition: all 0.3s ease;
+}
+
+footer .magnetic-btn:hover {
+    transform: translateY(-5px) scale(1.1);
+}
+
+/* Responsive adjustments for contact section */
+@media (max-width: 1024px) {
+    .grid.lg\\:grid-cols-2.gap-12.items-start {
+        grid-template-columns: 1fr;
+    }
+    
+    .contact-info,
+    .contact-form {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .grid.md\\:grid-cols-2.gap-4 {
+        grid-template-columns: 1fr;
+    }
+}

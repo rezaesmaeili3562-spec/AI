@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پروژه‌ها - رضا اسماعیلی</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/tailwind.css">
+    <link rel="stylesheet" href="projects.css">
+</head>
+<body class="font-vazir bg-gradient-to-br from-slate-50 to-blue-50 text-textDark dark:from-slate-900 dark:to-slate-800 dark:text-darkText transition-colors duration-500">
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 glass-effect backdrop-blur-md shadow-lg transition-all duration-300">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <div class="grid h-12 w-12 place-items-center rounded-full bg-gradient-to-br from-primaryStart to-primaryEnd font-bold text-white text-lg shadow-lg magnetic-btn">
+                        <i class="fa-solid fa-code"></i>
+                    </div>
+                    <span class="font-bold text-lg gradient-text">رضا اسماعیلی | Frontend Developer</span>
+                </div>
+                
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="../home/home.html" class="nav-link text-sm font-medium hover:text-primaryEnd transition-all duration-300 hover:scale-110 magnetic-btn">خانه</a>
+                    <a href="../about/about.html" class="nav-link text-sm font-medium hover:text-primaryEnd transition-all duration-300 hover:scale-110 magnetic-btn">درباره من</a>
+                    <a href="../skills/skills.html" class="nav-link text-sm font-medium hover:text-primaryEnd transition-all duration-300 hover:scale-110 magnetic-btn">مهارت‌ها</a>
+                    <a href="#" class="nav-link text-sm font-medium hover:text-primaryEnd transition-all duration-300 hover:scale-110 magnetic-btn active">پروژه‌ها</a>
+                    <a href="../contact/contact.html" class="nav-link text-sm font-medium hover:text-primaryEnd transition-all duration-300 hover:scale-110 magnetic-btn">تماس</a>
+                </div>
+                
+                <button class="md:hidden text-textDark dark:text-darkText text-xl hover-lift magnetic-btn" id="mobileMenuBtn" aria-label="منوی موبایل">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="absolute top-full left-0 right-0 bg-white dark:bg-darkBg shadow-2xl rounded-b-3xl p-6 hidden">
+            <div class="flex flex-col gap-4">
+                <a href="../home/home.html" class="nav-link text-lg font-medium hover:text-primaryEnd transition-all duration-300 py-2 border-b border-gray-200 dark:border-gray-700">خانه</a>
+                <a href="../about/about.html" class="nav-link text-lg font-medium hover:text-primaryEnd transition-all duration-300 py-2 border-b border-gray-200 dark:border-gray-700">درباره من</a>
+                <a href="../skills/skills.html" class="nav-link text-lg font-medium hover:text-primaryEnd transition-all duration-300 py-2 border-b border-gray-200 dark:border-gray-700">مهارت‌ها</a>
+                <a href="#" class="nav-link text-lg font-medium hover:text-primaryEnd transition-all duration-300 py-2 border-b border-gray-200 dark:border-gray-700 active">پروژه‌ها</a>
+                <a href="../contact/contact.html" class="nav-link text-lg font-medium hover:text-primaryEnd transition-all duration-300 py-2">تماس</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Projects Page Content -->
+    <main class="container mx-auto px-6 py-20">
+        <h2 class="text-3xl font-bold text-center mb-4 gradient-text">پروژه‌های منتخب</h2>
+        <p class="text-muted dark:text-gray-300 text-center mb-12 max-w-2xl mx-auto">
+            نمونه‌ای از پروژه‌های موفق در حوزه توسعه فرانت‌اند و طراحی رابط کاربری
+        </p>
+
+        <div class="project-grid grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Project 1 -->
+            <div class="project-card bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-xl">
+                <div class="w-full h-48 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl mb-4 flex items-center justify-center">
+                    <i class="fa-solid fa-store text-white text-4xl"></i>
+                </div>
+                <h3 class="font-bold text-lg mb-2">فروشگاه آنلاین</h3>
+                <p class="text-muted dark:text-gray-300 text-sm mb-4">فروشگاه اینترنتی با React و TypeScript</p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs px-3 py-1 rounded-full">React</span>
+                    <span class="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 text-xs px-3 py-1 rounded-full">TypeScript</span>
+                    <span class="bg-cyan-100 dark:bg-cyan-900 text-cyan-800 dark:text-cyan-200 text-xs px-3 py-1 rounded-full">Tailwind</span>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="project-card bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-xl">
+                <div class="w-full h-48 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-2xl mb-4 flex items-center justify-center">
+                    <i class="fa-solid fa-chart-line text-white text-4xl"></i>
+                </div>
+                <h3 class="font-bold text-lg mb-2">داشبورد مدیریتی</h3>
+                <p class="text-muted dark:text-gray-300 text-sm mb-4">داشبورد پیشرفته با نمودارهای تعاملی</p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs px-3 py-1 rounded-full">React</span>
+                    <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs px-3 py-1 rounded-full">Chart.js</span>
+                    <span class="bg-cyan-100 dark:bg-cyan-900 text-cyan-800 dark:text-cyan-200 text-xs px-3 py-1 rounded-full">Material-UI</span>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="project-card bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-xl">
+                <div class="w-full h-48 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl mb-4 flex items-center justify-center">
+                    <i class="fa-solid fa-mobile-screen text-white text-4xl"></i>
+                </div>
+                <h3 class="font-bold text-lg mb-2">اپلیکیشن موبایل</h3>
+                <p class="text-muted dark:text-gray-300 text-sm mb-4">PWA با قابلیت آفلاین</p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs px-3 py-1 rounded-full">JavaScript</span>
+                    <span class="bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 text-xs px-3 py-1 rounded-full">PWA</span>
+                    <span class="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 text-xs px-3 py-1 rounded-full">Bootstrap</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-12">
+            <a href="../contact/contact.html" class="contact-btn inline-flex items-center gap-2 rounded-full border border-primaryEnd px-6 py-3 text-primaryEnd font-semibold hover:bg-primaryEnd hover:text-white transition-all duration-300 magnetic-btn">
+                شروع پروژه جدید
+                <i class="fa-solid fa-arrow-left"></i>
+            </a>
+        </div>
+    </main>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="fixed bottom-8 left-8 w-14 h-14 bg-primaryEnd text-white rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 hidden z-40 magnetic-btn" aria-label="بازگشت به بالا">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <!-- Notification Container -->
+    <div id="notification" class="fixed top-4 left-1/2 transform -translate-x-1/2 px-6 py-3 rounded-2xl shadow-2xl z-50 hidden"></div>
+
+    <script src="projects.js"></script>
+</body>
+</html>
