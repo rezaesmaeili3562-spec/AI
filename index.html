@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>سجاد | برنامه‌نویس فرانت‌اند و توسعه‌دهنده React</title>
+  <title>رضا اسماعیلی | برنامه‌نویس فرانت‌اند و توسعه‌دهنده React</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800&display=swap" rel="stylesheet">
@@ -74,192 +74,8 @@
     }
   </script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <style>
-    :root {
-      --primary-color: #8b5cf6;
-      --secondary-color: #6366f1;
-    }
+  <link rel="stylesheet" href="./src/styles/main.css">
 
-    html {
-      scroll-behavior: smooth;
-    }
-
-    .skill-bar {
-      transition: width 1.5s ease-in-out;
-    }
-
-    .project-card {
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-
-    .project-card:hover {
-      transform: translateY(-12px) scale(1.02);
-    }
-
-    .section-hidden {
-      opacity: 0;
-      transform: translateY(50px);
-      transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .section-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .timeline::before {
-      content: '';
-      position: absolute;
-      right: 20px;
-      top: 0;
-      bottom: 0;
-      width: 3px;
-      background: linear-gradient(to bottom, #8b5cf6, #6366f1, #06b6d4);
-    }
-
-    .dark .timeline::before {
-      background: linear-gradient(to bottom, #8b5cf6, #6366f1, #06b6d4);
-    }
-
-    .particle {
-      position: absolute;
-      background: rgba(139, 92, 246, 0.6);
-      border-radius: 50%;
-      pointer-events: none;
-      animation: float 8s ease-in-out infinite;
-    }
-
-    .glass-effect {
-      backdrop-filter: blur(20px) saturate(180%);
-      background-color: rgba(255, 255, 255, 0.75);
-      border: 1px solid rgba(255, 255, 255, 0.125);
-    }
-
-    .dark .glass-effect {
-      background-color: rgba(15, 23, 42, 0.75);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .magnetic-btn {
-      transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
-    }
-
-    .magnetic-btn:hover {
-      transform: scale(1.05);
-    }
-
-    .custom-cursor {
-      width: 20px;
-      height: 20px;
-      border: 2px solid var(--primary-color);
-      border-radius: 50%;
-      position: fixed;
-      pointer-events: none;
-      z-index: 9999;
-      transition: all 0.1s ease;
-    }
-
-    .cursor-dot {
-      width: 4px;
-      height: 4px;
-      background: var(--secondary-color);
-      border-radius: 50%;
-      position: fixed;
-      pointer-events: none;
-      z-index: 9999;
-      transition: all 0.1s ease;
-    }
-
-    .code-editor {
-      background: #1e293b;
-      border-radius: 12px;
-      padding: 1.5rem;
-      font-family: 'Courier New', monospace;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .code-line {
-      color: #f8fafc;
-      margin-bottom: 0.5rem;
-      direction: ltr;
-      text-align: left;
-    }
-
-    .code-keyword {
-      color: #f472b6;
-    }
-
-    .code-function {
-      color: #7dd3fc;
-    }
-
-    .code-string {
-      color: #86efac;
-    }
-
-    .code-comment {
-      color: #64748b;
-    }
-
-    .code-cursor {
-      display: inline-block;
-      width: 8px;
-      height: 1.2em;
-      background: #06b6d4;
-      animation: blink 1s infinite;
-      vertical-align: middle;
-      margin-right: 2px;
-    }
-
-    @keyframes blink {
-      0%, 50% { opacity: 1; }
-      51%, 100% { opacity: 0; }
-    }
-
-    .tech-icon {
-      transition: all 0.3s ease;
-    }
-
-    .tech-icon:hover {
-      transform: scale(1.2) rotate(5deg);
-    }
-
-    .floating-shape {
-      animation: float 8s ease-in-out infinite;
-    }
-
-    .gradient-text {
-      background: linear-gradient(-45deg, #8b5cf6, #6366f1, #06b6d4);
-      background-size: 300% 300%;
-      animation: gradient 4s ease infinite;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hover-lift {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .hover-lift:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-    }
-
-    .dark .hover-lift:hover {
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-    }
-
-    /* Reduced motion support */
-    @media (prefers-reduced-motion: reduce) {
-      * {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
-    }
-  </style>
 </head>
 <body class="min-h-screen font-vazir bg-gradient-to-br from-slate-50 to-blue-50 text-textDark dark:from-slate-900 dark:to-slate-800 dark:text-darkText transition-colors duration-500 overflow-x-hidden">
   
@@ -319,7 +135,7 @@
           <div class="grid h-12 w-12 place-items-center rounded-full bg-gradient-to-br from-primaryStart to-primaryEnd font-bold text-white text-lg shadow-lg magnetic-btn">
             <i class="fa-solid fa-code"></i>
           </div>
-          <span class="font-bold text-lg gradient-text">سجاد | Frontend Developer</span>
+          <span class="font-bold text-lg gradient-text">رضا اسماعیلی | Frontend Developer</span>
         </div>
         
         <div class="hidden md:flex items-center gap-8">
@@ -370,7 +186,7 @@
               <span class="code-keyword">const</span> <span class="code-function">developer</span> = {
             </div>
             <div class="code-line ml-4">
-              name: <span class="code-string">"سجاد"</span>,
+              name: <span class="code-string">"رضا"</span>,
             </div>
             <div class="code-line ml-4">
               role: <span class="code-string">"Frontend Developer"</span>,
@@ -828,7 +644,7 @@
           </a>
         </div>
         
-        <p class="text-white/70 mb-4">© ۱۴۰۳ - سجاد | توسعه‌دهنده فرانت‌اند</p>
+        <p class="text-white/70 mb-4">© ۱۴۰۳ - رضا اسماعیلی | توسعه‌دهنده فرانت‌اند</p>
         <p class="text-white/50 text-sm">ساخته شده با ❤️ و React</p>
       </div>
     </div>
@@ -981,7 +797,7 @@
     }
 
     // Initialize Typewriter
-    new TypeWriter(document.getElementById('typewriter'), ['سلام! من سجادم']);
+    new TypeWriter(document.getElementById('typewriter'), ['سلام! من رضا هستم']);
 
     // ==================== ANIMATED COUNTERS ====================
     class AnimatedCounters {
@@ -1319,18 +1135,7 @@
       }
     });
 
-    // Service Worker Registration for PWA
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js')
-          .then(registration => {
-            console.log('SW registered: ', registration);
-          })
-          .catch(registrationError => {
-            console.log('SW registration failed: ', registrationError);
-          });
-      });
-    }
-  </script>
+  <!-- Scripts -->
+  <script src="./src/js/main.js"></script>
 </body>
 </html>
